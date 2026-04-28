@@ -104,7 +104,7 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files — WhiteNoise sirve estáticos en producción sin Nginx
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
