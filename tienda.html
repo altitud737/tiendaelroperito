@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <title>Tienda — El Roperito</title>
+    <link rel="stylesheet" href="styles.css?v=20260424b">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Nunito:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="page-body">
+
+    <!-- ── HEADER COMPRADOR ── -->
+    <header class="buyer-header">
+        <div class="buyer-header-inner">
+
+            <!-- Izquierda: Logo -->
+            <a href="tienda.html" class="buyer-logo">
+                <div class="brand-logo">
+                    <span class="logo-letter logo-el" data-letter="E">E</span>
+                    <span class="logo-letter logo-el" data-letter="l">l</span>
+                    <span class="logo-space"></span>
+                    <span class="logo-letter logo-rop" data-letter="R">R</span>
+                    <span class="logo-letter logo-rop" data-letter="o">o</span>
+                    <span class="logo-letter logo-rop" data-letter="p">p</span>
+                    <span class="logo-letter logo-er" data-letter="e">e</span>
+                    <span class="logo-letter logo-er" data-letter="r">r</span>
+                    <span class="logo-letter logo-ito" data-letter="i">i</span>
+                    <span class="logo-letter logo-ito" data-letter="t">t</span>
+                    <span class="logo-letter logo-ito" data-letter="o">o</span>
+                </div>
+            </a>
+
+            <!-- Centro: Búsqueda -->
+            <div class="buyer-search-wrap">
+                <svg class="buyer-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input
+                    type="text"
+                    id="search-input"
+                    class="buyer-search-input"
+                    placeholder="Buscar prendas, talles, categorías..."
+                    autocomplete="off"
+                >
+                <button id="search-clear" class="buyer-search-clear" style="display:none;" aria-label="Limpiar búsqueda">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <!-- Derecha: Acciones -->
+            <div class="buyer-actions">
+
+                <!-- Favoritos -->
+                <a href="perfil.html?tab=favoritos" class="buyer-action-btn buyer-wishlist-btn" title="Mis favoritos">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                    <span class="buyer-action-label">Favoritos</span>
+                    <span class="buyer-wishlist-count" id="buyer-wishlist-count" style="display:none;">0</span>
+                </a>
+
+                <!-- Notificaciones -->
+                <button class="buyer-action-btn" id="notif-btn" title="Notificaciones">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+                    <span class="buyer-action-label">Notificaciones</span>
+                    <span class="buyer-notif-dot" id="notif-dot" style="display:none;"></span>
+                </button>
+
+                <!-- Carrito -->
+                <a href="checkout.html" class="buyer-action-btn buyer-cart-btn" title="Carrito">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    <span class="buyer-action-label">Carrito</span>
+                    <span class="cart-count buyer-cart-count" id="buyer-cart-count" style="display:none;">0</span>
+                </a>
+
+                <!-- Perfil -->
+                <div class="buyer-profile-wrap" id="profile-wrap">
+                    <button class="buyer-profile-btn" id="profile-btn" aria-expanded="false" aria-label="Mi perfil">
+                        <div class="buyer-avatar" id="profile-avatar">?</div>
+                        <svg class="buyer-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="buyer-dropdown" id="profile-dropdown" style="display:none;">
+                        <div class="buyer-dropdown-user">
+                            <span class="buyer-dropdown-name" id="dropdown-name">Mi cuenta</span>
+                            <span class="buyer-dropdown-email" id="dropdown-email"></span>
+                        </div>
+                        <div class="buyer-dropdown-divider"></div>
+                        <a href="perfil.html" class="buyer-dropdown-item" id="item-mi-perfil">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            Mi perfil
+                        </a>
+                        <a href="perfil.html?tab=credito" class="buyer-dropdown-item" id="item-mi-credito">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                            Mi crédito
+                        </a>
+                        <a href="perfil.html?tab=datos" class="buyer-dropdown-item" id="item-config">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                            Configuración
+                        </a>
+                        <div class="buyer-dropdown-divider"></div>
+                        <a href="login.html" class="buyer-dropdown-item" id="item-login">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                            Iniciar sesión
+                        </a>
+                        <a href="registro.html" class="buyer-dropdown-item" id="item-register">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-3-3.87"/><path d="M4 21v-2a4 4 0 013-3.87"/><circle cx="12" cy="7" r="4"/><line x1="16" y1="3" x2="22" y2="3"/><line x1="19" y1="0" x2="19" y2="6"/></svg>
+                            Registrarse
+                        </a>
+                        <button class="buyer-dropdown-item buyer-dropdown-logout" id="logout-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                            Cerrar sesión
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <main class="tienda-main" style="background-image:url('https://res.cloudinary.com/elroperito/image/upload/v1777399625/web/bodytienda2.png');">
+        <div class="tienda-layout">
+
+            <!-- Sidebar izquierda: Filtros -->
+            <aside class="filters-bar">
+                <button class="filters-toggle" id="filters-toggle" type="button" aria-expanded="false" aria-controls="filters-panel">
+                    Filtros
+                </button>
+                <div class="filters-bar-inner" id="filters-panel">
+
+                    <div class="filter-group">
+                        <label class="filter-label">Talle</label>
+                        <div class="filter-dropdown" data-target="filter-talle" data-default-label="Todos los talles">
+                            <input type="hidden" id="filter-talle" value="">
+                            <button type="button" class="filter-dropdown-toggle" aria-expanded="false">Todos los talles</button>
+                            <div class="filter-dropdown-menu" role="listbox">
+                                <button type="button" class="filter-option is-selected" data-value="">Todos los talles</button>
+                                <button type="button" class="filter-option" data-value="0000">0000</button>
+                                <button type="button" class="filter-option" data-value="000">000</button>
+                                <button type="button" class="filter-option" data-value="00">00</button>
+                                <button type="button" class="filter-option" data-value="0">0</button>
+                                <button type="button" class="filter-option" data-value="1">1</button>
+                                <button type="button" class="filter-option" data-value="2">2</button>
+                                <button type="button" class="filter-option" data-value="3">3</button>
+                                <button type="button" class="filter-option" data-value="4">4</button>
+                                <button type="button" class="filter-option" data-value="6">6</button>
+                                <button type="button" class="filter-option" data-value="8">8</button>
+                                <button type="button" class="filter-option" data-value="10">10</button>
+                                <button type="button" class="filter-option" data-value="12">12</button>
+                                <button type="button" class="filter-option" data-value="14">14</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Género</label>
+                        <div class="filter-dropdown" data-target="filter-genero" data-default-label="Todos">
+                            <input type="hidden" id="filter-genero" value="">
+                            <button type="button" class="filter-dropdown-toggle" aria-expanded="false">Todos</button>
+                            <div class="filter-dropdown-menu" role="listbox">
+                                <button type="button" class="filter-option is-selected" data-value="">Todos</button>
+                                <button type="button" class="filter-option" data-value="nene">Nene</button>
+                                <button type="button" class="filter-option" data-value="nena">Nena</button>
+                                <button type="button" class="filter-option" data-value="unisex">Unisex</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Categoría</label>
+                        <div class="filter-dropdown" data-target="filter-categoria" data-default-label="Todas">
+                            <input type="hidden" id="filter-categoria" value="">
+                            <button type="button" class="filter-dropdown-toggle" aria-expanded="false">Todas</button>
+                            <div class="filter-dropdown-menu" role="listbox">
+                                <button type="button" class="filter-option is-selected" data-value="">Todas</button>
+                                <button type="button" class="filter-option" data-value="remera">Remera</button>
+                                <button type="button" class="filter-option" data-value="pantalon">Pantalón</button>
+                                <button type="button" class="filter-option" data-value="vestido">Vestido</button>
+                                <button type="button" class="filter-option" data-value="campera">Campera</button>
+                                <button type="button" class="filter-option" data-value="conjunto">Conjunto</button>
+                                <button type="button" class="filter-option" data-value="body">Body</button>
+                                <button type="button" class="filter-option" data-value="otro">Otro</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="filter-search-btn" type="button" class="filter-search-btn">Buscar</button>
+
+                    <button onclick="clearFilters()" class="filter-reset-btn">Limpiar filtros</button>
+                </div>
+            </aside>
+
+            <!-- Contenido derecha: Productos -->
+            <div class="tienda-content">
+                <div id="products-grid" class="products-grid">
+                    <div class="loading-text">Cargando productos...</div>
+                </div>
+                <div id="pagination" class="pagination-bar" style="display:none;">
+                    <button id="prev-page" class="pagination-btn" disabled>← Anterior</button>
+                    <span id="page-info" class="pagination-info"></span>
+                    <button id="next-page" class="pagination-btn">Siguiente →</button>
+                </div>
+                <div id="no-results" class="no-results" style="display:none;">
+                    <p>No encontramos productos con esos filtros.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/notifications.js"></script>
+    <script>
+        let currentPage = 1;
+        let totalPages = 1;
+        let searchTimer = null;
+
+        // ── Filter dropdown helpers (global so clearFilters can use them) ──
+        function closeAllDropdowns() {
+            document.querySelectorAll('.filter-dropdown.open').forEach(function(dd) {
+                dd.classList.remove('open');
+                var t = dd.querySelector('.filter-dropdown-toggle');
+                if (t) t.setAttribute('aria-expanded', 'false');
+            });
+        }
+
+        function setupFilterDropdowns() {
+            document.querySelectorAll('.filter-dropdown').forEach(function(dropdown) {
+                var hiddenInput = document.getElementById(dropdown.getAttribute('data-target'));
+                var toggle = dropdown.querySelector('.filter-dropdown-toggle');
+                if (!hiddenInput || !toggle) return;
+
+                toggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    var isOpen = dropdown.classList.contains('open');
+                    closeAllDropdowns();
+                    dropdown.classList.toggle('open', !isOpen);
+                    toggle.setAttribute('aria-expanded', String(!isOpen));
+                });
+
+                dropdown.querySelectorAll('.filter-option').forEach(function(option) {
+                    option.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        hiddenInput.value = option.getAttribute('data-value') || '';
+                        toggle.textContent = option.textContent.trim();
+                        dropdown.querySelectorAll('.filter-option').forEach(function(o) { o.classList.remove('is-selected'); });
+                        option.classList.add('is-selected');
+                        dropdown.classList.remove('open');
+                        toggle.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            });
+
+            document.addEventListener('click', closeAllDropdowns);
+            document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeAllDropdowns(); });
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Auth + header (wrapped so errors don't block filters/products)
+            try {
+                await window.ElRoperito.Auth.init();
+                initBuyerHeader();
+                updateCartBadge();
+                updateWishlistBadge();
+            } catch(e) { /* continue without auth */ }
+
+            // Logo: guests go to home, logged-in users stay in tienda
+            var logoLink = document.querySelector('.buyer-logo');
+            if (logoLink && !window.ElRoperito.Auth.isLoggedIn()) {
+                logoLink.href = 'index.html';
+            }
+
+            // Floating CTA for guests
+            var floatingCta = document.getElementById('guest-register-cta');
+            if (floatingCta) {
+                var isLoggedIn = false;
+                try { isLoggedIn = window.ElRoperito.Auth.isLoggedIn(); } catch(e) {}
+                if (!isLoggedIn) {
+                    setTimeout(function() {
+                        floatingCta.classList.add('visible');
+                        floatingCta.style.opacity = '1';
+                        floatingCta.style.transform = 'translateY(0)';
+                        floatingCta.style.pointerEvents = 'auto';
+                    }, 1500);
+                    var closeBtn = floatingCta.querySelector('.guest-cta-close');
+                    if (closeBtn) {
+                        closeBtn.addEventListener('click', function() {
+                            floatingCta.style.opacity = '0';
+                            floatingCta.style.transform = 'translateY(12px)';
+                            floatingCta.style.pointerEvents = 'none';
+                        });
+                    }
+                } else {
+                    floatingCta.style.display = 'none';
+                }
+            }
+
+            // Mobile filters toggle
+            var filtersBar = document.querySelector('.filters-bar');
+            var filtersToggle = document.getElementById('filters-toggle');
+            if (filtersBar && filtersToggle) {
+                filtersToggle.addEventListener('click', function() {
+                    var isOpen = filtersBar.classList.toggle('open');
+                    filtersToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                });
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 860) {
+                        filtersBar.classList.remove('open');
+                        filtersToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+
+            // Pre-fill search from URL
+            var urlSearch = new URLSearchParams(window.location.search).get('search');
+            if (urlSearch) {
+                document.getElementById('search-input').value = urlSearch;
+                document.getElementById('search-clear').style.display = '';
+            }
+
+            // Setup filter dropdowns
+            setupFilterDropdowns();
+
+            // Buscar button
+            var filterSearchBtn = document.getElementById('filter-search-btn');
+            if (filterSearchBtn) {
+                filterSearchBtn.addEventListener('click', function() {
+                    currentPage = 1;
+                    loadProducts();
+                    if (filtersBar && filtersToggle && window.innerWidth <= 860) {
+                        filtersBar.classList.remove('open');
+                        filtersToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+
+            // Pagination
+            var prevBtn = document.getElementById('prev-page');
+            var nextBtn = document.getElementById('next-page');
+            if (prevBtn) prevBtn.addEventListener('click', function() { if (currentPage > 1) { currentPage--; loadProducts(); } });
+            if (nextBtn) nextBtn.addEventListener('click', function() { if (currentPage < totalPages) { currentPage++; loadProducts(); } });
+
+            // Header search
+            var searchInput = document.getElementById('search-input');
+            var searchClear = document.getElementById('search-clear');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    if (searchClear) searchClear.style.display = this.value ? '' : 'none';
+                    clearTimeout(searchTimer);
+                    searchTimer = setTimeout(function() { currentPage = 1; loadProducts(); }, 350);
+                });
+            }
+            if (searchClear) {
+                searchClear.addEventListener('click', function() {
+                    searchInput.value = '';
+                    searchClear.style.display = 'none';
+                    currentPage = 1;
+                    loadProducts();
+                    searchInput.focus();
+                });
+            }
+
+            // Load products on init
+            loadProducts();
+        });
+
+        async function loadProducts() {
+            const grid = document.getElementById('products-grid');
+            const pagination = document.getElementById('pagination');
+            const noResults = document.getElementById('no-results');
+            grid.innerHTML = '<div class="loading-text">Cargando...</div>';
+            noResults.style.display = 'none';
+            pagination.style.display = 'none';
+
+            const params = { page: currentPage.toString() };
+            const talle = document.getElementById('filter-talle').value;
+            const genero = document.getElementById('filter-genero').value;
+            const categoria = document.getElementById('filter-categoria').value;
+            const search = document.getElementById('search-input').value.trim();
+
+            if (talle) params.talle = talle;
+            if (genero) params.genero = genero;
+            if (categoria) params.categoria = categoria;
+            if (search) params.search = search;
+
+            try {
+                const data = await window.ElRoperito.API.getProducts(params);
+                const products = data.results || data;
+
+                if (!products || products.length === 0) {
+                    grid.innerHTML = '';
+                    noResults.style.display = 'block';
+                    return;
+                }
+
+                grid.innerHTML = products.map(window.ElRoperito.Components.productCardHTML).join('');
+
+                // Paginación
+                if (data.count) {
+                    const pageSize = 20;
+                    totalPages = Math.ceil(data.count / pageSize);
+                    if (totalPages > 1) {
+                        pagination.style.display = 'flex';
+                        document.getElementById('page-info').textContent = 'Página ' + currentPage + ' de ' + totalPages;
+                        document.getElementById('prev-page').disabled = currentPage <= 1;
+                        document.getElementById('next-page').disabled = currentPage >= totalPages;
+                    }
+                }
+            } catch (e) {
+                grid.innerHTML = '<div class="loading-text">Error al cargar productos. ¿Está corriendo el backend?</div>';
+            }
+        }
+
+        function clearFilters() {
+            document.getElementById('filter-talle').value = '';
+            document.getElementById('filter-genero').value = '';
+            document.getElementById('filter-categoria').value = '';
+
+            document.querySelectorAll('.filter-dropdown').forEach(function(dropdown) {
+                var defaultLabel = dropdown.getAttribute('data-default-label') || 'Todas';
+                var toggle = dropdown.querySelector('.filter-dropdown-toggle');
+                if (toggle) {
+                    toggle.textContent = defaultLabel;
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+                dropdown.classList.remove('open');
+                dropdown.querySelectorAll('.filter-option').forEach(function(option) {
+                    option.classList.toggle('is-selected', (option.getAttribute('data-value') || '') === '');
+                });
+            });
+
+            document.getElementById('search-input').value = '';
+            document.getElementById('search-clear').style.display = 'none';
+            currentPage = 1;
+            loadProducts();
+
+            var filtersBar = document.querySelector('.filters-bar');
+            var filtersToggle = document.getElementById('filters-toggle');
+            if (filtersBar && filtersToggle && window.innerWidth <= 860) {
+                filtersBar.classList.remove('open');
+                filtersToggle.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        function updateCartBadge() {
+            var count = (window.ElRoperito.Cart.getItems() || []).length;
+            var el = document.getElementById('buyer-cart-count');
+            if (el) { el.textContent = count; el.style.display = count > 0 ? '' : 'none'; }
+        }
+
+        async function updateWishlistBadge() {
+            var el = document.getElementById('buyer-wishlist-count');
+            if (!el) return;
+            var token = window.ElRoperito.Auth.token;
+            if (!token) { el.style.display = 'none'; return; }
+            try {
+                var data = await window.ElRoperito.API.getWishlist(token);
+                var count = (data.productos || []).length;
+                el.textContent = count;
+                el.style.display = count > 0 ? '' : 'none';
+            } catch(e) { el.style.display = 'none'; }
+        }
+
+        function initBuyerHeader() {
+            var auth = window.ElRoperito.Auth;
+            var user = auth.user;
+            var isLogged = auth && typeof auth.isLoggedIn === 'function' ? auth.isLoggedIn() : !!user;
+
+            // Avatar y datos de usuario
+            var avatarEl = document.getElementById('profile-avatar');
+            var nameEl = document.getElementById('dropdown-name');
+            var emailEl = document.getElementById('dropdown-email');
+
+            var itemPerfil   = document.getElementById('item-mi-perfil');
+            var itemCredito  = document.getElementById('item-mi-credito');
+            var itemConfig   = document.getElementById('item-config');
+            var itemLogin    = document.getElementById('item-login');
+            var itemRegister = document.getElementById('item-register');
+            var logoutBtn    = document.getElementById('logout-btn');
+
+            if (isLogged && user && user.nombre) {
+                avatarEl.textContent = user.nombre.charAt(0).toUpperCase();
+                nameEl.textContent = user.nombre + (user.apellido ? ' ' + user.apellido : '');
+                emailEl.textContent = user.email || '';
+
+                // Mostrar opciones de usuario logueado
+                if (itemPerfil)   itemPerfil.style.display = '';
+                if (itemCredito)  itemCredito.style.display = '';
+                if (itemConfig)   itemConfig.style.display = '';
+                if (logoutBtn)    logoutBtn.style.display = '';
+
+                // Ocultar acciones para invitados
+                if (itemLogin)    itemLogin.style.display = 'none';
+                if (itemRegister) itemRegister.style.display = 'none';
+            } else {
+                // Estado invitado minimalista
+                avatarEl.textContent = '?';
+                nameEl.textContent = 'Invitado';
+                if (emailEl) emailEl.textContent = '';
+
+                // Ocultar opciones que requieren login
+                if (itemPerfil)   itemPerfil.style.display = 'none';
+                if (itemCredito)  itemCredito.style.display = 'none';
+                if (itemConfig)   itemConfig.style.display = 'none';
+                if (logoutBtn)    logoutBtn.style.display = 'none';
+
+                // Mostrar solo Iniciar sesión / Registrarse
+                if (itemLogin)    itemLogin.style.display = '';
+                if (itemRegister) itemRegister.style.display = '';
+            }
+
+            // Toggle dropdown perfil
+            var profileBtn = document.getElementById('profile-btn');
+            var dropdown = document.getElementById('profile-dropdown');
+            profileBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var open = dropdown.style.display !== 'none';
+                dropdown.style.display = open ? 'none' : '';
+                profileBtn.setAttribute('aria-expanded', String(!open));
+                profileBtn.closest('.buyer-profile-wrap').classList.toggle('open', !open);
+            });
+
+            // Cerrar al click fuera
+            document.addEventListener('click', function() {
+                dropdown.style.display = 'none';
+                profileBtn.setAttribute('aria-expanded', 'false');
+                profileBtn.closest('.buyer-profile-wrap').classList.remove('open');
+            });
+
+            // Logout
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                window.ElRoperito.Auth.logout();
+                window.location.href = 'index.html';
+            });
+
+            // Notificaciones (placeholder)
+            document.getElementById('notif-btn').addEventListener('click', function() {
+                window.ElRoperito.Components.showNotification('Sin notificaciones nuevas', 'info');
+            });
+        }
+    </script>
+
+    <!-- Floating CTA for guests -->
+    <div id="guest-register-cta" class="guest-register-cta">
+        <button class="guest-cta-close" aria-label="Cerrar">✕</button>
+        <a href="registro.html" class="guest-cta-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+            <span>Registrate y comprá</span>
+        </a>
+    </div>
+</body>
+</html>

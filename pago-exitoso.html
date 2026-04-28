@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Pago exitoso! — El Roperito</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .payment-result-page {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 16px;
+        }
+        .payment-result-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+            padding: 48px 40px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+        }
+        .payment-result-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            background: rgba(40,167,69,0.1);
+        }
+        .payment-result-icon svg { color: #28a745; }
+        .payment-result-title {
+            font-family: 'Jost', sans-serif;
+            font-size: 26px;
+            font-weight: 500;
+            color: #1a1a18;
+            margin: 0 0 12px;
+        }
+        .payment-result-subtitle {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+            margin: 0 0 8px;
+        }
+        .payment-result-detail {
+            font-size: 13px;
+            color: #999;
+            margin: 0 0 32px;
+        }
+        .payment-result-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .btn-primary-result {
+            display: block;
+            padding: 14px 24px;
+            background: #1a1a18;
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Jost', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: background 0.2s;
+        }
+        .btn-primary-result:hover { background: #333; }
+        .btn-secondary-result {
+            display: block;
+            padding: 14px 24px;
+            background: transparent;
+            color: #1a1a18;
+            border: 1.5px solid #ddd;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Jost', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        .btn-secondary-result:hover { border-color: #1a1a18; }
+    </style>
+</head>
+<body class="page-body">
+
+    <div id="site-header"></div>
+
+    <main class="payment-result-page">
+        <div class="payment-result-card">
+            <div class="payment-result-icon">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+            </div>
+            <h1 class="payment-result-title">¡Pago aprobado!</h1>
+            <p class="payment-result-subtitle">Tu compra se procesó correctamente.</p>
+            <p class="payment-result-detail" id="orden-info">En breve recibirás una confirmación.</p>
+            <div class="payment-result-actions">
+                <a href="/perfil/" class="btn-primary-result">Ver mis órdenes</a>
+                <a href="/tienda/" class="btn-secondary-result">Seguir comprando</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/components.js"></script>
+    <script>
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const ordenId = params.get('external_reference');
+            const paymentId = params.get('payment_id') || params.get('collection_id');
+            if (ordenId) {
+                document.getElementById('orden-info').textContent =
+                    'Orden #' + ordenId + (paymentId ? ' — Pago #' + paymentId : '');
+            }
+        })();
+    </script>
+
+</body>
+</html>

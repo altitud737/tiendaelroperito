@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito — El Roperito</title>
+    <link rel="stylesheet" href="styles.css?v=20260424b">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Nunito:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="page-body">
+
+    <!-- ── HEADER COMPRADOR ── -->
+    <header class="buyer-header">
+        <div class="buyer-header-inner">
+
+            <!-- Izquierda: Logo -->
+            <a href="tienda.html" class="buyer-logo">
+                <div class="brand-logo">
+                    <span class="logo-letter logo-el" data-letter="E">E</span>
+                    <span class="logo-letter logo-el" data-letter="l">l</span>
+                    <span class="logo-space"></span>
+                    <span class="logo-letter logo-rop" data-letter="R">R</span>
+                    <span class="logo-letter logo-rop" data-letter="o">o</span>
+                    <span class="logo-letter logo-rop" data-letter="p">p</span>
+                    <span class="logo-letter logo-er" data-letter="e">e</span>
+                    <span class="logo-letter logo-er" data-letter="r">r</span>
+                    <span class="logo-letter logo-ito" data-letter="i">i</span>
+                    <span class="logo-letter logo-ito" data-letter="t">t</span>
+                    <span class="logo-letter logo-ito" data-letter="o">o</span>
+                </div>
+            </a>
+
+            <!-- Centro: Búsqueda -->
+            <div class="buyer-search-wrap">
+                <svg class="buyer-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input
+                    type="text"
+                    id="search-input"
+                    class="buyer-search-input"
+                    placeholder="Buscar prendas, talles, categorías..."
+                    autocomplete="off"
+                >
+                <button id="search-clear" class="buyer-search-clear" style="display:none;" aria-label="Limpiar búsqueda">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <!-- Derecha: Acciones -->
+            <div class="buyer-actions">
+
+                <!-- Favoritos -->
+                <a href="perfil.html?tab=favoritos" class="buyer-action-btn buyer-wishlist-btn" title="Mis favoritos">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                    <span class="buyer-action-label">Favoritos</span>
+                    <span class="buyer-wishlist-count" id="buyer-wishlist-count" style="display:none;">0</span>
+                </a>
+
+                <!-- Notificaciones -->
+                <button class="buyer-action-btn" id="notif-btn" title="Notificaciones">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+                    <span class="buyer-action-label">Notificaciones</span>
+                    <span class="buyer-notif-dot" id="notif-dot" style="display:none;"></span>
+                </button>
+
+                <!-- Carrito -->
+                <a href="checkout.html" class="buyer-action-btn buyer-cart-btn" title="Carrito">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    <span class="buyer-action-label">Carrito</span>
+                    <span class="cart-count buyer-cart-count" id="buyer-cart-count" style="display:none;">0</span>
+                </a>
+
+                <!-- Perfil -->
+                <div class="buyer-profile-wrap" id="profile-wrap">
+                    <button class="buyer-profile-btn" id="profile-btn" aria-expanded="false" aria-label="Mi perfil">
+                        <div class="buyer-avatar" id="profile-avatar">?</div>
+                        <svg class="buyer-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="buyer-dropdown" id="profile-dropdown" style="display:none;">
+                        <div class="buyer-dropdown-user">
+                            <span class="buyer-dropdown-name" id="dropdown-name">Mi cuenta</span>
+                            <span class="buyer-dropdown-email" id="dropdown-email"></span>
+                        </div>
+                        <div class="buyer-dropdown-divider"></div>
+                        <a href="perfil.html" class="buyer-dropdown-item" id="item-mi-perfil">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            Mi perfil
+                        </a>
+                        <a href="perfil.html?tab=credito" class="buyer-dropdown-item" id="item-mi-credito">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                            Mi crédito
+                        </a>
+                        <a href="perfil.html?tab=datos" class="buyer-dropdown-item" id="item-config">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                            Configuración
+                        </a>
+                        <div class="buyer-dropdown-divider"></div>
+                        <a href="login.html" class="buyer-dropdown-item" id="item-login">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                            Iniciar sesión
+                        </a>
+                        <a href="registro.html" class="buyer-dropdown-item" id="item-register">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-3-3.87"/><path d="M4 21v-2a4 4 0 013-3.87"/><circle cx="12" cy="7" r="4"/><line x1="16" y1="3" x2="22" y2="3"/><line x1="19" y1="0" x2="19" y2="6"/></svg>
+                            Registrarse
+                        </a>
+                        <button class="buyer-dropdown-item buyer-dropdown-logout" id="logout-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                            Cerrar sesión
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <main class="page-main buyer-page-main">
+        <div class="page-container" style="max-width:800px;">
+
+            <!-- Botón volver a la tienda (siempre visible) -->
+            <a href="tienda.html" class="page-back-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                Volver a la tienda
+            </a>
+
+            <!-- Estado: Éxito -->
+            <div id="checkout-success" style="display:none;" class="checkout-success-card">
+                <div class="success-icon">✓</div>
+                <h1 class="auth-title">¡Compra exitosa!</h1>
+                <p class="success-order-label">Tu número de orden es:</p>
+                <p class="success-order-id" id="success-order-id"></p>
+                <p class="success-text">Podés ver el estado de tu compra en tu perfil.</p>
+                <div class="success-actions">
+                    <a href="perfil.html?tab=compras" class="cta-button">Ver mis compras</a>
+                    <a href="tienda.html" class="cta-button-outline">Seguir comprando</a>
+                </div>
+            </div>
+
+            <!-- Estado: Carrito vacío -->
+            <div id="checkout-empty" style="display:none;" class="checkout-empty-card">
+                <h1 class="auth-title">Tu carrito está vacío</h1>
+                <p>Ve a la tienda para comprar</p>
+                <a href="tienda.html" class="cta-button" style="margin-top:20px;display:inline-block;">Ir a la tienda</a>
+            </div>
+
+            <!-- Estado: Carrito con items -->
+            <div id="checkout-main" style="display:none;">
+                <div class="page-title-block">
+                    <h1 class="page-title">Tu carrito</h1>
+                </div>
+
+                <!-- Items -->
+                <div id="cart-items" class="cart-items-list"></div>
+
+                <!-- Resumen -->
+                <div class="cart-summary">
+                    <!-- Código de crédito (se aplica directo en la compra) -->
+                    <div id="credit-code-section" class="credit-code-section" style="margin-bottom:16px;">
+                        <label class="form-label" style="margin-bottom:6px;">¿Tenés un código de crédito?</label>
+                        <div class="credit-code-wrap">
+                            <input type="text" id="credit-code-input" class="form-input" placeholder="Ingresá tu código" maxlength="50" style="text-transform:uppercase;">
+                            <button type="button" id="btn-apply-code" class="credit-code-btn">Aplicar</button>
+                        </div>
+                        <div id="credit-code-msg" class="credit-code-msg" style="display:none;"></div>
+                        <div id="credit-code-applied" style="display:none;margin-top:8px;padding:10px 14px;background:rgba(40,167,69,0.08);border:1px solid rgba(40,167,69,0.25);border-radius:8px;font-size:13px;color:#1a1a18;">
+                            <span id="credit-code-applied-text"></span>
+                            <button type="button" id="btn-remove-code" style="background:none;border:none;cursor:pointer;color:#dc3545;font-weight:700;margin-left:8px;font-size:14px;">✕</button>
+                        </div>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Subtotal (<span id="cart-count">0</span> prenda<span id="cart-plural">s</span>)</span>
+                        <span id="cart-subtotal">$0</span>
+                    </div>
+                    <div id="credit-row" class="summary-row credit-row" style="display:none;">
+                        <span>Descuento por código</span>
+                        <span id="credit-applied" class="credit-applied"></span>
+                    </div>
+                    <div class="summary-total-row">
+                        <span>Total a pagar</span>
+                        <span id="cart-total">$0</span>
+                    </div>
+
+                    <div id="checkout-error" class="form-error" style="display:none;"></div>
+
+                    <button id="btn-checkout" class="cta-button checkout-btn">Pagar</button>
+
+                    <p id="login-hint" class="checkout-hint" style="display:none;">
+                        Para completar tu compra, <a href="login.html?next=checkout.html">ingresá o creá tu cuenta</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Paso 1.5: Datos de envío -->
+            <div id="checkout-shipping" style="display:none;">
+                <div class="page-title-block">
+                    <h1 class="page-title">Datos de entrega</h1>
+                </div>
+
+                <div class="shipping-form">
+                    <div class="shipping-type-selector">
+                        <label class="shipping-type-option">
+                            <input type="radio" name="shipping_type" value="retiro" checked>
+                            <div class="shipping-type-card">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                <span class="shipping-type-title">Retiro en local</span>
+                                <span class="shipping-type-desc">Gratis — Av. 3 de Febrero 640, Chivilcoy</span>
+                            </div>
+                        </label>
+                        <label class="shipping-type-option">
+                            <input type="radio" name="shipping_type" value="envio">
+                            <div class="shipping-type-card">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                                <span class="shipping-type-title">Envío a domicilio</span>
+                                <span class="shipping-type-desc">Costo a coordinar</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div id="shipping-whatsapp-note" class="shipping-whatsapp-note" style="display:none;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+                        <span>Te enviaremos a tu WhatsApp el costo del envío para abonarlo.</span>
+                    </div>
+
+                    <div id="address-fields" style="display:none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Calle</label>
+                                <input type="text" id="address_street" class="form-input" placeholder="Ej: Av. Rivadavia">
+                            </div>
+                            <div class="form-group" style="max-width:120px;">
+                                <label class="form-label">Número</label>
+                                <input type="text" id="address_number" class="form-input" placeholder="1234">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Ciudad</label>
+                                <input type="text" id="address_city" class="form-input" placeholder="Chivilcoy">
+                            </div>
+                            <div class="form-group" style="max-width:120px;">
+                                <label class="form-label">Código postal</label>
+                                <input type="text" id="address_zip" class="form-input" placeholder="6620">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Provincia</label>
+                            <input type="text" id="address_province" class="form-input" placeholder="Buenos Aires">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Celular de contacto</label>
+                        <input type="tel" id="shipping_phone" class="form-input" placeholder="Ej: 2346 530892">
+                    </div>
+
+                    <div id="shipping-error" class="form-error" style="display:none;"></div>
+
+                    <button id="btn-continue-payment" class="cta-button checkout-btn">Continuar al pago</button>
+                    <button id="btn-back-to-cart" style="margin-top:8px;background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;color:#666;cursor:pointer;text-decoration:underline;display:block;width:100%;text-align:center;">← Volver al carrito</button>
+                </div>
+            </div>
+
+            <!-- Paso 2: Formulario de pago MP Bricks -->
+            <div id="checkout-payment" style="display:none;">
+                <div class="page-title-block">
+                    <h1 class="page-title">Datos de pago</h1>
+                    <p style="font-family:'Jost',sans-serif;font-size:14px;color:#666;margin-top:6px;">
+                        Orden #<span id="payment-orden-id"></span> — Total: <strong id="payment-total"></strong>
+                    </p>
+                </div>
+                <div id="cardPaymentBrick_container"></div>
+                <div id="payment-error" class="form-error" style="display:none;margin-top:12px;"></div>
+                <button id="btn-back-cart" style="margin-top:12px;background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;color:#666;cursor:pointer;text-decoration:underline;">← Volver al carrito</button>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/notifications.js"></script>
+    <script>
+        var currentOrdenId = null;
+        var mpPublicKey = null;
+        var bricksController = null;
+        var shippingCost = 2500;
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            await window.ElRoperito.Auth.init();
+
+            if (!window.ElRoperito.Auth.isLoggedIn()) {
+                window.location.href = 'login.html?next=checkout.html';
+                return;
+            }
+
+            initBuyerHeader();
+            updateCartBadge();
+            updateWishlistBadge();
+
+            // Search redirige a tienda
+            var searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                searchInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' && this.value.trim()) {
+                        window.location.href = 'tienda.html?search=' + encodeURIComponent(this.value.trim());
+                    }
+                });
+            }
+
+            // Back buttons
+            var backBtn = document.getElementById('btn-back-cart');
+            if (backBtn) {
+                backBtn.addEventListener('click', function() {
+                    backToCartAfterError('');
+                    document.getElementById('checkout-error').style.display = 'none';
+                });
+            }
+            var backToCartBtn = document.getElementById('btn-back-to-cart');
+            if (backToCartBtn) {
+                backToCartBtn.addEventListener('click', function() {
+                    document.getElementById('checkout-shipping').style.display = 'none';
+                    document.getElementById('checkout-main').style.display = '';
+                });
+            }
+
+            // Shipping type toggle
+            var shippingRadios = document.querySelectorAll('input[name="shipping_type"]');
+            shippingRadios.forEach(function(r) {
+                r.addEventListener('change', function() {
+                    var isEnvio = this.value === 'envio';
+                    document.getElementById('address-fields').style.display = isEnvio ? '' : 'none';
+                    document.getElementById('shipping-whatsapp-note').style.display = isEnvio ? '' : 'none';
+                });
+            });
+
+            // Continue to payment button
+            document.getElementById('btn-continue-payment').addEventListener('click', handleCreateOrder);
+
+            // Load MP config
+            try {
+                var config = await window.ElRoperito.API.getCheckoutConfig();
+                if (config.configured) {
+                    mpPublicKey = config.public_key;
+                }
+                if (config.shipping_cost !== undefined) {
+                    shippingCost = config.shipping_cost;
+                }
+            } catch (e) {
+                console.warn('No se pudo obtener config de MP:', e);
+            }
+
+            // Pre-fill phone from user profile
+            var user = window.ElRoperito.Auth.user;
+            if (user && user.phone) {
+                document.getElementById('shipping_phone').value = user.phone;
+            }
+
+            renderCheckout();
+        });
+
+        function renderCheckout() {
+            var items = window.ElRoperito.Cart.getItems();
+
+            // Ocultar todos los estados primero
+            document.getElementById('checkout-empty').style.display = 'none';
+            document.getElementById('checkout-main').style.display = 'none';
+
+            if (items.length === 0) {
+                document.getElementById('checkout-empty').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('checkout-main').style.display = '';
+
+            // Render items
+            document.getElementById('cart-items').innerHTML = items.map(function(item) {
+                var imgSrc = item.imagen || 'images/placeholder.jpg';
+                var originalPrice = item.precio_original > item.precio
+                    ? '<span class="cart-item-original">$' + item.precio_original.toLocaleString('es-AR') + '</span>' : '';
+                return '<div class="cart-item">' +
+                    '<div class="cart-item-img"><img src="' + imgSrc + '" alt="' + item.nombre + '"></div>' +
+                    '<div class="cart-item-info">' +
+                        '<a href="producto.html?slug=' + item.slug + '" class="cart-item-name">' + item.nombre + '</a>' +
+                        '<span class="cart-item-talle">Talle ' + item.talle + '</span>' +
+                        '<div class="cart-item-prices"><span class="cart-item-price">$' + item.precio.toLocaleString('es-AR') + '</span>' + originalPrice + '</div>' +
+                    '</div>' +
+                    '<button class="cart-item-remove" onclick="removeCartItem(' + item.id + ')" title="Eliminar">✕</button>' +
+                '</div>';
+            }).join('');
+
+            updateSummary();
+
+            // Código de crédito (se aplica directo al hacer checkout)
+            document.getElementById('btn-apply-code').addEventListener('click', handleApplyCode);
+            document.getElementById('credit-code-input').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') { e.preventDefault(); handleApplyCode(); }
+            });
+            document.getElementById('btn-remove-code').addEventListener('click', handleRemoveCode);
+
+            // Ocultar sección de código si no está logueado
+            if (!window.ElRoperito.Auth.isLoggedIn()) {
+                document.getElementById('credit-code-section').style.display = 'none';
+                document.getElementById('btn-checkout').textContent = 'Iniciar sesión para comprar';
+                document.getElementById('login-hint').style.display = '';
+            }
+
+            document.getElementById('btn-checkout').addEventListener('click', goToShipping);
+        }
+
+        // Estado del código aplicado
+        var appliedCode = null;     // { codigo: 'ABC123', monto: 5000 }
+
+        async function handleApplyCode() {
+            if (!window.ElRoperito.Auth.isLoggedIn()) return;
+            var input = document.getElementById('credit-code-input');
+            var msgEl = document.getElementById('credit-code-msg');
+            var applyBtn = document.getElementById('btn-apply-code');
+            var code = input.value.trim().toUpperCase();
+            msgEl.style.display = 'none';
+
+            if (!code) {
+                msgEl.textContent = 'Ingresá un código.';
+                msgEl.className = 'credit-code-msg error';
+                msgEl.style.display = '';
+                return;
+            }
+
+            // Validate against the user's assigned codes
+            applyBtn.disabled = true;
+            applyBtn.textContent = 'Verificando...';
+            try {
+                var codes = await window.ElRoperito.API.getMyCodes(window.ElRoperito.Auth.token);
+                var match = (codes || []).find(function(c) {
+                    return c.codigo === code && !c.usado;
+                });
+
+                if (!match) {
+                    msgEl.textContent = 'Código inválido.';
+                    msgEl.className = 'credit-code-msg error';
+                    msgEl.style.display = '';
+                    return;
+                }
+
+                // Valid code
+                appliedCode = { codigo: match.codigo, monto: Number(match.monto) };
+                input.value = '';
+                var montoStr = '$' + Number(match.monto).toLocaleString('es-AR');
+                document.getElementById('credit-code-applied-text').textContent = 'Código ' + match.codigo + ' — ' + montoStr + ' de descuento aplicados';
+                document.getElementById('credit-code-applied').style.display = '';
+                document.querySelector('.credit-code-wrap').style.display = 'none';
+                msgEl.style.display = 'none';
+                updateSummary();
+            } catch(e) {
+                msgEl.textContent = 'Error al verificar el código. Intentá de nuevo.';
+                msgEl.className = 'credit-code-msg error';
+                msgEl.style.display = '';
+            } finally {
+                applyBtn.disabled = false;
+                applyBtn.textContent = 'Aplicar';
+            }
+        }
+
+        function handleRemoveCode() {
+            appliedCode = null;
+            document.getElementById('credit-code-applied').style.display = 'none';
+            document.querySelector('.credit-code-wrap').style.display = '';
+            updateSummary();
+        }
+
+        function updateSummary() {
+            var items = window.ElRoperito.Cart.getItems();
+            var total = window.ElRoperito.Cart.getTotal();
+
+            document.getElementById('cart-count').textContent = items.length;
+            document.getElementById('cart-plural').textContent = items.length > 1 ? 's' : '';
+            document.getElementById('cart-subtotal').textContent = '$' + total.toLocaleString('es-AR');
+
+            if (appliedCode && appliedCode.monto) {
+                var descuento = Math.min(appliedCode.monto, total);
+                document.getElementById('credit-row').style.display = '';
+                document.getElementById('credit-applied').textContent = '-$' + descuento.toLocaleString('es-AR');
+                document.getElementById('credit-applied').style.color = '#28a745';
+                total = Math.max(0, total - descuento);
+            } else {
+                document.getElementById('credit-row').style.display = 'none';
+            }
+
+            document.getElementById('cart-total').textContent = '$' + total.toLocaleString('es-AR');
+
+            // Actualizar texto del botón
+            var btn = document.getElementById('btn-checkout');
+            if (window.ElRoperito.Auth.isLoggedIn()) {
+                btn.textContent = 'Continuar';
+            }
+        }
+
+        function removeCartItem(id) {
+            window.ElRoperito.Cart.removeItem(id);
+            var items = window.ElRoperito.Cart.getItems();
+            if (items.length === 0) {
+                document.getElementById('checkout-main').style.display = 'none';
+                document.getElementById('checkout-empty').style.display = 'block';
+            } else {
+                renderCheckout();
+            }
+        }
+
+        function goToShipping() {
+            if (!window.ElRoperito.Auth.isLoggedIn()) {
+                window.location.href = 'login.html?next=checkout.html';
+                return;
+            }
+            document.getElementById('checkout-main').style.display = 'none';
+            document.getElementById('checkout-shipping').style.display = '';
+        }
+
+        async function handleCreateOrder() {
+            var btn = document.getElementById('btn-continue-payment');
+            var errorEl = document.getElementById('shipping-error');
+            btn.disabled = true;
+            btn.textContent = 'Procesando...';
+            errorEl.style.display = 'none';
+
+            // Collect shipping data
+            var shippingType = document.querySelector('input[name="shipping_type"]:checked').value;
+            var phone = document.getElementById('shipping_phone').value.trim();
+
+            if (!phone) {
+                errorEl.textContent = 'Ingresá tu número de celular para que podamos contactarte.';
+                errorEl.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = 'Continuar al pago';
+                return;
+            }
+
+            var checkoutData = {
+                items: window.ElRoperito.Cart.getItems().map(function(i) { return { product_id: i.id }; }),
+                codigo_credito: appliedCode ? appliedCode.codigo : '',
+                shipping_type: shippingType,
+            };
+
+            if (shippingType === 'envio') {
+                var street = document.getElementById('address_street').value.trim();
+                var number = document.getElementById('address_number').value.trim();
+                var city = document.getElementById('address_city').value.trim();
+                var zip = document.getElementById('address_zip').value.trim();
+                var province = document.getElementById('address_province').value.trim();
+
+                if (!street || !number || !city || !zip || !province) {
+                    errorEl.textContent = 'Completá todos los campos de dirección para el envío.';
+                    errorEl.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = 'Continuar al pago';
+                    return;
+                }
+                checkoutData.address_street = street;
+                checkoutData.address_number = number;
+                checkoutData.address_city = city;
+                checkoutData.address_zip = zip;
+                checkoutData.address_province = province;
+            }
+
+            try {
+                // Save phone to user profile
+                try {
+                    await window.ElRoperito.API.updateMe(window.ElRoperito.Auth.token, { phone: phone });
+                } catch (e) { /* no bloquear por esto */ }
+
+                var data = await window.ElRoperito.API.createCheckout(window.ElRoperito.Auth.token, checkoutData);
+
+                // Caso 1: Pagado completamente con crédito
+                if (data.paid_with_credit) {
+                    window.ElRoperito.Cart.clearCart();
+                    document.getElementById('checkout-shipping').style.display = 'none';
+                    showSuccess(data.orden_id);
+                    return;
+                }
+
+                // Caso 2: Necesita pago con MercadoPago
+                currentOrdenId = data.orden_id;
+                var montoPagar = data.monto_a_pagar;
+
+                if (!mpPublicKey) {
+                    errorEl.textContent = 'MercadoPago no está configurado. Contactá al administrador.';
+                    errorEl.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = 'Continuar al pago';
+                    return;
+                }
+
+                // Mostrar paso 3: formulario de pago MP
+                document.getElementById('checkout-shipping').style.display = 'none';
+                document.getElementById('checkout-payment').style.display = '';
+                document.getElementById('payment-orden-id').textContent = data.orden_id;
+                document.getElementById('payment-total').textContent = '$' + Number(montoPagar).toLocaleString('es-AR');
+
+                await renderCardBrick(montoPagar);
+
+            } catch (err) {
+                errorEl.textContent = err.message || 'Error al crear la orden';
+                errorEl.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = 'Continuar al pago';
+            }
+        }
+
+        async function renderCardBrick(amount) {
+            // Cleanup previous brick
+            if (bricksController) {
+                bricksController.unmount();
+                bricksController = null;
+            }
+            document.getElementById('cardPaymentBrick_container').innerHTML = '';
+
+            var mp = new MercadoPago(mpPublicKey, { locale: 'es-AR' });
+            var bricksBuilder = mp.bricks();
+
+            bricksController = await bricksBuilder.create('cardPayment', 'cardPaymentBrick_container', {
+                initialization: {
+                    amount: amount,
+                },
+                customization: {
+                    visual: {
+                        style: {
+                            theme: 'default',
+                        },
+                    },
+                    paymentMethods: {
+                        maxInstallments: 6,
+                    },
+                },
+                callbacks: {
+                    onReady: function() {
+                        // Brick listo
+                    },
+                    onSubmit: async function(cardFormData) {
+                        var paymentErrorEl = document.getElementById('payment-error');
+                        paymentErrorEl.style.display = 'none';
+                        console.log('Brick RAW cardFormData:', JSON.stringify(cardFormData, null, 2));
+
+                        // Handle both v2 structures: flat or nested under formData
+                        var fd = cardFormData.formData || cardFormData;
+
+                        try {
+                            var payer = fd.payer || {};
+                            var identification = payer.identification || {};
+                            var paymentData = {
+                                orden_id: currentOrdenId,
+                                token: fd.token,
+                                payment_method_id: fd.payment_method_id,
+                                issuer_id: fd.issuer_id || '',
+                                installments: fd.installments || 1,
+                                payer_email: payer.email,
+                                payer_identification_type: identification.type || '',
+                                payer_identification_number: identification.number || '',
+                            };
+                            console.log('Sending paymentData:', JSON.stringify(paymentData, null, 2));
+
+                            var result = await window.ElRoperito.API.processPayment(
+                                window.ElRoperito.Auth.token,
+                                paymentData
+                            );
+
+                            if (result.status === 'approved') {
+                                window.ElRoperito.Cart.clearCart();
+                                document.getElementById('checkout-payment').style.display = 'none';
+                                showSuccess(result.orden_id);
+                            } else if (result.status === 'rejected') {
+                                backToCartAfterError('El pago fue rechazado. Intentá con otro medio de pago.');
+                            } else if (result.status === 'in_process') {
+                                window.ElRoperito.Cart.clearCart();
+                                document.getElementById('checkout-payment').style.display = 'none';
+                                document.getElementById('checkout-success').style.display = 'block';
+                                document.querySelector('.success-icon').textContent = '⏳';
+                                document.querySelector('.auth-title').textContent = 'Pago en proceso';
+                                document.querySelector('.success-text').textContent = 'Tu pago está siendo procesado. Te avisaremos cuando se confirme.';
+                                document.getElementById('success-order-id').textContent = '#' + result.orden_id;
+                            } else {
+                                backToCartAfterError('Estado del pago: ' + (result.status_detail || result.status) + '. Intentá nuevamente.');
+                            }
+                        } catch (err) {
+                            backToCartAfterError(err.message || 'Error al procesar el pago. Intentá nuevamente.');
+                        }
+                    },
+                    onError: function(error) {
+                        var paymentErrorEl = document.getElementById('payment-error');
+                        paymentErrorEl.textContent = 'Error en el formulario de pago. Revisá los datos e intentá de nuevo.';
+                        paymentErrorEl.style.display = 'block';
+                        console.error('Brick error:', error);
+                    },
+                },
+            });
+        }
+
+        function backToCartAfterError(msg) {
+            // Destroy MP brick
+            if (bricksController) {
+                try { bricksController.unmount(); } catch(e) {}
+                bricksController = null;
+            }
+            document.getElementById('cardPaymentBrick_container').innerHTML = '';
+            currentOrdenId = null;
+
+            // Reset applied code (the backend already released it on failure)
+            appliedCode = null;
+            document.getElementById('credit-code-applied').style.display = 'none';
+            document.querySelector('.credit-code-wrap').style.display = '';
+
+            // Hide payment step, show cart step with error
+            document.getElementById('checkout-payment').style.display = 'none';
+            document.getElementById('checkout-shipping').style.display = 'none';
+            document.getElementById('checkout-main').style.display = '';
+
+            var errorEl = document.getElementById('checkout-error');
+            errorEl.textContent = msg;
+            errorEl.style.display = 'block';
+
+            // Auto-hide error after 8 seconds
+            setTimeout(function() { errorEl.style.display = 'none'; }, 8000);
+        }
+
+        function showSuccess(orderId) {
+            document.getElementById('checkout-main').style.display = 'none';
+            document.getElementById('checkout-payment').style.display = 'none';
+            document.getElementById('checkout-success').style.display = 'block';
+            document.getElementById('success-order-id').textContent = '#' + orderId;
+            updateCartBadge();
+        }
+
+        function updateCartBadge() {
+            var count = (window.ElRoperito.Cart.getItems() || []).length;
+            var el = document.getElementById('buyer-cart-count');
+            if (el) { el.textContent = count; el.style.display = count > 0 ? '' : 'none'; }
+        }
+
+        async function updateWishlistBadge() {
+            var el = document.getElementById('buyer-wishlist-count');
+            if (!el) return;
+            var token = window.ElRoperito.Auth.token;
+            if (!token) { el.style.display = 'none'; return; }
+            try {
+                var data = await window.ElRoperito.API.getWishlist(token);
+                var count = (data.productos || []).length;
+                el.textContent = count;
+                el.style.display = count > 0 ? '' : 'none';
+            } catch(e) { el.style.display = 'none'; }
+        }
+
+        function initBuyerHeader() {
+            var auth = window.ElRoperito.Auth;
+            var user = auth.user;
+            var isLogged = auth && typeof auth.isLoggedIn === 'function' ? auth.isLoggedIn() : !!user;
+
+            var avatarEl = document.getElementById('profile-avatar');
+            var nameEl = document.getElementById('dropdown-name');
+            var emailEl = document.getElementById('dropdown-email');
+
+            var itemPerfil   = document.getElementById('item-mi-perfil');
+            var itemCredito  = document.getElementById('item-mi-credito');
+            var itemConfig   = document.getElementById('item-config');
+            var itemLogin    = document.getElementById('item-login');
+            var itemRegister = document.getElementById('item-register');
+            var logoutBtn    = document.getElementById('logout-btn');
+
+            if (isLogged && user && user.nombre) {
+                avatarEl.textContent = user.nombre.charAt(0).toUpperCase();
+                nameEl.textContent = user.nombre + (user.apellido ? ' ' + user.apellido : '');
+                emailEl.textContent = user.email || '';
+
+                if (itemPerfil)   itemPerfil.style.display = '';
+                if (itemCredito)  itemCredito.style.display = '';
+                if (itemConfig)   itemConfig.style.display = '';
+                if (logoutBtn)    logoutBtn.style.display = '';
+
+                if (itemLogin)    itemLogin.style.display = 'none';
+                if (itemRegister) itemRegister.style.display = 'none';
+            } else {
+                avatarEl.textContent = '?';
+                nameEl.textContent = 'Invitado';
+                if (emailEl) emailEl.textContent = '';
+
+                if (itemPerfil)   itemPerfil.style.display = 'none';
+                if (itemCredito)  itemCredito.style.display = 'none';
+                if (itemConfig)   itemConfig.style.display = 'none';
+                if (logoutBtn)    logoutBtn.style.display = 'none';
+
+                if (itemLogin)    itemLogin.style.display = '';
+                if (itemRegister) itemRegister.style.display = '';
+            }
+
+            var profileBtn = document.getElementById('profile-btn');
+            var dropdown = document.getElementById('profile-dropdown');
+            profileBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var open = dropdown.style.display !== 'none';
+                dropdown.style.display = open ? 'none' : '';
+                profileBtn.setAttribute('aria-expanded', String(!open));
+                profileBtn.closest('.buyer-profile-wrap').classList.toggle('open', !open);
+            });
+
+            document.addEventListener('click', function() {
+                dropdown.style.display = 'none';
+                profileBtn.setAttribute('aria-expanded', 'false');
+                profileBtn.closest('.buyer-profile-wrap').classList.remove('open');
+            });
+
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                window.ElRoperito.Auth.logout();
+                window.location.href = 'index.html';
+            });
+
+            document.getElementById('notif-btn').addEventListener('click', function() {
+                window.ElRoperito.Components.showNotification('Sin notificaciones nuevas', 'info');
+            });
+        }
+    </script>
+</body>
+</html>

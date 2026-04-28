@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi perfil — El Roperito</title>
+    <link rel="stylesheet" href="styles.css?v=20260424b">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Nunito:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="page-body">
+
+    <!-- ── HEADER COMPRADOR ── -->
+    <header class="buyer-header">
+        <div class="buyer-header-inner">
+
+            <!-- Izquierda: Logo -->
+            <a href="tienda.html" class="buyer-logo">
+                <div class="brand-logo">
+                    <span class="logo-letter logo-el" data-letter="E">E</span>
+                    <span class="logo-letter logo-el" data-letter="l">l</span>
+                    <span class="logo-space"></span>
+                    <span class="logo-letter logo-rop" data-letter="R">R</span>
+                    <span class="logo-letter logo-rop" data-letter="o">o</span>
+                    <span class="logo-letter logo-rop" data-letter="p">p</span>
+                    <span class="logo-letter logo-er" data-letter="e">e</span>
+                    <span class="logo-letter logo-er" data-letter="r">r</span>
+                    <span class="logo-letter logo-ito" data-letter="i">i</span>
+                    <span class="logo-letter logo-ito" data-letter="t">t</span>
+                    <span class="logo-letter logo-ito" data-letter="o">o</span>
+                </div>
+            </a>
+
+            <!-- Centro: Búsqueda (navega a tienda) -->
+            <div class="buyer-search-wrap">
+                <svg class="buyer-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input
+                    type="text"
+                    id="search-input"
+                    class="buyer-search-input"
+                    placeholder="Buscar prendas, talles, categorías..."
+                    autocomplete="off"
+                >
+                <button id="search-clear" class="buyer-search-clear" style="display:none;" aria-label="Limpiar búsqueda">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <!-- Derecha: Acciones -->
+            <div class="buyer-actions">
+
+                <!-- Favoritos -->
+                <a href="perfil.html?tab=favoritos" class="buyer-action-btn" title="Mis favoritos">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                    <span class="buyer-action-label">Favoritos</span>
+                </a>
+
+                <!-- Notificaciones -->
+                <button class="buyer-action-btn" id="notif-btn" title="Notificaciones">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+                    <span class="buyer-action-label">Notificaciones</span>
+                    <span class="buyer-notif-dot" id="notif-dot" style="display:none;"></span>
+                </button>
+
+                <!-- Carrito -->
+                <a href="checkout.html" class="buyer-action-btn buyer-cart-btn" title="Carrito">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    <span class="buyer-action-label">Carrito</span>
+                    <span class="cart-count buyer-cart-count" id="buyer-cart-count" style="display:none;">0</span>
+                </a>
+
+                <!-- Perfil -->
+                <div class="buyer-profile-wrap" id="profile-wrap">
+                    <button class="buyer-profile-btn" id="profile-btn" aria-expanded="false" aria-label="Mi perfil">
+                        <div class="buyer-avatar" id="profile-avatar">?</div>
+                        <svg class="buyer-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="buyer-dropdown" id="profile-dropdown" style="display:none;">
+                        <div class="buyer-dropdown-user">
+                            <span class="buyer-dropdown-name" id="dropdown-name">Mi cuenta</span>
+                            <span class="buyer-dropdown-email" id="dropdown-email"></span>
+                        </div>
+                        <div class="buyer-dropdown-divider"></div>
+                        <a href="perfil.html" class="buyer-dropdown-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            Mi perfil
+                        </a>
+                        <a href="perfil.html?tab=credito" class="buyer-dropdown-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                            Mi crédito
+                        </a>
+                        <a href="perfil.html?tab=configuracion" class="buyer-dropdown-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                            Configuración
+                        </a>
+                        <div class="buyer-dropdown-divider"></div>
+                        <button class="buyer-dropdown-item buyer-dropdown-logout" id="logout-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                            Cerrar sesión
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <main class="page-main buyer-page-main">
+        <div class="page-container">
+
+            <!-- Botón volver -->
+            <a href="tienda.html" class="page-back-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                Volver a la tienda
+            </a>
+
+            <div id="perfil-loading" class="loading-text">Cargando perfil...</div>
+            <div id="perfil-content" style="display:none;">
+
+                <!-- Tabs -->
+                <div class="tabs-bar">
+                    <button class="tab-btn active" data-tab="credito">Mi crédito</button>
+                    <button class="tab-btn" data-tab="compras">Mis compras</button>
+                    <button class="tab-btn" data-tab="favoritos">Favoritos</button>
+                    <button class="tab-btn" data-tab="configuracion">Configuración</button>
+                </div>
+
+                <!-- Tab: Crédito -->
+                <div class="tab-panel active" id="tab-credito">
+                    <p style="font-size:14px;color:#555;margin-bottom:16px;">
+                        Si tenés un código de crédito, podés aplicarlo directamente en el <a href="checkout.html" style="color:#1a1a18;font-weight:600;">carrito</a> al momento de comprar.
+                    </p>
+
+                    <h3 class="tab-subtitle">Mis códigos</h3>
+                    <div id="my-codes" class="data-list">
+                        <div class="loading-text">Cargando...</div>
+                    </div>
+
+                    <h3 class="tab-subtitle" style="margin-top:24px;">Historial de movimientos</h3>
+                    <div id="credit-history" class="data-list">
+                        <div class="loading-text">Cargando...</div>
+                    </div>
+                </div>
+
+                <!-- Tab: Compras -->
+                <div class="tab-panel" id="tab-compras">
+                    <div id="orders-list" class="data-list">
+                        <div class="loading-text">Cargando...</div>
+                    </div>
+                </div>
+
+                <!-- Tab: Favoritos -->
+                <div class="tab-panel" id="tab-favoritos">
+                    <div id="wishlist-grid" class="products-grid">
+                        <div class="loading-text">Cargando...</div>
+                    </div>
+                </div>
+
+                <!-- Tab: Configuración -->
+                <div class="tab-panel" id="tab-configuracion">
+                    <form id="datos-form" class="perfil-form">
+                        <div class="perfil-form-grid">
+
+                            <!-- Columna izquierda: Datos personales -->
+                            <div class="perfil-form-section">
+                                <p class="form-section-title">Datos personales</p>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Nombre</label>
+                                        <input type="text" id="datos-nombre" class="form-input" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Apellido</label>
+                                        <input type="text" id="datos-apellido" class="form-input" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" id="datos-email" class="form-input" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Teléfono</label>
+                                    <input type="text" id="datos-phone" class="form-input" placeholder="+54 9 2346 ...">
+                                </div>
+                            </div>
+
+                            <!-- Columna derecha: Dirección de envío -->
+                            <div class="perfil-form-section">
+                                <p class="form-section-title">Dirección de envío</p>
+                                <div class="form-group">
+                                    <label class="form-label">Calle y número</label>
+                                    <input type="text" id="datos-calle" class="form-input" placeholder="Ej: Av. 3 de Febrero 640">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Ciudad</label>
+                                        <input type="text" id="datos-ciudad" class="form-input" placeholder="Ej: Chivilcoy">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Código postal</label>
+                                        <input type="text" id="datos-cp" class="form-input" placeholder="Ej: 6620" maxlength="10">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Provincia</label>
+                                    <select id="datos-provincia" class="form-input">
+                                        <option value="">Seleccioná tu provincia</option>
+                                        <option value="Buenos Aires">Buenos Aires</option>
+                                        <option value="Ciudad Autónoma de Buenos Aires">Ciudad Autónoma de Buenos Aires</option>
+                                        <option value="Catamarca">Catamarca</option>
+                                        <option value="Chaco">Chaco</option>
+                                        <option value="Chubut">Chubut</option>
+                                        <option value="Córdoba">Córdoba</option>
+                                        <option value="Corrientes">Corrientes</option>
+                                        <option value="Entre Ríos">Entre Ríos</option>
+                                        <option value="Formosa">Formosa</option>
+                                        <option value="Jujuy">Jujuy</option>
+                                        <option value="La Pampa">La Pampa</option>
+                                        <option value="La Rioja">La Rioja</option>
+                                        <option value="Mendoza">Mendoza</option>
+                                        <option value="Misiones">Misiones</option>
+                                        <option value="Neuquén">Neuquén</option>
+                                        <option value="Río Negro">Río Negro</option>
+                                        <option value="Salta">Salta</option>
+                                        <option value="San Juan">San Juan</option>
+                                        <option value="San Luis">San Luis</option>
+                                        <option value="Santa Cruz">Santa Cruz</option>
+                                        <option value="Santa Fe">Santa Fe</option>
+                                        <option value="Santiago del Estero">Santiago del Estero</option>
+                                        <option value="Tierra del Fuego">Tierra del Fuego</option>
+                                        <option value="Tucumán">Tucumán</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Columna: Carrito -->
+                            <div class="perfil-form-section">
+                                <p class="form-section-title">Carrito</p>
+                                <div class="form-group">
+                                    <label class="form-label">Preferencia de envío</label>
+                                    <select id="datos-preferencia-envio" class="form-input">
+                                        <option value="">Seleccioná tu preferencia</option>
+                                        <option value="retiro">Retiro en local (gratis)</option>
+                                        <option value="envio">Envío a domicilio</option>
+                                    </select>
+                                    <p style="font-size:12px;color:#666;margin-top:4px;">Esta preferencia se usará por defecto al completar tu compra.</p>
+                                </div>
+                                <div class="form-group" style="margin-top:16px;">
+                                    <a href="checkout.html" class="cta-button" style="display:inline-block;text-decoration:none;">
+                                        Ir a mi carrito
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="datos-msg" class="form-success" style="display:none;"></div>
+                        <button type="submit" class="cta-button auth-submit perfil-submit">Guardar cambios</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/notifications.js"></script>
+    <script>
+        var tabsLoaded = {};
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            await window.ElRoperito.Auth.init();
+            updateCartBadge();
+
+            if (!window.ElRoperito.Auth.isLoggedIn()) {
+                window.location.href = 'login.html?next=perfil.html';
+                return;
+            }
+
+            initBuyerHeader();
+
+            document.getElementById('perfil-loading').style.display = 'none';
+            document.getElementById('perfil-content').style.display = '';
+
+            // Tabs
+            document.querySelectorAll('.tab-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+                    document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+                    btn.classList.add('active');
+                    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+                    loadTab(btn.dataset.tab);
+                });
+            });
+
+            // Búsqueda en header → navegar a tienda
+            var searchInput = document.getElementById('search-input');
+            var searchClear = document.getElementById('search-clear');
+            searchInput.addEventListener('input', function() {
+                searchClear.style.display = this.value ? '' : 'none';
+            });
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && this.value.trim()) {
+                    window.location.href = 'tienda.html?search=' + encodeURIComponent(this.value.trim());
+                }
+            });
+            searchClear.addEventListener('click', function() {
+                searchInput.value = '';
+                searchClear.style.display = 'none';
+                searchInput.focus();
+            });
+
+            // Abrir tab desde URL
+            var params = new URLSearchParams(window.location.search);
+            var startTab = params.get('tab') || 'credito';
+            var startBtn = document.querySelector('[data-tab="' + startTab + '"]');
+            if (startBtn) startBtn.click();
+            else loadTab('credito');
+        });
+
+        async function loadTab(tab) {
+            var token = window.ElRoperito.Auth.token;
+            if (tabsLoaded[tab]) return;
+
+            if (tab === 'credito') {
+                // Cargar códigos asignados al usuario
+                try {
+                    var codes = await window.ElRoperito.API.getMyCodes(token);
+                    var codeList = codes.results || codes;
+                    if (!codeList || codeList.length === 0) {
+                        document.getElementById('my-codes').innerHTML = '<p class="empty-text">No tenés códigos de crédito asignados.</p>';
+                    } else {
+                        document.getElementById('my-codes').innerHTML = codeList.map(function(c) {
+                            var estado = c.usado
+                                ? '<span style="color:#dc3545;font-weight:600;">Usado</span>'
+                                : '<span style="color:#28a745;font-weight:600;">Disponible — $' + Number(c.monto).toLocaleString('es-AR') + '</span>';
+                            var fechaUso = c.fecha_uso ? ' — Usado el ' + new Date(c.fecha_uso).toLocaleDateString('es-AR') : '';
+                            return '<div class="data-row" style="align-items:center;">' +
+                                '<code style="font-size:14px;font-weight:700;letter-spacing:1px;background:rgba(26,26,24,0.05);padding:3px 8px;border-radius:6px;">' + c.codigo + '</code>' +
+                                '<span>' + estado + fechaUso + '</span>' +
+                            '</div>';
+                        }).join('');
+                    }
+                } catch (e) {
+                    document.getElementById('my-codes').innerHTML = '<p class="empty-text">Error al cargar códigos.</p>';
+                }
+
+                // Historial de movimientos
+                try {
+                    var history = await window.ElRoperito.API.getCreditHistory(token);
+                    var items = history.results || history;
+                    if (!items || items.length === 0) {
+                        document.getElementById('credit-history').innerHTML = '<p class="empty-text">Sin movimientos de crédito todavía.</p>';
+                    } else {
+                        document.getElementById('credit-history').innerHTML = items.map(function(h) {
+                            var sign = h.tipo === 'credito' ? '+' : '-';
+                            var color = h.tipo === 'credito' ? 'color:#28a745' : 'color:#dc3545';
+                            return '<div class="data-row"><span>' + h.descripcion + '</span><span style="' + color + ';font-weight:600;">' + sign + '$' + Number(h.monto).toLocaleString('es-AR') + '</span><span class="data-date">' + new Date(h.fecha).toLocaleDateString('es-AR') + '</span></div>';
+                        }).join('');
+                    }
+                } catch (e) {
+                    document.getElementById('credit-history').innerHTML = '<p class="empty-text">Error al cargar historial.</p>';
+                }
+                tabsLoaded.credito = true;
+            }
+
+            if (tab === 'compras') {
+                try {
+                    var orders = await window.ElRoperito.API.getOrders(token);
+                    var list = orders.results || orders;
+                    if (!list || list.length === 0) {
+                        document.getElementById('orders-list').innerHTML = '<p class="empty-text">No tenés compras todavía. <a href="tienda.html">Explorá la tienda</a></p>';
+                    } else {
+                        document.getElementById('orders-list').innerHTML = list.map(function(o) {
+                            var estadoMap = {
+                                'pending_payment': 'Pendiente de pago',
+                                'paid': 'Pagada',
+                                'shipped': 'Enviada',
+                                'ready_for_pickup': 'Lista para retirar',
+                                'completed': 'Completada',
+                                'cancelled': 'Cancelada'
+                            };
+                            var estadoLabel = estadoMap[o.estado] || o.estado;
+                            var estadoClass = (o.estado === 'paid' || o.estado === 'completed') ? 'badge-ok'
+                                : (o.estado === 'shipped' || o.estado === 'ready_for_pickup') ? 'badge-info'
+                                : o.estado === 'pending_payment' ? 'badge-warn'
+                                : o.estado === 'cancelled' ? 'badge-danger' : 'badge-default';
+
+                            var itemsHTML = (o.items || []).map(function(item) {
+                                var p = item.producto || {};
+                                var img = p.imagen_principal || 'images/placeholder.jpg';
+                                return '<div class="order-product">' +
+                                    '<img src="' + img + '" alt="' + (p.nombre || '') + '" class="order-product-img">' +
+                                    '<div class="order-product-info">' +
+                                        '<span class="order-product-name">' + (p.nombre || 'Producto') + '</span>' +
+                                        '<span class="order-product-detail">Talle ' + (p.talle || '-') + '</span>' +
+                                    '</div>' +
+                                    '<span class="order-product-price">$' + Number(item.precio_unitario).toLocaleString('es-AR') + '</span>' +
+                                '</div>';
+                            }).join('');
+
+                            var envioLabel = o.shipping_type === 'envio' ? 'Envío a domicilio' : 'Retiro en local';
+                            var fechaStr = new Date(o.fecha).toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+                            var waMsg = encodeURIComponent('Hola! Necesito ayuda con mi orden #' + o.id + ' de El Roperito.');
+
+                            return '<div class="order-card">' +
+                                '<div class="order-card-header">' +
+                                    '<div class="order-card-meta">' +
+                                        '<span class="order-card-id">Orden #' + o.id + '</span>' +
+                                        '<span class="order-card-date">' + fechaStr + '</span>' +
+                                    '</div>' +
+                                    '<span class="badge ' + estadoClass + '">' + estadoLabel + '</span>' +
+                                '</div>' +
+                                '<div class="order-card-items">' + itemsHTML + '</div>' +
+                                '<div class="order-card-footer">' +
+                                    '<div class="order-card-totals">' +
+                                        '<span class="order-card-shipping">' + envioLabel +
+                                            (o.shipping_cost > 0 ? ' (+$' + Number(o.shipping_cost).toLocaleString('es-AR') + ')' : '') +
+                                        '</span>' +
+                                        '<span class="order-card-total">Total: $' + Number(o.total).toLocaleString('es-AR') + '</span>' +
+                                    '</div>' +
+                                    '<a href="https://wa.me/5492346530892?text=' + waMsg + '" target="_blank" rel="noopener" class="order-wa-btn">' +
+                                        '<svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>' +
+                                        'Necesito ayuda' +
+                                    '</a>' +
+                                '</div>' +
+                            '</div>';
+                        }).join('');
+                    }
+                } catch (e) {
+                    document.getElementById('orders-list').innerHTML = '<p class="empty-text">Error al cargar compras.</p>';
+                }
+                tabsLoaded.compras = true;
+            }
+
+            if (tab === 'favoritos') {
+                try {
+                    var wishlist = await window.ElRoperito.API.getWishlist(token);
+                    var productos = wishlist.productos || wishlist;
+                    if (!productos || productos.length === 0) {
+                        document.getElementById('wishlist-grid').innerHTML = '<p class="empty-text">No tenés favoritos. <a href="tienda.html">Explorá la tienda</a></p>';
+                    } else {
+                        document.getElementById('wishlist-grid').innerHTML = productos.map(function(p) {
+                            return '<div class="wishlist-card-wrap" data-product-id="' + p.id + '">' +
+                                window.ElRoperito.Components.productCardHTML(p) +
+                                '<button class="wishlist-remove-btn" onclick="removeFromWishlist(' + p.id + ', this)" title="Quitar de favoritos">' +
+                                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+                                '</button>' +
+                            '</div>';
+                        }).join('');
+                    }
+                } catch (e) {
+                    document.getElementById('wishlist-grid').innerHTML = '<p class="empty-text">Error al cargar favoritos.</p>';
+                }
+                tabsLoaded.favoritos = true;
+            }
+
+            if (tab === 'configuracion') {
+                var user = window.ElRoperito.Auth.user;
+                document.getElementById('datos-nombre').value = user.nombre || '';
+                document.getElementById('datos-apellido').value = user.apellido || '';
+                document.getElementById('datos-email').value = user.email || '';
+                document.getElementById('datos-phone').value = user.phone || '';
+                document.getElementById('datos-calle').value = user.calle || '';
+                document.getElementById('datos-ciudad').value = user.ciudad || '';
+                document.getElementById('datos-cp').value = user.codigo_postal || '';
+                var provSelect = document.getElementById('datos-provincia');
+                if (user.provincia) provSelect.value = user.provincia;
+                var prefEnvioSelect = document.getElementById('datos-preferencia-envio');
+                if (user.preferencia_envio) prefEnvioSelect.value = user.preferencia_envio;
+
+                document.getElementById('datos-form').onsubmit = async function(e) {
+                    e.preventDefault();
+                    var msgEl = document.getElementById('datos-msg');
+                    msgEl.style.display = 'none';
+                    try {
+                        await window.ElRoperito.API.updateMe(token, {
+                            nombre: document.getElementById('datos-nombre').value,
+                            apellido: document.getElementById('datos-apellido').value,
+                            phone: document.getElementById('datos-phone').value,
+                            calle: document.getElementById('datos-calle').value,
+                            ciudad: document.getElementById('datos-ciudad').value,
+                            codigo_postal: document.getElementById('datos-cp').value,
+                            provincia: document.getElementById('datos-provincia').value,
+                            preferencia_envio: document.getElementById('datos-preferencia-envio').value
+                        });
+                        await window.ElRoperito.Auth.refreshUser();
+                        msgEl.textContent = '¡Cambios guardados correctamente!';
+                        msgEl.style.color = '';
+                        msgEl.style.display = 'block';
+                        setTimeout(function() { msgEl.style.display = 'none'; }, 3500);
+                    } catch (err) {
+                        msgEl.textContent = 'No se pudieron guardar los cambios. Intentá de nuevo.';
+                        msgEl.style.color = '#dc3545';
+                        msgEl.style.display = 'block';
+                    }
+                };
+                tabsLoaded.configuracion = true;
+            }
+        }
+
+        function updateCartBadge() {
+            var count = (window.ElRoperito.Cart.getItems() || []).length;
+            var el = document.getElementById('buyer-cart-count');
+            if (el) { el.textContent = count; el.style.display = count > 0 ? '' : 'none'; }
+        }
+
+        function initBuyerHeader() {
+            var user = window.ElRoperito.Auth.user;
+            var avatarEl = document.getElementById('profile-avatar');
+            var nameEl = document.getElementById('dropdown-name');
+            var emailEl = document.getElementById('dropdown-email');
+            if (user && user.nombre) {
+                avatarEl.textContent = user.nombre.charAt(0).toUpperCase();
+                nameEl.textContent = user.nombre + (user.apellido ? ' ' + user.apellido : '');
+                emailEl.textContent = user.email || '';
+            } else {
+                avatarEl.textContent = '?';
+                nameEl.textContent = 'Invitado';
+            }
+
+            var profileBtn = document.getElementById('profile-btn');
+            var dropdown = document.getElementById('profile-dropdown');
+            profileBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var open = dropdown.style.display !== 'none';
+                dropdown.style.display = open ? 'none' : '';
+                profileBtn.setAttribute('aria-expanded', String(!open));
+                profileBtn.closest('.buyer-profile-wrap').classList.toggle('open', !open);
+            });
+            document.addEventListener('click', function() {
+                dropdown.style.display = 'none';
+                profileBtn.setAttribute('aria-expanded', 'false');
+                profileBtn.closest('.buyer-profile-wrap').classList.remove('open');
+            });
+
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                window.ElRoperito.Auth.logout();
+                window.location.href = 'index.html';
+            });
+
+            document.getElementById('notif-btn').addEventListener('click', function() {
+                window.ElRoperito.Components.showNotification('Sin notificaciones nuevas');
+            });
+        }
+
+        async function removeFromWishlist(productId, btnEl) {
+            try {
+                await window.ElRoperito.API.removeFromWishlist(window.ElRoperito.Auth.token, productId);
+                var wrap = btnEl.closest('.wishlist-card-wrap');
+                if (wrap) wrap.remove();
+                window.ElRoperito.Components.showNotification('Eliminado de favoritos');
+                // Check if grid is now empty
+                var grid = document.getElementById('wishlist-grid');
+                if (grid && grid.querySelectorAll('.wishlist-card-wrap').length === 0) {
+                    grid.innerHTML = '<p class="empty-text">No tenés favoritos. <a href="tienda.html">Explorá la tienda</a></p>';
+                }
+            } catch (e) {
+                window.ElRoperito.Components.showNotification('Error al eliminar', 'error');
+            }
+        }
+    </script>
+</body>
+</html>

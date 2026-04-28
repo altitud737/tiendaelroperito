@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Roperito - Ropa para niños y niñas de 0 a 12 años</title>
+    <link rel="stylesheet" href="styles.css?v=20260424c">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Jost:wght@300;400;500&family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="script.js"></script>
+
+    <style>
+        /* ─── FAQ ─────────────────────────────────────────── */
+        .faq-section {
+            padding: 120px 24px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://res.cloudinary.com/elroperito/image/upload/v1777399631/web/bs3.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+            min-height: 100vh;
+            overflow: visible;
+            scroll-snap-align: start;
+            scroll-snap-stop: normal;
+        }
+
+        .faq-inner {
+            max-width: 780px;
+            margin: 0 auto;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 52px;
+        }
+
+        .faq-eyebrow {
+            display: inline-block;
+            font-family: 'Jost', sans-serif;
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .faq-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(28px, 5vw, 42px);
+            font-weight: 300;
+            color: #ffffff;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .faq-item:hover {
+            background: rgba(0, 0, 0, 0.25);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.05);
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 18px 20px;
+            cursor: pointer;
+            list-style: none;
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            user-select: none;
+            position: relative;
+        }
+
+        .faq-question::-webkit-details-marker { display: none; }
+
+        .faq-item[open] .faq-question {
+            color: #ffffff;
+        }
+
+        .faq-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-item[open] .faq-icon {
+            transform: rotate(45deg) scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border-color: #ffffff;
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+        }
+
+        .faq-icon svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .faq-answer {
+            padding: 0 16px 24px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.5;
+        }
+
+        .faq-item:last-child {
+            margin-bottom: 40px;
+        }
+
+        .faq-item:last-child .faq-answer {
+            padding-bottom: 40px;
+        }
+
+        @keyframes faqFadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ─── FOOTER ─────────────────────────────────────── */
+        .site-footer {
+            background: #ffffff;
+            color: #1a1a1a;
+            padding: 100px 0 0;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+            width: 100vw;
+            min-height: 400px;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 5%;
+            right: 5%;
+            height: 1px;
+            background: #e0e0e0;
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 80px;
+            padding-bottom: 60px;
+        }
+
+        /* Brand column */
+        .footer-brand .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            color: #1a1a1a;
+            margin: 0 0 8px;
+        }
+
+        .footer-brand .footer-tagline {
+            font-family: 'Jost', sans-serif;
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #666;
+            margin: 0 0 24px;
+            font-weight: 500;
+        }
+
+        .footer-brand .footer-desc {
+            font-family: 'Nunito', sans-serif;
+            font-size: 15px;
+            line-height: 1.75;
+            color: #3f3f3f;
+            max-width: 300px;
+        }
+
+        /* Social icons */
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* Footer socials row - aligns socials and scroll-to-top on same line */
+        .footer-socials-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 28px;
+        }
+
+        .footer-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .footer-social-link:hover {
+            background: #1a1a1a;
+            border-color: #1a1a1a;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .footer-social-link svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        /* Nav columns */
+        .footer-col-title {
+            font-family: 'Jost', sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            margin: 0 0 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            font-family: 'Nunito', sans-serif;
+            font-size: 15px;
+            color: #3f3f3f;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover { 
+            color: #1a1a1a; 
+        }
+
+        /* Contact */
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 15px;
+            color: #3f3f3f;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-contact-item:hover {
+            color: #1a1a1a;
+        }
+
+        .footer-contact-item svg {
+            flex-shrink: 0;
+            margin-top: 2px;
+            color: #1a1a1a;
+            opacity: 0.4;
+        }
+
+        /* Bottom bar */
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 32px 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-copy {
+            font-family: 'Jost', sans-serif;
+            font-size: 14px;
+            color: #4a4a4a;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        .footer-love {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 15px;
+            color: #4a4a4a;
+            font-weight: 400;
+        }
+
+        .footer-sdp {
+            font-family: 'Jost', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: #888;
+            text-decoration: none;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.2s ease, letter-spacing 0.2s ease;
+            display: inline-block;
+            padding: 6px 14px;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 20px;
+        }
+        .footer-sdp:hover {
+            color: #1a1a18;
+            border-color: rgba(0,0,0,0.2);
+            letter-spacing: 0.12em;
+        }
+
+        /* Scroll to top button */
+        .scroll-to-top {
+            width: 44px;
+            height: 44px;
+            border: 1px solid #ddd;
+            background: #ffffff;
+            color: #1a1a1a;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            outline: none;
+            flex-shrink: 0;
+        }
+
+        .scroll-to-top:hover {
+            background: #1a1a1a;
+            border-color: #1a1a1a;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .scroll-to-top svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Place scroll button under WhatsApp and align to extreme right on desktop */
+        .footer-contact-item.footer-whatsapp {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-contact-item.footer-whatsapp .scroll-to-top {
+            margin-left: auto;
+        }
+
+        @media (max-width: 720px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+            /* Stack WhatsApp and move scroll button to the right under it on mobile */
+            .footer-contact-item.footer-whatsapp {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .footer-contact-item.footer-whatsapp .scroll-to-top {
+                margin-left: 0;
+                align-self: flex-end;
+                margin-top: 8px;
+            }
+            .footer-inner { padding: 0 20px; }
+            .footer-brand .footer-desc { max-width: 100%; }
+            .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .footer-socials-row { flex-direction: column; gap: 16px; align-items: flex-start; }
+            .site-footer { padding: 60px 0 0; margin-top: 30px; min-height: auto; height: auto; }
+        }
+        @media (max-width: 480px) {
+            .footer-inner { padding: 0 16px; }
+            .footer-grid { gap: 28px; }
+            .site-footer { padding: 40px 0 0; }
+        }
+
+        @media (max-width: 768px) {
+            .faq-section {
+                padding: 80px 16px 0;
+                background-attachment: scroll;
+                min-height: auto;
+                scroll-snap-align: none;
+            }
+            .faq-list {
+                gap: 12px;
+                max-width: 100%;
+            }
+            .faq-question {
+                font-size: 13px;
+                padding: 14px;
+            }
+            .faq-answer {
+                font-size: 12px;
+                padding: 0 14px 14px;
+            }
+        }
+        @media (max-width: 480px) {
+            .faq-section { padding: 60px 12px 0; }
+            .faq-header { margin-bottom: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Principal -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Izquierda: Logo -->
+            <div class="header-brand">
+                <a href="index.html" class="brand-logo">
+                    <span class="logo-letter logo-el" data-letter="E">E</span>
+                    <span class="logo-letter logo-el" data-letter="l">l</span>
+                    <span class="logo-space"></span>
+                    <span class="logo-letter logo-rop" data-letter="R">R</span>
+                    <span class="logo-letter logo-rop" data-letter="o">o</span>
+                    <span class="logo-letter logo-rop" data-letter="p">p</span>
+                    <span class="logo-letter logo-er" data-letter="e">e</span>
+                    <span class="logo-letter logo-er" data-letter="r">r</span>
+                    <span class="logo-letter logo-ito" data-letter="i">i</span>
+                    <span class="logo-letter logo-ito" data-letter="t">t</span>
+                    <span class="logo-letter logo-ito" data-letter="o">o</span>
+                </a>
+            </div>
+
+            <!-- Centro: Navegación -->
+            <nav class="header-nav">
+                <ul class="nav-menu">
+                    <li><a href="tienda.html" class="nav-link">Tienda</a></li>
+                    <li><a href="#faq" class="nav-link">Preguntas</a></li>
+                    <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+                </ul>
+            </nav>
+
+            <!-- Derecha: Acciones y Redes -->
+            <div class="header-actions">
+                <a href="#como-funciona" class="header-sell-btn">Vendé tu ropa</a>
+                <div class="header-icons">
+                    <a href="login.html" class="header-icon" data-auth="login" aria-label="Ingresar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </a>
+                    <a href="tienda.html" class="header-icon buyer-cart-btn" title="Carrito">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                        <span class="cart-count buyer-cart-count" id="buyer-cart-count" style="display:none;">0</span>
+                    </a>
+                    <a href="https://instagram.com/elroperitochivilcoy" class="header-icon" aria-label="Instagram" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hamburger (solo mobile) -->
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+
+            <!-- Mobile nav drawer -->
+            <div class="nav-mobile-overlay" id="nav-mobile-overlay">
+                <nav class="nav-mobile-drawer">
+                    <div class="nav-mobile-header">
+                        <a href="index.html" class="nav-mobile-brand">
+                            <span class="logo-letter logo-el" data-letter="E">E</span>
+                            <span class="logo-letter logo-el" data-letter="l">l</span>
+                            <span class="logo-space"></span>
+                            <span class="logo-letter logo-rop" data-letter="R">R</span>
+                            <span class="logo-letter logo-rop" data-letter="o">o</span>
+                            <span class="logo-letter logo-rop" data-letter="p">p</span>
+                            <span class="logo-letter logo-er" data-letter="e">e</span>
+                            <span class="logo-letter logo-er" data-letter="r">r</span>
+                            <span class="logo-letter logo-ito" data-letter="i">i</span>
+                            <span class="logo-letter logo-ito" data-letter="t">t</span>
+                            <span class="logo-letter logo-ito" data-letter="o">o</span>
+                        </a>
+                    </div>
+                    <ul class="nav-mobile-list">
+                        <li><a href="tienda.html">Tienda</a></li>
+                        <li><a href="#faq">Preguntas</a></li>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#como-funciona" style="font-weight:600;color:#95E1A8;">Vendé tu ropa</a></li>
+                        <li class="nav-mobile-divider-li"></li>
+                        <li data-auth="mobile-login"><a href="login.html">Ingresar</a></li>
+                        <li data-auth="mobile-user" style="display:none;"><a href="perfil.html" data-auth="mobile-user-name">Mi cuenta</a></li>
+                        <li data-auth="mobile-logout" style="display:none;"><button class="nav-mobile-logout-btn" onclick="window.ElRoperito.Auth.logout()">Cerrar sesión</button></li>
+                        <li class="nav-mobile-divider-li"></li>
+                        <li><a href="checkout.html" style="display:flex;align-items:center;gap:10px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                            Carrito
+                        </a></li>
+                        <li><a href="https://instagram.com/elroperitochivilcoy" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                            Instagram
+                        </a></li>
+                    </ul>
+                </nav>
+            </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+
+        <!-- Hero -->
+        <section class="hero-section">
+
+            <!-- Blobs decorativos de fondo CSS -->
+            <div class="hero-bg-blob hero-bg-blob-tl" aria-hidden="true"></div>
+            <div class="hero-bg-blob hero-bg-blob-bl" aria-hidden="true"></div>
+            <div class="hero-bg-blob hero-bg-blob-br" aria-hidden="true"></div>
+
+            <!-- Izquierda: texto -->
+            <div class="hero-content">
+                <p class="hero-eyebrow">Moda circular infantil</p>
+
+                <h1 class="hero-title">
+                    Pequeñas prendas,<br>
+                    grandes historias
+                </h1>
+
+                <p class="hero-subtitle">
+                    Ropa de calidad para niños y niñas de 0 a 12 años.<br>
+                    Comprá, vendé y dale nueva vida a cada prenda.
+                </p>
+
+                <div class="hero-actions-grid">
+                    <!-- Columna Izquierda (Botón + Testimonio) -->
+                    <div class="hero-cta-col">
+                        <div class="hero-cta-row">
+                            <a href="tienda.html" class="hero-cta">ver roperito</a>
+                            <a href="#como-funciona" class="hero-secondary-link hero-secondary-inline">¿Cómo funciona? <span class="arrow">→</span></a>
+                        </div>
+
+                        <div class="hero-testimonial">
+                            <h3 class="testimonial-title">Historias de Familia</h3>
+                            <div class="testimonial-carousel" id="testimonialCarousel">
+                                <div class="testimonial-slide active">
+                                    <p class="testimonial-quote">"Encontramos una ropita muy cuidada y con mucho amor , Teo esta muy feliz"</p>
+                                    <span class="testimonial-author">Juana, mamá de Teo.</span>
+                                </div>
+                                <div class="testimonial-slide">
+                                    <p class="testimonial-quote">"Pude vender lo que a mi nena ya no usaba y compré nueva ropita. ¡Excelente!"</p>
+                                    <span class="testimonial-author">Sofía, mamá de Mía.</span>
+                                </div>
+                                <div class="testimonial-slide">
+                                    <p class="testimonial-quote">"La ropa impecable, parece todo nuevo. Me encantó."</p>
+                                    <span class="testimonial-author">Carla, mamá de Lucas.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Columna Derecha (Proceso) -->
+                    <div class="hero-info-col">
+                        <div class="hero-process-row">
+                            <div class="hero-process-icons"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Derecha: imagen blob -->
+            <div class="hero-visual">
+                <div class="hero-img-wrapper">
+                    <!-- Decorative blobs (blue added manually, others use pseudo elements) -->
+                    <div class="hero-img-wrapper-light-blue" aria-hidden="true"></div>
+                    <!-- Imagen de mamá e hija alegre -->
+                    <img src="https://res.cloudinary.com/elroperito/image/upload/v1777399637/web/mostrador.jpg" alt="Mamá y niña jugando y sonriendo" class="hero-img">
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Sección: Vendé tu ropa (antes "El proceso / Cómo funciona El Roperito") -->
+        <section class="process-section" id="como-funciona">
+            <div class="process-blob-blue" aria-hidden="true"></div>
+            <div class="process-inner">
+
+                <div class="top-row">
+                    <span class="eyebrow">Dale nueva vida a la ropa de tus hijos</span>
+                    <h2 class="process-title">Vendé tu ropa</h2>
+                </div>
+
+                <!-- Testimonios de Padres -->
+                <div class="testimonials-background">
+                    <div class="testimonial-card testimonial-float-1">
+                        <div class="testimonial-quote-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" opacity="0.15">
+                                <path d="M11.3 2.5C6.4 4.2 2.9 8.5 2.9 13.4c0 3.4 2.1 5.6 4.7 5.6 2.4 0 4.3-1.9 4.3-4.3 0-2.3-1.7-4.1-3.9-4.3.4-2.8 2.6-5.4 5.4-6.8L11.3 2.5zM21.7 2.5c-4.9 1.7-8.4 6-8.4 10.9 0 3.4 2.1 5.6 4.7 5.6 2.4 0 4.3-1.9 4.3-4.3 0-2.3-1.7-4.1-3.9-4.3.4-2.8 2.6-5.4 5.4-6.8L21.7 2.5z"/>
+                            </svg>
+                        </div>
+                        <p class="testimonial-quote">"Gracias a El Roperito Sofi tiene campera.."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">L</div>
+                            <div class="testimonial-author-info">
+                                <span class="testimonial-name">Lu</span>
+                                <span class="testimonial-role">mamá de Sofi</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card testimonial-float-2">
+                        <div class="testimonial-quote-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" opacity="0.15">
+                                <path d="M11.3 2.5C6.4 4.2 2.9 8.5 2.9 13.4c0 3.4 2.1 5.6 4.7 5.6 2.4 0 4.3-1.9 4.3-4.3 0-2.3-1.7-4.1-3.9-4.3.4-2.8 2.6-5.4 5.4-6.8L11.3 2.5zM21.7 2.5c-4.9 1.7-8.4 6-8.4 10.9 0 3.4 2.1 5.6 4.7 5.6 2.4 0 4.3-1.9 4.3-4.3 0-2.3-1.7-4.1-3.9-4.3.4-2.8 2.6-5.4 5.4-6.8L21.7 2.5z"/>
+                            </svg>
+                        </div>
+                        <p class="testimonial-quote">"Encontré vestidos preciosos para Emma.."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar" style="background: linear-gradient(135deg, #F2A2B1, #e88a9c);">V</div>
+                            <div class="testimonial-author-info">
+                                <span class="testimonial-name">Valentina</span>
+                                <span class="testimonial-role">mamá de Emma</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card testimonial-float-3">
+                        <div class="testimonial-quote-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" opacity="0.15">
+                                <path d="M11.3 2.5C6.4 4.2 2.9 8.5 2.9 13.4c0 3.4 2.1 5.6 4.7 5.6 2.4 0 4.3-1.9 4.3-4.3 0-2.3-1.7-4.1-3.9-4.3.4-2.8 2.6-5.4 5.4-6.8L11.3 2.5zM21.7 2.5c-4.9 1.7-8.4 6-8.4 10.9 0 3.4 2.1 5.6 4.7 5.6 2.4 0 4.3-1.9 4.3-4.3 0-2.3-1.7-4.1-3.9-4.3.4-2.8 2.6-5.4 5.4-6.8L21.7 2.5z"/>
+                            </svg>
+                        </div>
+                        <p class="testimonial-quote">"Los pantalones de Tomás tienen nueva vida.."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar" style="background: linear-gradient(135deg, #96C3EB, #7ab0de);">D</div>
+                            <div class="testimonial-author-info">
+                                <span class="testimonial-name">Diego</span>
+                                <span class="testimonial-role">papá de Tomás</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card testimonial-float-4">
+                        <div class="testimonial-quote-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" opacity="0.15">
+                                <path d="M11.3 2.5C6.4 4.2 2.9 8.5 2.9 13.4c0 3.4 2.1 5.6 4.7 5.6 2.4 0 4.3-1.9 4.3-4.3 0-2.3-1.7-4.1-3.9-4.3.4-2.8 2.6-5.4 5.4-6.8L11.3 2.5zM21.7 2.5c-4.9 1.7-8.4 6-8.4 10.9 0 3.4 2.1 5.6 4.7 5.6 2.4 0 4.3-1.9 4.3-4.3 0-2.3-1.7-4.1-3.9-4.3.4-2.8 2.6-5.4 5.4-6.8L21.7 2.5z"/>
+                            </svg>
+                        </div>
+                        <p class="testimonial-quote">"La mejor calidad para mi bebé.."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar" style="background: linear-gradient(135deg, #F9E076, #f0d45e);">C</div>
+                            <div class="testimonial-author-info">
+                                <span class="testimonial-name">Carla</span>
+                                <span class="testimonial-role">mamá</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chain-row">
+
+                    <div class="step">
+                        <span class="step-n">01</span>
+                        <span class="step-label">Traé tu ropa</span>
+                        <span class="step-sub">Acercate al local con las prendas limpias y en buen estado.</span>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M40,6h-8h-3.003C28.997,6.011,29,6.021,29,6.032c0,2.761-2.239,5-5,5s-5-2.239-5-5C19,6.021,19.003,6.011,19.003,6H16H8c-2.2,0-4,1.8-4,4v8c0,2.2,1.8,4,4,4l1.978,0v16c0,2.2,1.8,4,4,4L34,42c2.2,0,4-1.8,4-4V22h2c2.2,0,4-1.8,4-4v-8C44,7.8,42.2,6,40,6z M40,18h-6v4v16l-20.022,0V22v-4L8,18v-8h7.923c1.469,2.978,4.538,5.032,8.077,5.032s6.608-2.053,8.077-5.032H40V18z"/>
+                            </svg>
+                        </div>
+                        <div class="step-bar"></div>
+                    </div>
+
+                    <div class="step">
+                        <span class="step-n">02</span>
+                        <span class="step-label">La revisamos</span>
+                        <span class="step-sub">Seleccionamos las prendas aptas: sin manchas ni roturas.</span>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                        </div>
+                        <div class="step-bar"></div>
+                    </div>
+
+                    <div class="step">
+                        <span class="step-n">03</span>
+                        <span class="step-label">Fotografiamos</span>
+                        <span class="step-sub">Cuidamos cada detalle para que luzcan como merecen.</span>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                                <circle cx="12" cy="13" r="4"/>
+                            </svg>
+                        </div>
+                        <div class="step-bar"></div>
+                    </div>
+
+                    <div class="step">
+                        <span class="step-n">04</span>
+                        <span class="step-label">Publicamos</span>
+                        <span class="step-sub">Las exhibimos en el local y en la tienda online.</span>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <div class="step-bar"></div>
+                    </div>
+
+                    <div class="step">
+                        <span class="step-n">05</span>
+                        <span class="step-label">Vendemos</span>
+                        <span class="step-sub">Te avisamos apenas encuentra una nueva familia.</span>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </div>
+                        <div class="step-bar"></div>
+                    </div>
+
+                    <div class="last-step">
+                        <span class="step-n">06</span>
+                        <span class="step-label">Cobrás</span>
+                        <span class="step-sub">Elegís crédito para futuras compras o efectivo. Vos decidís.</span>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="6" width="20" height="12" rx="2"/>
+                                <circle cx="12" cy="12" r="2.5"/>
+                                <path d="M6 12h.01M18 12h.01"/>
+                            </svg>
+                        </div>
+                        <div class="step-bar"></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Recien llegados -->
+        <section class="new-arrivals" id="new-arrivals">
+            <div class="background-blobs">
+                <div class="blob blob-1"></div>
+                <div class="blob blob-2"></div>
+            </div>
+            
+            <div class="new-arrivals-container">
+                <div class="section-header">
+                    <span class="eyebrow-text">Tesoros recien llegados</span>
+                    <p class="emotional-subtitle">Prendas con historia, seleccionadas con amor para que sigan jugando en otra familia.</p>
+                </div>
+                
+                <div class="new-arrivals-wrapper">
+                    <button class="carousel-arrow carousel-prev" id="featured-prev" style="display:none;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    </button>
+                    <div class="products-grid" id="featured-products-grid">
+                        <!-- Featured products loaded dynamically -->
+                    </div>
+                    <button class="carousel-arrow carousel-next" id="featured-next" style="display:none;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                </div>
+                
+                <div class="view-all-wrapper">
+                    <a href="tienda.html" class="view-all-btn" style="text-decoration:none;">Ver toda la tienda</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nosotros Section -->
+        <section id="nosotros" class="nosotros-section">
+            <div class="nosotros-container">
+                <div class="nosotros-left">
+                    <span class="nosotros-subtitle">SELECCIÓN PREMIUM EN MODA INFANTIL</span>
+                    <h2 class="nosotros-title">Moda con Historia</h2>
+                    <p class="nosotros-text">
+                        En El Roperito nos especializamos en encontrar prendas que merecen una segunda oportunidad. Somos un espacio de selección rigurosa: revisamos cada costura, botón y textura para asegurar que cada pieza esté impecable antes de llegar a tus manos.
+                    </p>
+                </div>
+                <div class="nosotros-right">
+                    <div class="nosotros-gallery-carousel">
+                        <div class="gallery-track" id="galleryTrack">
+                            <div class="gallery-slide">
+                                <img src="https://res.cloudinary.com/elroperito/image/upload/v1777399618/web/1.jpg" alt="Perchero del local El Roperito" class="gallery-slide-img">
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="https://res.cloudinary.com/elroperito/image/upload/v1777399632/web/fotolocal1.jpg" alt="Selección de prendas en exhibición" class="gallery-slide-img">
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="https://res.cloudinary.com/elroperito/image/upload/v1777399633/web/fotolocaldibujando.jpg" alt="Detalle de prendas seleccionadas" class="gallery-slide-img">
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="https://res.cloudinary.com/elroperito/image/upload/v1777399637/web/mostrador.jpg" alt="Vista general del espacio" class="gallery-slide-img">
+                            </div>
+                        </div>
+                        <div class="gallery-dots" id="galleryDots">
+                            <span class="gallery-dot active" data-index="0"></span>
+                            <span class="gallery-dot" data-index="1"></span>
+                            <span class="gallery-dot" data-index="2"></span>
+                            <span class="gallery-dot" data-index="3"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── FAQ ────────────────────────────────────────── -->
+        <section class="faq-section" id="faq">
+            <div class="faq-inner">
+                <div class="faq-header">
+                    <span class="faq-eyebrow">Preguntas frecuentes</span>
+                    <h2 class="faq-title">Todo lo que necesitás saber</h2>
+                </div>
+
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Qué condiciones debe tener la ropa para que la acepten?
+                            <span class="faq-icon">
+                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                    <line x1="6" y1="1" x2="6" y2="11"/>
+                                    <line x1="1" y1="6" x2="11" y2="6"/>
+                                </svg>
+                            </span>
+                        </summary>
+                        <p class="faq-answer">
+                            La ropa debe estar limpia, en buen estado y libre de roturas, manchas o desgaste excesivo. No aceptamos prendas con cremalleras rotas, botones faltantes ni costuras abiertas. Si tenés dudas, escribinos antes de acercarte y te orientamos sin problema.
+                        </p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Qué talles aceptan?
+                            <span class="faq-icon">
+                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                    <line x1="6" y1="1" x2="6" y2="11"/>
+                                    <line x1="1" y1="6" x2="11" y2="6"/>
+                                </svg>
+                            </span>
+                        </summary>
+                        <p class="faq-answer">
+                            Trabajamos con ropa para niños y niñas de 0 a 12 años, desde talle 0000 hasta talle 14. Cubrimos bebés, niños pequeños y niños en edad escolar. Si tenés una prenda de talle especial, consultanos.
+                        </p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Hacen envíos?
+                            <span class="faq-icon">
+                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                    <line x1="6" y1="1" x2="6" y2="11"/>
+                                    <line x1="1" y1="6" x2="11" y2="6"/>
+                                </svg>
+                            </span>
+                        </summary>
+                        <p class="faq-answer">
+                            Sí, realizamos envíos. Podés comprar por la web o escribirnos por WhatsApp y coordinamos la entrega. También podés retirar en el local en Av. 3 de Febrero 640, Chivilcoy, sin costo adicional.
+                        </p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Cuánto me queda a mí de la venta?
+                            <span class="faq-icon">
+                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                    <line x1="6" y1="1" x2="6" y2="11"/>
+                                    <line x1="1" y1="6" x2="11" y2="6"/>
+                                </svg>
+                            </span>
+                        </summary>
+                        <p class="faq-answer">
+                            El porcentaje que te corresponde depende del tipo de prenda y su estado. Te lo informamos en el momento de la recepción, de manera clara y sin sorpresas. Nuestro objetivo es que sea justo para ambas partes y que la ropa de tus hijos siga generando valor.
+                        </p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Cómo recibo mi dinero o crédito cuando se vende mi ropa?
+                            <span class="faq-icon">
+                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                    <line x1="6" y1="1" x2="6" y2="11"/>
+                                    <line x1="1" y1="6" x2="11" y2="6"/>
+                                </svg>
+                            </span>
+                        </summary>
+                        <p class="faq-answer">
+                            Vos elegís cómo querés recibir tu ganancia. Podés optar por <strong>crédito</strong> para usar en tu próxima compra en El Roperito, o cobrarlo en <strong>efectivo</strong> directamente en el local. Te avisamos cuando se vende y acordamos cómo proceder.
+                        </p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Puedo comprar sin crear una cuenta?
+                            <span class="faq-icon">
+                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                    <line x1="6" y1="1" x2="6" y2="11"/>
+                                    <line x1="1" y1="6" x2="11" y2="6"/>
+                                </svg>
+                            </span>
+                        </summary>
+                        <p class="faq-answer">
+                            Sí, podés escribirnos directamente por WhatsApp o venir al local sin necesidad de registrarte. Crear una cuenta en la web te permite hacer seguimiento de tus pedidos y gestionar tu crédito acumulado, pero no es obligatorio.
+                        </p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Qué pasa si mi ropa no se vende?
+                            <span class="faq-icon">
+                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                    <line x1="6" y1="1" x2="6" y2="11"/>
+                                    <line x1="1" y1="6" x2="11" y2="6"/>
+                                </svg>
+                            </span>
+                        </summary>
+                        <p class="faq-answer">
+                            Si pasado un tiempo la prenda no encontró nueva familia, te avisamos para que puedas retirarla. Lo coordinamos juntos para que nunca pierdas el control de lo que es tuyo.
+                        </p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Aceptan donaciones de ropa?
+                            <span class="faq-icon">
+                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                    <line x1="6" y1="1" x2="6" y2="11"/>
+                                    <line x1="1" y1="6" x2="11" y2="6"/>
+                                </svg>
+                            </span>
+                        </summary>
+                        <p class="faq-answer">
+                            Por el momento trabajamos exclusivamente bajo el modelo de consignación, donde vos conservás la titularidad de la ropa hasta que se vende. Si querés donar prendas, te podemos orientar hacia organizaciones de la comunidad con las que colaboramos.
+                        </p>
+                    </details>
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ─── CTA final antes del footer ─────────────────────── -->
+        <section class="prefooter-cta">
+            <div class="prefooter-inner">
+                <div class="prefooter-text">
+                    <span class="eyebrow-text">Cerramos el c&iacute;rculo</span>
+                    <h2 class="prefooter-title">&iquest;Ten&eacute;s ropa para vender?</h2>
+                    <p class="prefooter-desc">Convert&iacute; la ropa que tus hijos ya no usan en cr&eacute;dito o efectivo, de forma simple y cercana.</p>
+                </div>
+                <div class="prefooter-action">
+                    <a href="https://wa.me/5492346530892?text=Hola!%20Quiero%20traer%20ropa%20para%20vender%20en%20El%20Roperito.%20%C2%BFC%C3%B3mo%20hago?" class="prefooter-btn" target="_blank" rel="noopener">
+                        Escribinos ahora
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── FOOTER ─────────────────────────────────────────── -->
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <div class="footer-grid">
+
+                    <!-- Columna marca -->
+                    <div class="footer-brand">
+                        <p class="footer-logo">El Roperito</p>
+                        <p class="footer-tagline">Moda circular infantil</p>
+                        <p class="footer-desc">
+                            Damos segunda vida a la ropa de tus hijos para que otras familias sigan creando recuerdos con ella.
+                        </p>
+                        <p class="footer-trust">Cada prenda es seleccionada una por una en nuestro local de Chivilcoy.</p>
+                        <div class="footer-socials-row">
+                            <div class="footer-socials">
+                                <!-- Instagram -->
+                                <a href="https://instagram.com/elroperitochivilcoy" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771-4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                    </svg>
+                                </a>
+                                <!-- WhatsApp -->
+                                <a href="https://wa.me/5492346530892" class="footer-social-link" aria-label="WhatsApp" target="_blank" rel="noopener">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                                    </svg>
+                                </a>
+                                <!-- Facebook (opcional) -->
+                                <a href="https://www.facebook.com/share/1b3wxjaBvp/" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <!-- scroll-to-top moved to contact column (below WhatsApp) -->
+                        </div>
+                    </div>
+
+                    <!-- Columna navegación -->
+                    <div>
+                        <p class="footer-col-title">Navegá</p>
+                        <ul class="footer-links">
+                            <li><a href="tienda.html">Tienda</a></li>
+                            <li><a href="#como-funciona">Vendé tu ropa</a></li>
+                            <li><a href="#nosotros">Nosotros</a></li>
+                            <li><a href="#faq">Preguntas frecuentes</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Columna ubicacion -->
+                    <div>
+                        <p class="footer-col-title">Ubicación</p>
+                        <div class="footer-contact-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <span>Av. 3 de Febrero 640,<br>B6620 Chivilcoy, Buenos Aires</span>
+                        </div>
+                        <div class="footer-map">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3272.1234567890123!2d-58.92345678901234!3d-34.12345678901234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb12345678901%3A0x1234567890abcdef!2sAv.%203%20de%20Febrero%20640%2C%20B6620%20Chivilcoy%2C%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1234567890123"
+                                width="100%"
+                                height="150"
+                                style="border:0; border-radius: 8px;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                        <div class="footer-contact-item footer-whatsapp">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            </svg>
+                            <!-- removed textual WhatsApp CTA; floating button added site-wide -->
+                            <!-- removed: scroll-to-top moved to floating control near WhatsApp -->
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="footer-bottom">
+                    <span class="footer-copy">© 2026 El Roperito · Chivilcoy, Buenos Aires</span>
+                    <span class="footer-love">Hecho con amor para las familias de nuestra comunidad</span>
+                    <a href="https://sdp.ar/" class="footer-sdp" target="_blank" rel="noopener">Hecho por SDP</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Floating scroll-to-top -->
+        <button class="scroll-to-top-floating" id="scrollToTop" aria-label="Volver arriba">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+        </button>
+
+    </main>
+
+    <script src="script.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/components.js"></script>
+
+    <!-- Floating WhatsApp button -->
+    <a href="https://wa.me/5492346530892" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    <script>
+        let featuredProducts = [];
+        let featuredCurrentPage = 0;
+
+        function getFeaturedPageSize() {
+            return window.innerWidth <= 640 ? 1 : 3;
+        }
+
+        async function loadFeaturedProducts() {
+            try {
+                const data = await window.ElRoperito.API.getFeaturedProducts();
+                featuredProducts = data || [];
+                renderFeaturedProducts();
+            } catch (e) {
+                console.error('Error loading featured products:', e);
+            }
+        }
+
+        function renderFeaturedProducts() {
+            const grid = document.getElementById('featured-products-grid');
+            const prevBtn = document.getElementById('featured-prev');
+            const nextBtn = document.getElementById('featured-next');
+            const pageSize = getFeaturedPageSize();
+
+            if (!featuredProducts.length) {
+                grid.innerHTML = '<p style="text-align:center;color:#999;">No hay productos destacados.</p>';
+                return;
+            }
+
+            // Clamp current page in case screen resized
+            const totalPages = Math.ceil(featuredProducts.length / pageSize);
+            if (featuredCurrentPage >= totalPages) featuredCurrentPage = totalPages - 1;
+
+            const start = featuredCurrentPage * pageSize;
+            const pageProducts = featuredProducts.slice(start, start + pageSize);
+
+            // Mobile: single card centered, no 3D
+            const isMobile = window.innerWidth <= 640;
+            grid.style.gridTemplateColumns = isMobile ? '1fr' : '';
+            grid.style.perspective = isMobile ? 'none' : '';
+            grid.style.maxWidth = isMobile ? '320px' : '';
+            grid.style.margin = isMobile ? '0 auto' : '';
+            grid.style.height = 'auto';
+            grid.style.maxHeight = 'none';
+
+            grid.innerHTML = pageProducts.map(p => {
+                const img = p.imagen_principal || (p.images && p.images[0] && p.images[0].imagen) || '';
+                const price = p.precio ? '$' + parseInt(p.precio).toLocaleString('es-AR') : '';
+                const history = p.historia || p.descripcion || '';
+                const genderClass = p.genero === 'nena' ? 'gender-nena' : p.genero === 'nene' ? 'gender-nene' : 'gender-unisex';
+                return `
+                    <div class="product-card ${genderClass}" style="transform:none;min-width:0;max-width:none;width:100%;">
+                        <a href="producto.html?slug=${p.slug}" style="text-decoration:none;">
+                            <div class="product-image">
+                                <img src="${img}" alt="${p.nombre}">
+                                <div class="product-attributes">
+                                    <span class="product-size">Talle ${p.talle}</span>
+                                    <span class="product-gender">${p.genero}</span>
+                                </div>
+                                ${history ? `
+                                    <div class="product-story">
+                                        <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                                        <p>${history}</p>
+                                    </div>
+                                ` : ''}
+                            </div>
+                            <div class="product-details">
+                                <div class="product-meta">
+                                    <h3 class="product-name">${p.nombre}</h3>
+                                    <span class="product-price">${price}</span>
+                                </div>
+                                <button class="product-action">Lo quiero</button>
+                            </div>
+                        </a>
+                    </div>
+                `;
+            }).join('');
+
+            prevBtn.style.display = totalPages > 1 && featuredCurrentPage > 0 ? '' : 'none';
+            nextBtn.style.display = totalPages > 1 && featuredCurrentPage < totalPages - 1 ? '' : 'none';
+        }
+
+        document.getElementById('featured-prev').addEventListener('click', function() {
+            if (featuredCurrentPage > 0) { featuredCurrentPage--; renderFeaturedProducts(); }
+        });
+        document.getElementById('featured-next').addEventListener('click', function() {
+            const totalPages = Math.ceil(featuredProducts.length / getFeaturedPageSize());
+            if (featuredCurrentPage < totalPages - 1) { featuredCurrentPage++; renderFeaturedProducts(); }
+        });
+
+        // Touch swipe on featured grid
+        (function() {
+            var startX = 0;
+            var wrapper = document.getElementById('featured-products-grid');
+            if (!wrapper) return;
+            wrapper.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+            }, { passive: true });
+            wrapper.addEventListener('touchend', function(e) {
+                var diff = startX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) < 50) return;
+                var totalPages = Math.ceil(featuredProducts.length / getFeaturedPageSize());
+                if (diff > 0 && featuredCurrentPage < totalPages - 1) {
+                    featuredCurrentPage++; renderFeaturedProducts();
+                } else if (diff < 0 && featuredCurrentPage > 0) {
+                    featuredCurrentPage--; renderFeaturedProducts();
+                }
+            }, { passive: true });
+        })();
+
+        // Re-render on resize so pageSize adapts
+        window.addEventListener('resize', function() { renderFeaturedProducts(); });
+
+        document.addEventListener('DOMContentLoaded', async function() {
+
+            // Hamburger mobile menu toggle (run first, before async ops)
+            const hamburger = document.getElementById('nav-hamburger');
+            const mobileOverlay = document.getElementById('nav-mobile-overlay');
+            if (hamburger && mobileOverlay) {
+                hamburger.addEventListener('click', function() {
+                    const isOpen = hamburger.classList.toggle('open');
+                    mobileOverlay.classList.toggle('open', isOpen);
+                    hamburger.setAttribute('aria-expanded', isOpen);
+                    document.body.style.overflow = isOpen ? 'hidden' : '';
+                });
+                mobileOverlay.addEventListener('click', function(e) {
+                    if (e.target === mobileOverlay) {
+                        hamburger.classList.remove('open');
+                        mobileOverlay.classList.remove('open');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+                mobileOverlay.querySelectorAll('a, button').forEach(function(el) {
+                    el.addEventListener('click', function() {
+                        hamburger.classList.remove('open');
+                        mobileOverlay.classList.remove('open');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+
+            // Scroll to top
+            var scrollBtn = document.getElementById('scrollToTop');
+            if (scrollBtn) {
+                var footerEl = document.querySelector('.site-footer');
+
+                scrollBtn.onclick = function() {
+                    console.log('scrollToTop clicked');
+                    var hero = document.querySelector('.hero-section');
+                    if (hero) {
+                        hero.scrollIntoView({ block: 'start' });
+                    } else {
+                        document.body.scrollTop = 0;
+                        document.documentElement.scrollTop = 0;
+                        window.scroll(0, 0);
+                    }
+                };
+
+                // Show/hide based on footer visibility
+                var lastShow = null;
+                function checkFooter() {
+                    if (!footerEl) return;
+                    var r = footerEl.getBoundingClientRect();
+                    var show = r.top < window.innerHeight && r.bottom > 0;
+                    if (show !== lastShow) {
+                        lastShow = show;
+                        scrollBtn.classList.toggle('visible', show);
+                    }
+                }
+                (function poll() { checkFooter(); requestAnimationFrame(poll); })();
+            }
+
+            try { window.ElRoperito.Cart.updateBadge(); } catch(e) {}
+            try { await window.ElRoperito.Auth.init(); } catch(e) {}
+            try { await loadFeaturedProducts(); } catch(e) {}
+
+            // Floating CTA for guests on index
+            var indexCta = document.getElementById('guest-register-cta');
+            if (indexCta) {
+                var isLoggedIn = false;
+                try { isLoggedIn = window.ElRoperito.Auth.isLoggedIn(); } catch(e) {}
+                if (!isLoggedIn) {
+                    setTimeout(function() {
+                        indexCta.style.opacity = '1';
+                        indexCta.style.transform = 'translateY(0)';
+                        indexCta.style.pointerEvents = 'auto';
+                    }, 1500);
+                    var closeBtn = indexCta.querySelector('.guest-cta-close');
+                    if (closeBtn) {
+                        closeBtn.addEventListener('click', function() {
+                            indexCta.style.opacity = '0';
+                            indexCta.style.transform = 'translateY(12px)';
+                            indexCta.style.pointerEvents = 'none';
+                        });
+                    }
+                } else {
+                    indexCta.style.display = 'none';
+                }
+            }
+
+            // Gallery carousel: auto-play + dots
+            const galleryTrack = document.getElementById('galleryTrack');
+            const galleryDots = document.querySelectorAll('.gallery-dot');
+            if (galleryTrack && galleryDots.length) {
+                const totalSlides = galleryTrack.children.length;
+                let currentSlide = 0;
+                let autoplayTimer = null;
+
+                function goToSlide(idx) {
+                    currentSlide = (idx + totalSlides) % totalSlides;
+                    const slide = galleryTrack.children[currentSlide];
+                    if (slide) galleryTrack.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' });
+                    galleryDots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+                }
+
+                function startAutoplay() {
+                    stopAutoplay();
+                    autoplayTimer = setInterval(() => goToSlide(currentSlide + 1), 2500);
+                }
+
+                function stopAutoplay() {
+                    clearInterval(autoplayTimer);
+                    autoplayTimer = null;
+                }
+
+                // Dot click
+                galleryDots.forEach(dot => {
+                    dot.addEventListener('click', function() {
+                        goToSlide(parseInt(this.dataset.index));
+                        startAutoplay();
+                    });
+                });
+
+                // Sync dots on manual scroll
+                let scrollTimeout;
+                galleryTrack.addEventListener('scroll', function() {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        const slideWidth = galleryTrack.children[0].offsetWidth;
+                        currentSlide = Math.round(galleryTrack.scrollLeft / slideWidth);
+                        galleryDots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+                    }, 50);
+                });
+
+                // Pause on hover / touch
+                galleryTrack.addEventListener('mouseenter', stopAutoplay);
+                galleryTrack.addEventListener('mouseleave', startAutoplay);
+                galleryTrack.addEventListener('touchstart', stopAutoplay, { passive: true });
+                galleryTrack.addEventListener('touchend', startAutoplay, { passive: true });
+
+                startAutoplay();
+            }
+
+            // Scroll spy: highlight active nav link based on visible section
+            const spySections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.header-nav .nav-link');
+            const mobileNavLinks = document.querySelectorAll('.nav-mobile-list li a');
+            if (spySections.length && navLinks.length) {
+                var visibleSections = new Set();
+                var navSectionIds = new Set();
+                navLinks.forEach(function(link) {
+                    var href = link.getAttribute('href');
+                    if (href && href.startsWith('#')) navSectionIds.add(href.substring(1));
+                });
+                mobileNavLinks.forEach(function(link) {
+                    var href = link.getAttribute('href');
+                    if (href && href.startsWith('#')) navSectionIds.add(href.substring(1));
+                });
+
+                function updateActiveNav() {
+                    var activeId = null;
+                    // Pick the last visible section that has a nav link
+                    spySections.forEach(function(sec) {
+                        var id = sec.getAttribute('id');
+                        if (visibleSections.has(id) && navSectionIds.has(id)) activeId = id;
+                    });
+                    navLinks.forEach(function(link) {
+                        var href = link.getAttribute('href');
+                        link.classList.toggle('active', href === '#' + activeId);
+                    });
+                    mobileNavLinks.forEach(function(link) {
+                        var href = link.getAttribute('href');
+                        link.classList.toggle('active', href === '#' + activeId);
+                    });
+                }
+
+                var spyObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        var id = entry.target.getAttribute('id');
+                        if (entry.isIntersecting) {
+                            visibleSections.add(id);
+                        } else {
+                            visibleSections.delete(id);
+                        }
+                    });
+                    updateActiveNav();
+                }, { threshold: 0.3, rootMargin: '-80px 0px 0px 0px' });
+                spySections.forEach(function(sec) { spyObserver.observe(sec); });
+            }
+
+        });
+    </script>
+
+    <!-- Floating CTA for guests -->
+    <div id="guest-register-cta" class="guest-register-cta">
+        <button class="guest-cta-close" aria-label="Cerrar">&#x2715;</button>
+        <a href="registro.html" class="guest-cta-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+            <span>Registrate y compr&#225;</span>
+        </a>
+    </div>
+</body>
+</html>

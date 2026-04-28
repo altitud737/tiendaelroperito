@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión — El Roperito</title>
+    <link rel="stylesheet" href="styles.css?v=20260424b">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Nunito:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="page-body">
+
+    <div id="site-header"></div>
+
+    <main class="page-main auth-page-main">
+        <div class="page-container">
+            <div class="auth-card">
+                <h1 class="auth-title">Iniciar sesión</h1>
+
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="login-email" class="form-input" placeholder="tu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Contraseña</label>
+                        <div class="form-input-wrap">
+                            <input type="password" id="login-password" class="form-input" placeholder="Tu contraseña" required>
+                            <button type="button" class="password-toggle" data-target="login-password" aria-label="Mostrar contraseña">
+                                <svg class="eye-icon eye-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <svg class="eye-icon eye-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="login-error" class="form-error" style="display:none;"></div>
+
+                    <p style="text-align:right;margin-bottom:12px;">
+                        <a href="recuperar.html" style="font-size:13px;color:#888;text-decoration:none;font-family:'Nunito',sans-serif;transition:color 0.2s;" onmouseover="this.style.color='#1a1a1a'" onmouseout="this.style.color='#888'">¿Olvidaste tu contraseña?</a>
+                    </p>
+
+                    <button type="submit" id="login-btn" class="cta-button auth-submit">Ingresar</button>
+                </form>
+
+                <p class="auth-alt">
+                    ¿No tenés cuenta? <a href="registro.html" id="register-link">Creá una</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/components.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            window.ElRoperito.Components.injectLayout();
+
+            var headerLogo = document.querySelector('.main-header .brand-logo');
+            if (headerLogo) {
+                var goHome = function(e) {
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                };
+                headerLogo.addEventListener('click', goHome);
+                headerLogo.addEventListener('touchend', goHome, { passive: false });
+            }
+
+            window.ElRoperito.Cart.updateBadge();
+            await window.ElRoperito.Auth.init();
+
+            var params = new URLSearchParams(window.location.search);
+            var next = params.get('next') || 'tienda.html';
+
+            // Si ya está logueado, redirigir
+            if (window.ElRoperito.Auth.isLoggedIn()) {
+                window.location.href = window.ElRoperito.Auth.isAdmin() ? 'panel.html' : next;
+                return;
+            }
+
+            // Pasar ?next al link de registro
+            document.getElementById('register-link').href = 'registro.html' + (next !== 'index.html' ? '?next=' + encodeURIComponent(next) : '');
+
+            document.getElementById('login-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                var errorEl = document.getElementById('login-error');
+                errorEl.style.display = 'none';
+                var btn = document.getElementById('login-btn');
+                btn.disabled = true;
+                btn.textContent = 'Ingresando...';
+
+                var email = document.getElementById('login-email').value;
+                var password = document.getElementById('login-password').value;
+
+                try {
+                    await window.ElRoperito.Auth.login(email, password);
+                    window.location.href = window.ElRoperito.Auth.isAdmin() ? 'panel.html' : next;
+                } catch (err) {
+                    errorEl.textContent = err.message || 'No encontramos una cuenta con esos datos. Revisá tu email y contraseña.';
+                    errorEl.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = 'Ingresar';
+                }
+            });
+        });
+        // Toggle mostrar/ocultar contraseña
+        document.querySelectorAll('.password-toggle').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var input = document.getElementById(btn.dataset.target);
+                var isHidden = input.type === 'password';
+                input.type = isHidden ? 'text' : 'password';
+                btn.querySelector('.eye-show').style.display = isHidden ? '' : 'none';
+                btn.querySelector('.eye-hide').style.display = isHidden ? 'none' : '';
+                btn.setAttribute('aria-label', isHidden ? 'Ocultar contraseña' : 'Mostrar contraseña');
+            });
+        });
+    </script>
+</body>
+</html>

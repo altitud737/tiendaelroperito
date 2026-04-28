@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear cuenta — El Roperito</title>
+    <link rel="stylesheet" href="styles.css?v=20260424b">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Nunito:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="page-body">
+
+    <div id="site-header"></div>
+
+    <main class="page-main auth-page-main">
+        <div class="page-container">
+            <div class="auth-card-wrap">
+            <div class="auth-card">
+                <h1 class="auth-title">Crear cuenta</h1>
+
+                <form id="register-form" class="auth-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" id="reg-nombre" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Apellido</label>
+                            <input type="text" id="reg-apellido" class="form-input" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="reg-email" class="form-input" placeholder="tu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Contraseña</label>
+                        <div class="form-input-wrap">
+                            <input type="password" id="reg-password" class="form-input" placeholder="Mínimo 8 caracteres" required minlength="8">
+                            <button type="button" class="password-toggle" data-target="reg-password" aria-label="Mostrar contraseña">
+                                <svg class="eye-icon eye-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <svg class="eye-icon eye-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                            </button>
+                        </div>
+                        <p class="form-hint">Mínimo 8 caracteres. Puede incluir letras, números y símbolos.</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Confirmar contraseña</label>
+                        <div class="form-input-wrap">
+                            <input type="password" id="reg-password2" class="form-input" required>
+                            <button type="button" class="password-toggle" data-target="reg-password2" aria-label="Mostrar contraseña">
+                                <svg class="eye-icon eye-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <svg class="eye-icon eye-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                            </button>
+                        </div>
+                        <p class="form-match-hint" id="match-hint" style="display:none;"></p>
+                    </div>
+
+                    <div id="reg-error" class="form-error" style="display:none;"></div>
+
+                    <button type="submit" id="reg-btn" class="cta-button auth-submit">Crear cuenta</button>
+                </form>
+
+                <p class="auth-alt">
+                    ¿Ya tenés cuenta? <a href="login.html" id="login-link">Iniciá sesión</a>
+                </p>
+            </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/components.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            window.ElRoperito.Components.injectLayout();
+
+            var headerLogo = document.querySelector('.main-header .brand-logo');
+            if (headerLogo) {
+                var goHome = function(e) {
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                };
+                headerLogo.addEventListener('click', goHome);
+                headerLogo.addEventListener('touchend', goHome, { passive: false });
+            }
+
+            window.ElRoperito.Cart.updateBadge();
+            await window.ElRoperito.Auth.init();
+
+            var params = new URLSearchParams(window.location.search);
+            var next = params.get('next') || 'tienda.html';
+
+            if (window.ElRoperito.Auth.isLoggedIn()) {
+                window.location.href = next;
+                return;
+            }
+
+            document.getElementById('login-link').href = 'login.html' + (next !== 'index.html' ? '?next=' + encodeURIComponent(next) : '');
+
+            document.getElementById('register-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                var errorEl = document.getElementById('reg-error');
+                errorEl.style.display = 'none';
+                var btn = document.getElementById('reg-btn');
+
+                var password = document.getElementById('reg-password').value;
+                var password2 = document.getElementById('reg-password2').value;
+
+                if (password.length < 8) {
+                    errorEl.textContent = 'La contraseña es muy corta — necesitás al menos 8 caracteres.';
+                    errorEl.style.display = 'block';
+                    return;
+                }
+                if (password !== password2) {
+                    errorEl.textContent = 'Las contraseñas no coinciden. Revisá que las dos sean iguales.';
+                    errorEl.style.display = 'block';
+                    return;
+                }
+
+                btn.disabled = true;
+                btn.textContent = 'Creando cuenta...';
+
+                try {
+                    await window.ElRoperito.API.register({
+                        nombre: document.getElementById('reg-nombre').value,
+                        apellido: document.getElementById('reg-apellido').value,
+                        email: document.getElementById('reg-email').value,
+                        password: password,
+                        password_confirm: password2
+                    });
+                    // Auto-login después del registro
+                    await window.ElRoperito.Auth.login(
+                        document.getElementById('reg-email').value,
+                        password
+                    );
+                    window.location.href = next;
+                } catch (err) {
+                    var msg = err.message || '';
+                    if (msg.includes('email') || msg.includes('correo')) {
+                        errorEl.textContent = 'Ya existe una cuenta con ese email. \u00bfQuerés iniciar sesión?';
+                    } else if (msg.includes('contraseña') || msg.includes('password')) {
+                        errorEl.textContent = 'La contraseña no cumple los requisitos. Usá al menos 8 caracteres.';
+                    } else {
+                        errorEl.textContent = msg || 'Algo salió mal. Intentá de nuevo o escribinos por WhatsApp.';
+                    }
+                    errorEl.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = 'Crear cuenta';
+                }
+            });
+        });
+        // Toggle mostrar/ocultar contraseña
+        document.querySelectorAll('.password-toggle').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var input = document.getElementById(btn.dataset.target);
+                var isHidden = input.type === 'password';
+                input.type = isHidden ? 'text' : 'password';
+                btn.querySelector('.eye-show').style.display = isHidden ? '' : 'none';
+                btn.querySelector('.eye-hide').style.display = isHidden ? 'none' : '';
+                btn.setAttribute('aria-label', isHidden ? 'Ocultar contraseña' : 'Mostrar contraseña');
+            });
+        });
+
+        // Validación en tiempo real de que las contraseñas coinciden
+        document.getElementById('reg-password2').addEventListener('input', function() {
+            var p1 = document.getElementById('reg-password').value;
+            var p2 = this.value;
+            var hint = document.getElementById('match-hint');
+            if (!p2) { hint.style.display = 'none'; return; }
+            if (p1 === p2) {
+                hint.textContent = '\u2714 Las contraseñas coinciden';
+                hint.className = 'form-match-hint match-ok';
+            } else {
+                hint.textContent = 'Las contraseñas no coinciden todavía';
+                hint.className = 'form-match-hint match-error';
+            }
+            hint.style.display = '';
+        });
+
+        // Pasar next al link de volver (calculado inline, no depende del scope de DOMContentLoaded)
+        (function() {
+            var _next = new URLSearchParams(window.location.search).get('next');
+            if (_next) document.getElementById('back-login').href = 'login.html?next=' + encodeURIComponent(_next);
+        })();
+    </script>
+</body>
+</html>

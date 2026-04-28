@@ -1,0 +1,46 @@
+# ─── Python ───────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ─── Entorno virtual ──────────────────────────────────────
+venv/
+.venv/
+env/
+
+# ─── Variables de entorno (NUNCA subir) ───────────────────
+.env
+.env.*
+!.env.example
+
+# ─── Django ───────────────────────────────────────────────
+backend/staticfiles/
+backend/media/
+backend/logs/
+backend/setup_db.py
+upload_web_images.py
+db.sqlite3
+*.log
+
+# ─── IDE / Editor ─────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.windsurf/
+
+# ─── OS ───────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Node / Next.js ───────────────────────────────────────
+node_modules/
+.next/
+frontend/.next/
+frontend/node_modules/

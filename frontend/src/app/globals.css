@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500&family=Nunito:wght@300;400;600;700&display=swap');
+
+@layer base {
+  body {
+    @apply bg-white text-text font-sans;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-pink hover:bg-pink-dark text-white font-semibold py-3 px-6 rounded-btn transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-text text-text hover:bg-text hover:text-white font-semibold py-3 px-6 rounded-btn transition-colors duration-200;
+  }
+
+  .btn-white {
+    @apply bg-white text-text hover:bg-gray-100 font-semibold py-3 px-6 rounded-btn transition-colors duration-200;
+  }
+
+  .section-padding {
+    @apply px-4 py-16 md:px-8 lg:px-16 xl:px-24;
+  }
+
+  .container-roperito {
+    @apply max-w-7xl mx-auto;
+  }
+}

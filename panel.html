@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración — El Roperito</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500;600&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+
+    <!-- ═══════════════════════════════ SIDEBAR ═══════════════════════════════ -->
+    <nav class="admin-sidebar">
+        <div class="admin-sidebar-brand">
+            <span class="admin-brand-logo">El Roperito</span>
+            <span class="admin-brand-sub">Panel de gestión</span>
+        </div>
+
+        <ul class="admin-nav-list">
+            <li>
+                <button class="admin-nav-btn active" data-section="dashboard">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                    Dashboard
+                </button>
+            </li>
+            <li>
+                <button class="admin-nav-btn" data-section="productos">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    Productos
+                </button>
+            </li>
+            <li>
+                <button class="admin-nav-btn" data-section="usuarios">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                    Usuarios
+                </button>
+            </li>
+            <li>
+                <button class="admin-nav-btn" data-section="creditos">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                    Créditos
+                </button>
+            </li>
+        </ul>
+
+        <div class="admin-sidebar-footer">
+            <a href="tienda.html" class="admin-nav-tienda" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+                Ver tienda
+            </a>
+            <button class="admin-logout-btn" id="btn-logout">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Cerrar sesión
+            </button>
+        </div>
+    </nav>
+
+    <!-- Sidebar overlay (mobile) -->
+    <div class="admin-sidebar-overlay" id="admin-sidebar-overlay"></div>
+
+    <!-- ═══════════════════════════════ MAIN ═══════════════════════════════════ -->
+    <div class="admin-main">
+
+        <!-- Top bar -->
+        <header class="admin-topbar">
+            <div class="admin-topbar-left">
+                <button class="admin-sidebar-toggle" id="admin-sidebar-toggle" aria-label="Menú">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+                <h1 class="admin-section-title" id="section-title">Dashboard</h1>
+            </div>
+            <div class="admin-topbar-right">
+                <span class="admin-user-badge" id="admin-user-name"></span>
+                <button class="admin-btn-primary" id="btn-new-product">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    Nuevo producto
+                </button>
+            </div>
+        </header>
+
+        <!-- ──── SECCIÓN DASHBOARD ──── -->
+        <section class="admin-section active" id="section-dashboard">
+            <div class="admin-dashboard-header">
+                <h2 class="admin-dashboard-title">Métricas generales</h2>
+                <select class="admin-filter-select" id="dashboard-year-select">
+                    <option value="">Todos los años</option>
+                </select>
+            </div>
+
+            <div class="admin-stats-row" id="dashboard-stats">
+                <div class="admin-stat-card">
+                    <span class="admin-stat-value" id="dash-disponibles">—</span>
+                    <span class="admin-stat-label">Disponibles</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="admin-stat-value" id="dash-reservados">—</span>
+                    <span class="admin-stat-label">Reservados</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="admin-stat-value" id="dash-vendidos">—</span>
+                    <span class="admin-stat-label">Vendidos</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="admin-stat-value" id="dash-pausados">—</span>
+                    <span class="admin-stat-label">Pausados</span>
+                </div>
+            </div>
+
+            <div class="admin-stats-row" id="dashboard-money-stats">
+                <div class="admin-stat-card admin-stat-green">
+                    <span class="admin-stat-value" id="dash-ingresos">$0</span>
+                    <span class="admin-stat-label">Ingresos (ventas)</span>
+                </div>
+                <div class="admin-stat-card admin-stat-yellow">
+                    <span class="admin-stat-value" id="dash-dinero-reservado">$0</span>
+                    <span class="admin-stat-label">Dinero reservado</span>
+                </div>
+                <div class="admin-stat-card admin-stat-orange">
+                    <span class="admin-stat-value" id="dash-consignantes">$0</span>
+                    <span class="admin-stat-label">Deuda consignantes</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="admin-stat-value" id="dash-ordenes">0</span>
+                    <span class="admin-stat-label">Órdenes pagadas</span>
+                </div>
+            </div>
+
+            <div class="admin-table-card">
+                <h3 style="padding:16px 20px 8px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;color:#1a1a1a;">Ingresos mensuales</h3>
+                <div class="admin-monthly-chart" id="monthly-chart"></div>
+            </div>
+        </section>
+
+        <!-- ──── SECCIÓN PRODUCTOS ──── -->
+        <section class="admin-section" id="section-productos">
+
+            <div class="admin-stats-row" id="products-stats">
+                <div class="admin-stat-card">
+                    <span class="admin-stat-value" id="stat-total">—</span>
+                    <span class="admin-stat-label">Total</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="admin-stat-value" id="stat-disponible">—</span>
+                    <span class="admin-stat-label">Disponibles</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="admin-stat-value" id="stat-pausado">—</span>
+                    <span class="admin-stat-label">Pausados</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="admin-stat-value" id="stat-vendido">—</span>
+                    <span class="admin-stat-label">Vendidos</span>
+                </div>
+            </div>
+
+            <div class="admin-table-card">
+                <div class="admin-table-toolbar">
+                    <input type="text" class="admin-search-input" id="product-search" placeholder="Buscar por nombre…">
+                    <select class="admin-filter-select" id="product-filter-estado">
+                        <option value="">Todos los estados</option>
+                        <option value="disponible">Disponible</option>
+                        <option value="pausado">Pausado</option>
+                        <option value="vendido">Vendido</option>
+                        <option value="reservado">Reservado</option>
+                    </select>
+                </div>
+                <div class="admin-table-scroll">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>Nombre</th>
+                                <th>Talle</th>
+                                <th>Género</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-tbody">
+                            <tr><td colspan="8" class="admin-table-loading">Cargando productos…</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ──── SECCIÓN USUARIOS ──── -->
+        <section class="admin-section" id="section-usuarios">
+            <div class="admin-table-card">
+                <div class="admin-table-toolbar">
+                    <input type="text" class="admin-search-input" id="user-search" placeholder="Buscar por nombre o email…">
+                    <select class="admin-filter-select" id="user-filter-estado">
+                        <option value="">Todos</option>
+                        <option value="activo">Activos</option>
+                        <option value="bloqueado">Bloqueados</option>
+                    </select>
+                </div>
+                <div class="admin-table-scroll">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Crédito</th>
+                                <th>Registrado</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-tbody">
+                            <tr><td colspan="7" class="admin-table-loading">Cargando usuarios…</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ──── SECCIÓN CRÉDITOS ──── -->
+        <section class="admin-section" id="section-creditos">
+
+            <!-- Asignar código de crédito a usuario -->
+            <div class="admin-table-card" style="margin-bottom:24px;">
+                <h3 style="font-family:'Jost',sans-serif;font-size:16px;font-weight:600;margin:0 0 16px;">Asignar código de crédito a usuario</h3>
+                <div class="admin-form-row">
+                    <div class="admin-form-group" style="position:relative;">
+                        <label class="admin-form-label">Buscar usuario</label>
+                        <input type="text" id="credit-user-search" class="admin-form-input" placeholder="Nombre o email…" autocomplete="off">
+                        <div id="credit-user-results" class="credit-user-results" style="display:none;"></div>
+                        <input type="hidden" id="credit-user-id">
+                        <div id="credit-user-selected" class="credit-user-selected" style="display:none;"></div>
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label">Monto del código ($)</label>
+                        <input type="number" id="credit-assign-amount" class="admin-form-input" min="1" step="1" placeholder="Ej: 5000">
+                    </div>
+                </div>
+                <div class="admin-form-group">
+                    <label class="admin-form-label">Descripción (opcional)</label>
+                    <input type="text" id="credit-assign-desc" class="admin-form-input" placeholder="Motivo del crédito…">
+                </div>
+                <div id="credit-assign-msg" class="form-error" style="display:none;"></div>
+                <div id="credit-assign-ok" class="form-success" style="display:none;"></div>
+                <button class="admin-btn admin-btn-primary" id="btn-assign-credit" style="margin-top:8px;">Generar código y asignar</button>
+            </div>
+
+            <!-- Tabla de códigos asignados -->
+            <div class="admin-table-card">
+                <div class="admin-table-toolbar">
+                    <h3 style="font-family:'Jost',sans-serif;font-size:16px;font-weight:600;margin:0;">Códigos asignados</h3>
+                </div>
+                <div class="admin-table-scroll">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Monto</th>
+                                <th>Usuario</th>
+                                <th>Estado</th>
+                                <th>Fecha uso</th>
+                                <th>Creado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="codes-tbody">
+                            <tr><td colspan="7" class="admin-table-loading">Cargando códigos…</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- /.admin-main -->
+
+
+    <!-- ═══════════════════════ DRAWER: PRODUCTO ══════════════════════════════ -->
+    <div class="admin-overlay" id="drawer-overlay"></div>
+    <aside class="admin-drawer" id="product-drawer">
+        <div class="admin-drawer-header">
+            <h2 class="admin-drawer-title" id="drawer-title">Nuevo producto</h2>
+            <button class="admin-drawer-close" id="drawer-close">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+
+        <form id="product-form" class="admin-drawer-form" novalidate>
+            <input type="hidden" id="form-product-id">
+
+            <div class="admin-form-row">
+                <div class="admin-form-group admin-form-col-2">
+                    <label class="admin-form-label">Nombre <span class="required">*</span></label>
+                    <input type="text" id="form-nombre" class="admin-form-input" required>
+                </div>
+            </div>
+
+            <div class="admin-form-row">
+                <div class="admin-form-group">
+                    <label class="admin-form-label">Precio <span class="required">*</span></label>
+                    <input type="number" id="form-precio" class="admin-form-input" min="0" step="1" required>
+                </div>
+            </div>
+
+            <div class="admin-form-row">
+                <div class="admin-form-group">
+                    <label class="admin-form-label">Talle <span class="required">*</span></label>
+                    <select id="form-talle" class="admin-form-input" required>
+                        <option value="">Seleccioná</option>
+                        <option value="0000">0000</option>
+                        <option value="000">000</option>
+                        <option value="00">00</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="12">12</option>
+                        <option value="14">14</option>
+                    </select>
+                </div>
+                <div class="admin-form-group">
+                    <label class="admin-form-label">Género <span class="required">*</span></label>
+                    <select id="form-genero" class="admin-form-input" required>
+                        <option value="">Seleccioná</option>
+                        <option value="nena">Nena</option>
+                        <option value="nene">Nene</option>
+                        <option value="unisex">Unisex</option>
+                    </select>
+                </div>
+                <div class="admin-form-group">
+                    <label class="admin-form-label">Categoría <span class="required">*</span></label>
+                    <select id="form-categoria" class="admin-form-input" required>
+                        <option value="">Seleccioná</option>
+                        <option value="remera">Remera</option>
+                        <option value="pantalon">Pantalón</option>
+                        <option value="vestido">Vestido</option>
+                        <option value="campera">Campera</option>
+                        <option value="mameluco">Mameluco</option>
+                        <option value="conjunto">Conjunto</option>
+                        <option value="calzado">Calzado</option>
+                        <option value="accesorio">Accesorio</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="admin-form-row">
+                <div class="admin-form-group">
+                    <label class="admin-form-label">Estado</label>
+                    <select id="form-estado" class="admin-form-input">
+                        <option value="disponible">Disponible</option>
+                        <option value="pausado">Pausado</option>
+                    </select>
+                </div>
+                <div class="admin-form-group">
+                    <label class="admin-form-label">Familia de origen</label>
+                    <input type="text" id="form-familia" class="admin-form-input" placeholder="Alias de la familia">
+                </div>
+            </div>
+
+            <div class="admin-form-group admin-form-col-2">
+                <label class="admin-form-label">Descripción</label>
+                <textarea id="form-descripcion" class="admin-form-input admin-textarea" rows="3" placeholder="Descripción de la prenda…"></textarea>
+            </div>
+
+            <div class="admin-form-group admin-form-col-2">
+                <label class="admin-form-label">Historia de la prenda</label>
+                <textarea id="form-historia" class="admin-form-input admin-textarea" rows="3" placeholder="Historia emocional — se muestra en la página del producto…"></textarea>
+            </div>
+
+            <div class="admin-form-row" style="background:#fff8ed;padding:12px;border-radius:8px;border:1px solid #f0e0c0;">
+                <div class="admin-form-group" style="flex:2;">
+                    <label class="admin-form-label" style="color:#8b6914;">Consignante (nota interna)</label>
+                    <input type="text" id="form-nota-consignante" class="admin-form-input" placeholder="Quién entregó la ropa">
+                </div>
+                <div class="admin-form-group" style="flex:1;">
+                    <label class="admin-form-label" style="color:#8b6914;">Monto a pagar ($)</label>
+                    <input type="number" id="form-monto-consignante" class="admin-form-input" min="0" step="1" placeholder="0">
+                </div>
+            </div>
+
+            <!-- Info comprador (solo visible cuando el producto está reservado/vendido) -->
+            <div class="admin-form-group admin-form-col-2" id="buyer-info-section" style="display:none;">
+                <label class="admin-form-label">Comprador</label>
+                <div id="buyer-info-card" class="admin-buyer-card"></div>
+            </div>
+
+            <div class="admin-form-group admin-form-col-2">
+                <label class="admin-form-label">Fotos del producto (máximo 2)</label>
+                <div class="admin-image-upload" id="image-upload-area">
+                    <input type="file" id="form-imagen" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="admin-file-input" multiple>
+                    <div class="admin-image-preview" id="image-preview">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        <span class="upload-main-text">Arrastrá imágenes o hacé click para buscar (máximo 2)</span>
+                        <span class="upload-hint-text">JPG, PNG o WEBP &mdash; máximo 5 MB cada una</span>
+                    </div>
+                </div>
+                <div id="image-client-error" class="admin-image-error" style="display:none;"></div>
+            </div>
+
+            <div class="admin-form-checks">
+                <label class="admin-check-label">
+                    <input type="checkbox" id="form-revisado"> Revisado
+                </label>
+                <label class="admin-check-label">
+                    <input type="checkbox" id="form-lavado"> Lavado
+                </label>
+                <label class="admin-check-label">
+                    <input type="checkbox" id="form-sin-manchas"> Sin manchas
+                </label>
+                <label class="admin-check-label">
+                    <input type="checkbox" id="form-destacado"> Destacado en home
+                </label>
+            </div>
+
+            <div id="form-error" class="admin-form-error" style="display:none;"></div>
+
+            <div class="admin-drawer-footer">
+                <button type="button" class="admin-btn-ghost" id="btn-cancel-form">Cancelar</button>
+                <button type="submit" class="admin-btn-primary" id="btn-submit-form">Guardar producto</button>
+            </div>
+        </form>
+    </aside>
+
+    <!-- ═══════════════════════ MODAL CONFIRMAR ELIMINAR ══════════════════════ -->
+    <div class="admin-overlay" id="confirm-overlay" style="display:none;"></div>
+    <div class="admin-confirm-modal" id="confirm-modal" style="display:none;">
+        <p class="admin-confirm-text" id="confirm-text">¿Eliminar este producto?</p>
+        <div class="admin-confirm-actions">
+            <button class="admin-btn-ghost" id="btn-confirm-cancel">Cancelar</button>
+            <button class="admin-btn-danger" id="btn-confirm-ok">Eliminar</button>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/components.js"></script>
+    <script>
+    // ============================================================================
+    // Panel de Administración — El Roperito
+    // ============================================================================
+
+    let allProducts = [];
+    let allUsers    = [];
+    let editingId   = null;
+    let confirmCallback = null;
+
+    // ─── Init ────────────────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', async function () {
+        await window.ElRoperito.Auth.init();
+
+        if (!window.ElRoperito.Auth.requireAdmin()) return;
+
+        const user = window.ElRoperito.Auth.user;
+        document.getElementById('admin-user-name').textContent = user.nombre + ' ' + user.apellido;
+
+        setupNav();
+        setupDrawer();
+        setupConfirm();
+        setupMobileSidebar();
+
+        document.getElementById('btn-new-product').style.display = 'none';
+        await loadDashboard();
+    });
+
+    // ─── Sidebar móvil ──────────────────────────────────────────────────────────
+    function setupMobileSidebar() {
+        var toggleBtn = document.getElementById('admin-sidebar-toggle');
+        var sidebar   = document.querySelector('.admin-sidebar');
+        var overlay   = document.getElementById('admin-sidebar-overlay');
+        if (!toggleBtn || !sidebar || !overlay) return;
+
+        function openSidebar() {
+            sidebar.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        toggleBtn.addEventListener('click', openSidebar);
+        overlay.addEventListener('click', closeSidebar);
+
+        // Close sidebar when a nav item is clicked (mobile)
+        document.querySelectorAll('.admin-nav-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                if (window.innerWidth <= 768) closeSidebar();
+            });
+        });
+    }
+
+    // ─── Navegación ─────────────────────────────────────────────────────────────
+    function setupNav() {
+        var sectionTitles = { dashboard: 'Dashboard', productos: 'Productos', usuarios: 'Usuarios', creditos: 'Créditos' };
+        document.querySelectorAll('.admin-nav-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const section = this.dataset.section;
+                document.querySelectorAll('.admin-nav-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+                document.getElementById('section-' + section).classList.add('active');
+                document.getElementById('section-title').textContent = sectionTitles[section] || section;
+                document.getElementById('btn-new-product').style.display =
+                    section === 'productos' ? '' : 'none';
+                if (section === 'dashboard') loadDashboard();
+                if (section === 'productos') loadProducts();
+                if (section === 'usuarios') loadUsers();
+                if (section === 'creditos') loadCreditos();
+            });
+        });
+
+        document.getElementById('btn-logout').addEventListener('click', function () {
+            window.ElRoperito.Auth.logout();
+        });
+
+        document.getElementById('btn-new-product').addEventListener('click', openCreateDrawer);
+    }
+
+    // ─── Dashboard ──────────────────────────────────────────────────────────────
+    let dashboardLoaded = false;
+    async function loadDashboard(year) {
+        try {
+            const token = window.ElRoperito.Auth.token;
+            const data = await window.ElRoperito.API.adminGetDashboard(token, year || '');
+
+            // Year selector
+            if (!dashboardLoaded) {
+                const sel = document.getElementById('dashboard-year-select');
+                sel.innerHTML = '<option value="">Todos los años</option>';
+                (data.available_years || []).forEach(y => {
+                    sel.innerHTML += '<option value="' + y + '">' + y + '</option>';
+                });
+                sel.addEventListener('change', function() { loadDashboard(this.value); });
+                dashboardLoaded = true;
+            }
+
+            // Product stats
+            const p = data.productos;
+            document.getElementById('dash-disponibles').textContent = p.disponibles;
+            document.getElementById('dash-reservados').textContent  = p.reservados;
+            document.getElementById('dash-vendidos').textContent    = p.vendidos;
+            document.getElementById('dash-pausados').textContent    = p.pausados;
+
+            // Money stats
+            const v = data.ventas;
+            document.getElementById('dash-ingresos').textContent        = '$' + Number(v.ingresos).toLocaleString('es-AR');
+            document.getElementById('dash-dinero-reservado').textContent = '$' + Number(v.dinero_reservado).toLocaleString('es-AR');
+            document.getElementById('dash-consignantes').textContent     = '$' + Number(v.monto_consignantes).toLocaleString('es-AR');
+            document.getElementById('dash-ordenes').textContent          = v.cantidad_ordenes;
+
+            // Monthly chart (simple bar chart)
+            const monthNames = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+            const maxVal = Math.max(...data.mensual.map(m => m.ingresos), 1);
+            document.getElementById('monthly-chart').innerHTML = '<div class="admin-chart-bars">' +
+                data.mensual.map(function(m) {
+                    const pct = Math.round((m.ingresos / maxVal) * 100);
+                    return '<div class="admin-chart-col">' +
+                        '<span class="admin-chart-val">$' + Number(m.ingresos).toLocaleString('es-AR') + '</span>' +
+                        '<div class="admin-chart-bar" style="height:' + Math.max(pct, 2) + '%"></div>' +
+                        '<span class="admin-chart-label">' + monthNames[m.mes - 1] + '</span>' +
+                        '<span class="admin-chart-orders">' + m.ordenes + ' ord.</span>' +
+                    '</div>';
+                }).join('') +
+            '</div>';
+
+        } catch (e) {
+            console.error('Error loading dashboard:', e);
+        }
+    }
+
+    // ─── Productos ───────────────────────────────────────────────────────────────
+    async function loadProducts() {
+        try {
+            const token = window.ElRoperito.Auth.token;
+            const res = await window.ElRoperito.API.adminGetProducts(token);
+            allProducts = res.results || res;
+            renderProductsTable(allProducts);
+            updateStats(allProducts);
+        } catch (e) {
+            document.getElementById('products-tbody').innerHTML =
+                '<tr><td colspan="8" class="admin-table-error">Error al cargar productos: ' + e.message + '</td></tr>';
+        }
+    }
+
+    function updateStats(products) {
+        document.getElementById('stat-total').textContent      = products.length;
+        document.getElementById('stat-disponible').textContent = products.filter(p => p.estado === 'disponible').length;
+        document.getElementById('stat-pausado').textContent    = products.filter(p => p.estado === 'pausado').length;
+        document.getElementById('stat-vendido').textContent    = products.filter(p => p.estado === 'vendido').length;
+    }
+
+    function renderProductsTable(products) {
+        const tbody = document.getElementById('products-tbody');
+        if (!products.length) {
+            tbody.innerHTML = '<tr><td colspan="8" class="admin-table-empty">No hay productos.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = products.map(p => {
+            const img = p.images && p.images.length
+                ? '<img src="' + p.images[0].imagen + '" class="admin-thumb" alt="">'
+                : '<div class="admin-thumb-placeholder"></div>';
+            const estadoBadge = '<span class="admin-badge admin-badge-' + p.estado + '">' + estadoLabel(p.estado) + '</span>';
+            const pauseLabel  = p.estado === 'pausado' ? 'Activar' : 'Pausar';
+            const pauseClass  = p.estado === 'pausado' ? 'admin-action-activate' : 'admin-action-pause';
+            const canPause    = (p.estado === 'disponible' || p.estado === 'pausado');
+
+            // Buyer info row
+            let buyerRow = '';
+            if (p.comprador) {
+                const c = p.comprador;
+                const waLink = c.phone ? 'https://wa.me/' + c.phone.replace(/[^0-9]/g, '') : '';
+                buyerRow = `<tr class="admin-buyer-row"><td colspan="8"><div class="admin-inline-buyer">
+                    <span>Comprador: <strong>${escHtml(c.nombre + ' ' + c.apellido)}</strong> — ${escHtml(c.email)}${c.phone ? ' — ' + escHtml(c.phone) : ''}</span>
+                    ${waLink ? `<a href="${waLink}" target="_blank" rel="noopener" class="admin-wa-mini"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp</a>` : ''}
+                </div></td></tr>`;
+            }
+
+            return `<tr>
+                <td>${img}</td>
+                <td class="admin-td-name">${escHtml(p.nombre)}${p.nota_consignante ? '<br><span class="admin-consig-tag">📋 ' + escHtml(p.nota_consignante) + (p.monto_consignante > 0 ? ' ($' + Number(p.monto_consignante).toLocaleString('es-AR') + ')' : '') + '</span>' : ''}</td>
+                <td>${p.talle}</td>
+                <td>${generoLabel(p.genero)}</td>
+                <td>${categoriaLabel(p.categoria)}</td>
+                <td>$${Number(p.precio).toLocaleString('es-AR')}</td>
+                <td>${estadoBadge}</td>
+                <td class="admin-actions-cell">
+                    <button class="admin-action-btn admin-action-edit" onclick="openEditDrawer(${p.id})">Editar</button>
+                    ${canPause ? `<button class="admin-action-btn ${pauseClass}" onclick="handlePause(${p.id})">${pauseLabel}</button>` : ''}
+                    ${p.estado === 'reservado' ? `<button class="admin-action-btn admin-action-activate" onclick="handleMarkSold(${p.id})">Marcar vendido</button>` : ''}
+                    <button class="admin-action-btn admin-action-delete" onclick="handleDelete(${p.id}, '${escHtml(p.nombre)}')">Eliminar</button>
+                </td>
+            </tr>${buyerRow}`;
+        }).join('');
+    }
+
+    // Filtros en tiempo real
+    function filterProducts() {
+        const search = document.getElementById('product-search').value.toLowerCase();
+        const estado = document.getElementById('product-filter-estado').value;
+        const filtered = allProducts.filter(p => {
+            const matchSearch = !search || p.nombre.toLowerCase().includes(search);
+            const matchEstado = !estado || p.estado === estado;
+            return matchSearch && matchEstado;
+        });
+        renderProductsTable(filtered);
+    }
+    document.getElementById('product-search').addEventListener('input', filterProducts);
+    document.getElementById('product-filter-estado').addEventListener('change', filterProducts);
+
+    async function handlePause(id) {
+        try {
+            const token = window.ElRoperito.Auth.token;
+            await window.ElRoperito.API.adminPauseProduct(token, id);
+            await loadProducts();
+        } catch (e) {
+            alert('Error: ' + e.message);
+        }
+    }
+
+    function handleDelete(id, nombre) {
+        showConfirm('¿Eliminar "' + nombre + '"? El producto se ocultará del panel pero las métricas se conservan.', async function () {
+            try {
+                const token = window.ElRoperito.Auth.token;
+                await window.ElRoperito.API.adminDeleteProduct(token, id);
+                await loadProducts();
+            } catch (e) {
+                alert('Error al eliminar: ' + e.message);
+            }
+        });
+    }
+
+    async function handleMarkSold(id) {
+        showConfirm('¿Marcar este producto como vendido?', async function () {
+            try {
+                const token = window.ElRoperito.Auth.token;
+                await window.ElRoperito.API.adminMarkSold(token, id);
+                await loadProducts();
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+        });
+    }
+
+    // ─── Usuarios ────────────────────────────────────────────────────────────────
+    async function loadUsers() {
+        try {
+            const token = window.ElRoperito.Auth.token;
+            const res = await window.ElRoperito.API.adminGetUsers(token);
+            allUsers = res.results || res;
+            renderUsersTable(allUsers);
+        } catch (e) {
+            document.getElementById('users-tbody').innerHTML =
+                '<tr><td colspan="7" class="admin-table-error">Error al cargar usuarios: ' + e.message + '</td></tr>';
+        }
+    }
+
+    function renderUsersTable(users) {
+        const tbody = document.getElementById('users-tbody');
+        if (!users.length) {
+            tbody.innerHTML = '<tr><td colspan="7" class="admin-table-empty">No hay usuarios registrados.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = users.map(u => {
+            const estadoBadge = u.is_active
+                ? '<span class="admin-badge admin-badge-disponible">Activo</span>'
+                : '<span class="admin-badge admin-badge-pausado">Bloqueado</span>';
+            const blockLabel = u.is_active ? 'Bloquear' : 'Desbloquear';
+            const fecha = new Date(u.date_joined).toLocaleDateString('es-AR', { day:'2-digit', month:'short', year:'numeric' });
+            return `<tr>
+                <td>${escHtml(u.nombre + ' ' + u.apellido)}</td>
+                <td>${escHtml(u.email)}</td>
+                <td>${escHtml(u.phone || '—')}</td>
+                <td>$${Number(u.credit_balance).toLocaleString('es-AR')}</td>
+                <td>${fecha}</td>
+                <td>${estadoBadge}</td>
+                <td class="admin-actions-cell">
+                    <button class="admin-action-btn ${u.is_active ? 'admin-action-pause' : 'admin-action-activate'}"
+                        onclick="handleBlock(${u.id}, '${escHtml(u.nombre)}', ${u.is_active})">${blockLabel}</button>
+                </td>
+            </tr>`;
+        }).join('');
+    }
+
+    document.getElementById('user-search').addEventListener('input', filterUsers);
+    document.getElementById('user-filter-estado').addEventListener('change', filterUsers);
+    function filterUsers() {
+        const search = document.getElementById('user-search').value.toLowerCase();
+        const estado = document.getElementById('user-filter-estado').value;
+        const filtered = allUsers.filter(u => {
+            const matchSearch = !search ||
+                (u.nombre + ' ' + u.apellido).toLowerCase().includes(search) ||
+                u.email.toLowerCase().includes(search);
+            const matchEstado = !estado ||
+                (estado === 'activo' && u.is_active) ||
+                (estado === 'bloqueado' && !u.is_active);
+            return matchSearch && matchEstado;
+        });
+        renderUsersTable(filtered);
+    }
+
+    async function handleBlock(id, nombre, isActive) {
+        const action = isActive ? 'bloquear' : 'desbloquear';
+        showConfirm('¿' + (isActive ? 'Bloquear' : 'Desbloquear') + ' a "' + nombre + '"?', async function () {
+            try {
+                const token = window.ElRoperito.Auth.token;
+                await window.ElRoperito.API.adminBlockUser(token, id);
+                await loadUsers();
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+        });
+    }
+
+    // ─── Créditos ───────────────────────────────────────────────────────────────
+    var allCodes = [];
+    var creditUsersCache = [];
+
+    async function loadCreditos() {
+        // Load users cache for the search
+        try {
+            const token = window.ElRoperito.Auth.token;
+            const res = await window.ElRoperito.API.adminGetUsers(token);
+            creditUsersCache = res.results || res;
+        } catch (e) { creditUsersCache = []; }
+        // Load codes table
+        loadCreditCodes();
+    }
+
+    async function loadCreditCodes() {
+        try {
+            const token = window.ElRoperito.Auth.token;
+            const res = await window.ElRoperito.API.adminGetCreditCodes(token);
+            allCodes = res.results || res;
+            renderCodesTable(allCodes);
+        } catch (e) {
+            document.getElementById('codes-tbody').innerHTML =
+                '<tr><td colspan="7" class="admin-table-error">Error: ' + escHtml(e.message) + '</td></tr>';
+        }
+    }
+
+    function renderCodesTable(codes) {
+        const tbody = document.getElementById('codes-tbody');
+        if (!codes.length) {
+            tbody.innerHTML = '<tr><td colspan="7" class="admin-table-empty">No hay códigos asignados.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = codes.map(c => {
+            const estadoBadge = c.usado
+                ? '<span class="admin-badge admin-badge-pausado">Usado</span>'
+                : '<span class="admin-badge admin-badge-disponible">Pendiente</span>';
+            const fechaCreado = new Date(c.fecha_creacion).toLocaleDateString('es-AR', { day:'2-digit', month:'short', year:'numeric' });
+            const fechaUso = c.fecha_uso
+                ? new Date(c.fecha_uso).toLocaleDateString('es-AR', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' })
+                : '—';
+            return `<tr>
+                <td><code style="font-size:14px;font-weight:600;letter-spacing:1px;background:rgba(26,26,24,0.05);padding:3px 8px;border-radius:6px;">${escHtml(c.codigo)}</code></td>
+                <td>$${Number(c.monto).toLocaleString('es-AR')}</td>
+                <td>${escHtml(c.usuario_nombre || '')} <br><small style="color:#888;">${escHtml(c.usuario_email || '')}</small></td>
+                <td>${estadoBadge}</td>
+                <td>${fechaUso}</td>
+                <td>${fechaCreado}</td>
+                <td class="admin-actions-cell">
+                    ${!c.usado ? '<button class="admin-action-btn admin-action-danger" onclick="handleDeleteCode(' + c.id + ', \'' + escHtml(c.codigo) + '\')">Eliminar</button>' : ''}
+                </td>
+            </tr>`;
+        }).join('');
+    }
+
+    // User search for credit code assignment
+    (function() {
+        const searchInput = document.getElementById('credit-user-search');
+        const resultsDiv = document.getElementById('credit-user-results');
+        let debounceTimer;
+
+        function doSearch() {
+            const q = searchInput.value.trim().toLowerCase();
+            if (q.length < 2) { resultsDiv.style.display = 'none'; return; }
+            const matches = creditUsersCache.filter(u =>
+                (u.nombre + ' ' + u.apellido).toLowerCase().includes(q) ||
+                u.email.toLowerCase().includes(q)
+            ).slice(0, 6);
+            if (!matches.length) {
+                resultsDiv.innerHTML = '<div class="credit-user-item" style="color:#888;">Sin resultados</div>';
+            } else {
+                resultsDiv.innerHTML = matches.map(u =>
+                    `<div class="credit-user-item" onmousedown="selectCreditUser(${u.id}, '${escHtml(u.nombre + ' ' + u.apellido)}', '${escHtml(u.email)}', ${Number(u.credit_balance)})">
+                        <strong>${escHtml(u.nombre + ' ' + u.apellido)}</strong>
+                        <span>${escHtml(u.email)}</span>
+                        <span style="color:#888;">Saldo: $${Number(u.credit_balance).toLocaleString('es-AR')}</span>
+                    </div>`
+                ).join('');
+            }
+            resultsDiv.style.display = '';
+        }
+
+        searchInput.addEventListener('input', function() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(doSearch, 200);
+        });
+
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                clearTimeout(debounceTimer);
+                doSearch();
+            }
+        });
+
+        searchInput.addEventListener('blur', function() {
+            setTimeout(function() { resultsDiv.style.display = 'none'; }, 250);
+        });
+
+        searchInput.addEventListener('focus', function() {
+            if (this.value.trim().length >= 2) doSearch();
+        });
+    })();
+
+    function selectCreditUser(id, nombre, email, saldo) {
+        document.getElementById('credit-user-id').value = id;
+        document.getElementById('credit-user-search').value = '';
+        document.getElementById('credit-user-results').style.display = 'none';
+        const sel = document.getElementById('credit-user-selected');
+        sel.innerHTML = `<span>${escHtml(nombre)} — ${escHtml(email)} — Saldo: $${saldo.toLocaleString('es-AR')}</span>
+            <button type="button" class="credit-user-clear" onclick="clearCreditUser()">✕</button>`;
+        sel.style.display = '';
+    }
+
+    function clearCreditUser() {
+        document.getElementById('credit-user-id').value = '';
+        document.getElementById('credit-user-selected').style.display = 'none';
+    }
+
+    // Assign credit code to user
+    document.getElementById('btn-assign-credit').addEventListener('click', async function() {
+        const btn = this;
+        const msgEl = document.getElementById('credit-assign-msg');
+        const okEl = document.getElementById('credit-assign-ok');
+        msgEl.style.display = 'none';
+        okEl.style.display = 'none';
+
+        const userId = document.getElementById('credit-user-id').value;
+        const monto = parseFloat(document.getElementById('credit-assign-amount').value);
+        const desc = document.getElementById('credit-assign-desc').value.trim();
+
+        if (!userId) { msgEl.textContent = 'Seleccioná un usuario primero.'; msgEl.style.display = ''; return; }
+        if (!monto || monto <= 0) { msgEl.textContent = 'Ingresá un monto válido.'; msgEl.style.display = ''; return; }
+
+        btn.disabled = true;
+        btn.textContent = 'Generando…';
+        try {
+            const token = window.ElRoperito.Auth.token;
+            const data = { usuario_id: parseInt(userId), monto: monto };
+            if (desc) data.descripcion = desc;
+            const res = await window.ElRoperito.API.adminCreateCreditCode(token, data);
+            okEl.innerHTML = 'Código generado: <code style="font-size:16px;font-weight:700;letter-spacing:2px;background:rgba(26,26,24,0.06);padding:4px 12px;border-radius:6px;">' + escHtml(res.codigo) + '</code> — $' + Number(res.monto).toLocaleString('es-AR') + ' para ' + escHtml(res.usuario_email);
+            okEl.style.display = '';
+            document.getElementById('credit-assign-amount').value = '';
+            document.getElementById('credit-assign-desc').value = '';
+            clearCreditUser();
+            await loadCreditCodes();
+        } catch (e) {
+            msgEl.textContent = e.message;
+            msgEl.style.display = '';
+        } finally {
+            btn.disabled = false;
+            btn.textContent = 'Generar código y asignar';
+        }
+    });
+
+    function handleDeleteCode(id, codigo) {
+        showConfirm('¿Eliminar el código "' + codigo + '"? Esta acción no se puede deshacer.', async function() {
+            try {
+                const token = window.ElRoperito.Auth.token;
+                await window.ElRoperito.API.adminDeleteCreditCode(token, id);
+                await loadCreditCodes();
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+        });
+    }
+
+    // ─── Drawer (crear / editar producto) ────────────────────────────────────────
+    const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+    const MAX_SIZE_MB   = 5;
+    const MAX_SIZE_B    = MAX_SIZE_MB * 1024 * 1024;
+    let selectedImageFiles = [];
+
+    function handleImageFile(file) {
+        const errEl = document.getElementById('image-client-error');
+        errEl.style.display = 'none';
+
+        if (!ALLOWED_TYPES.includes(file.type)) {
+            errEl.textContent = 'Formato no permitido. Usá JPG, PNG o WEBP.';
+            errEl.style.display = '';
+            return false;
+        }
+        if (file.size > MAX_SIZE_B) {
+            const mb = (file.size / (1024 * 1024)).toFixed(1);
+            errEl.textContent = `La imagen es demasiado grande (${mb} MB). Límite: ${MAX_SIZE_MB} MB.`;
+            errEl.style.display = '';
+            return false;
+        }
+        if (selectedImageFiles.length >= 2) {
+            errEl.textContent = 'Máximo 2 imágenes permitidas.';
+            errEl.style.display = '';
+            return false;
+        }
+
+        selectedImageFiles.push(file);
+        updateImagePreview();
+        return true;
+    }
+
+    function updateImagePreview() {
+        const preview = document.getElementById('image-preview');
+        if (selectedImageFiles.length === 0) {
+            preview.innerHTML =
+                `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                 <span class="upload-main-text">Arrastrá imágenes o hacé click para buscar (máximo 2)</span>
+                 <span class="upload-hint-text">JPG, PNG o WEBP &mdash; máximo 5 MB cada una</span>`;
+            return;
+        }
+
+        let html = '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+        selectedImageFiles.forEach((file, idx) => {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const imgDiv = preview.querySelectorAll('.admin-img-preview-item')[idx];
+                if (imgDiv) {
+                    imgDiv.querySelector('img').src = e.target.result;
+                }
+            };
+            reader.readAsDataURL(file);
+            html += `<div class="admin-img-preview-item">
+                <img src="" style="max-height:100px;border-radius:8px;object-fit:contain;" alt="">
+                <button type="button" class="admin-img-remove-btn" data-idx="${idx}">✕</button>
+            </div>`;
+        });
+        html += '</div>';
+        preview.innerHTML = html;
+
+        preview.querySelectorAll('.admin-img-remove-btn').forEach(btn => {
+            btn.addEventListener('click', function (ev) {
+                ev.stopPropagation();
+                const idx = parseInt(this.dataset.idx);
+                selectedImageFiles.splice(idx, 1);
+                updateImagePreview();
+            });
+        });
+    }
+
+    function clearImagePreview() {
+        selectedImageFiles = [];
+        document.getElementById('form-imagen').value = '';
+        document.getElementById('image-client-error').style.display = 'none';
+        updateImagePreview();
+    }
+
+    function setupDrawer() {
+        document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+        document.getElementById('btn-cancel-form').addEventListener('click', closeDrawer);
+        document.getElementById('drawer-overlay').addEventListener('click', closeDrawer);
+
+        const fileInput    = document.getElementById('form-imagen');
+        const uploadArea   = document.getElementById('image-upload-area');
+
+        fileInput.addEventListener('change', function () {
+            for (let i = 0; i < this.files.length; i++) {
+                handleImageFile(this.files[i]);
+            }
+            // Sync files back to input
+            const dt = new DataTransfer();
+            for (let i = 0; i < selectedImageFiles.length; i++) {
+                dt.items.add(selectedImageFiles[i]);
+            }
+            fileInput.files = dt.files;
+        });
+
+        uploadArea.addEventListener('click', function () {
+            fileInput.click();
+        });
+
+        // Drag & drop
+        uploadArea.addEventListener('dragover', function (e) {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+        uploadArea.addEventListener('dragleave', function () {
+            uploadArea.classList.remove('drag-over');
+        });
+        uploadArea.addEventListener('drop', function (e) {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            const files = e.dataTransfer.files;
+            if (!files.length) return;
+            for (let i = 0; i < files.length; i++) {
+                handleImageFile(files[i]);
+            }
+            // Inject files into input via DataTransfer
+            const dt = new DataTransfer();
+            for (let i = 0; i < selectedImageFiles.length; i++) {
+                dt.items.add(selectedImageFiles[i]);
+            }
+            fileInput.files = dt.files;
+        });
+
+        document.getElementById('product-form').addEventListener('submit', handleProductSubmit);
+    }
+
+    function openCreateDrawer() {
+        editingId = null;
+        document.getElementById('drawer-title').textContent = 'Nuevo producto';
+        document.getElementById('btn-submit-form').textContent = 'Crear producto';
+        resetForm();
+        openDrawer();
+    }
+
+    function openEditDrawer(id) {
+        const p = allProducts.find(x => x.id === id);
+        if (!p) return;
+        editingId = id;
+        document.getElementById('drawer-title').textContent = 'Editar producto';
+        document.getElementById('btn-submit-form').textContent = 'Guardar cambios';
+        fillForm(p);
+        openDrawer();
+    }
+
+    function openDrawer() {
+        document.getElementById('product-drawer').classList.add('open');
+        document.getElementById('drawer-overlay').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+        document.getElementById('product-drawer').classList.remove('open');
+        document.getElementById('drawer-overlay').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function resetForm() {
+        document.getElementById('form-product-id').value = '';
+        document.getElementById('form-nombre').value = '';
+        document.getElementById('form-precio').value = '';
+        document.getElementById('form-talle').value = '';
+        document.getElementById('form-genero').value = '';
+        document.getElementById('form-categoria').value = '';
+        document.getElementById('form-estado').value = 'disponible';
+        document.getElementById('form-familia').value = '';
+        document.getElementById('form-descripcion').value = '';
+        document.getElementById('form-historia').value = '';
+        document.getElementById('form-nota-consignante').value = '';
+        document.getElementById('form-monto-consignante').value = '';
+        document.getElementById('form-revisado').checked = false;
+        document.getElementById('form-lavado').checked = false;
+        document.getElementById('form-sin-manchas').checked = false;
+        document.getElementById('form-destacado').checked = false;
+        document.getElementById('buyer-info-section').style.display = 'none';
+        clearImagePreview();
+        hideFormError();
+    }
+
+    function fillForm(p) {
+        document.getElementById('form-product-id').value      = p.id;
+        document.getElementById('form-nombre').value          = p.nombre;
+        document.getElementById('form-precio').value          = p.precio;
+        document.getElementById('form-talle').value           = p.talle;
+        document.getElementById('form-genero').value          = p.genero;
+        document.getElementById('form-categoria').value       = p.categoria;
+        document.getElementById('form-estado').value          = p.estado;
+        document.getElementById('form-familia').value         = p.familia_origen || '';
+        document.getElementById('form-descripcion').value     = p.descripcion || '';
+        document.getElementById('form-historia').value        = p.historia || '';
+        document.getElementById('form-nota-consignante').value   = p.nota_consignante || '';
+        document.getElementById('form-monto-consignante').value  = p.monto_consignante || '';
+        document.getElementById('form-revisado').checked      = p.revisado;
+        document.getElementById('form-lavado').checked        = p.lavado;
+        document.getElementById('form-sin-manchas').checked   = p.sin_manchas;
+        document.getElementById('form-destacado').checked     = p.es_destacado;
+        document.getElementById('form-imagen').value          = '';
+        selectedImageFiles = [];
+
+        const preview = document.getElementById('image-preview');
+        if (p.images && p.images.length) {
+            let html = '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+            p.images.forEach(img => {
+                html += `<div class="admin-img-preview-item">
+                    <img src="${img.imagen}" style="max-height:100px;border-radius:8px;object-fit:contain;" alt="">
+                </div>`;
+            });
+            html += '</div>';
+            preview.innerHTML = html;
+        } else {
+            updateImagePreview();
+        }
+
+        // Buyer info
+        const buyerSection = document.getElementById('buyer-info-section');
+        const buyerCard = document.getElementById('buyer-info-card');
+        if (p.comprador) {
+            const c = p.comprador;
+            const waLink = c.phone ? 'https://wa.me/' + c.phone.replace(/[^0-9]/g, '') : '';
+            buyerCard.innerHTML =
+                '<div class="admin-buyer-detail">' +
+                    '<p><strong>' + escHtml(c.nombre + ' ' + c.apellido) + '</strong></p>' +
+                    '<p>' + escHtml(c.email) + '</p>' +
+                    (c.phone ? '<p>' + escHtml(c.phone) + '</p>' : '') +
+                    '<p style="font-size:11px;color:rgba(26,26,24,0.5);">Orden #' + c.orden_id + ' — ' + estadoLabel(c.orden_estado) + '</p>' +
+                    (waLink ? '<a href="' + waLink + '" target="_blank" rel="noopener" class="admin-wa-btn-card"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp</a>' : '') +
+                '</div>';
+            buyerSection.style.display = '';
+        } else {
+            buyerSection.style.display = 'none';
+        }
+
+        hideFormError();
+    }
+
+    async function handleProductSubmit(e) {
+        e.preventDefault();
+        hideFormError();
+
+        const nombre       = document.getElementById('form-nombre').value.trim();
+        const precio       = document.getElementById('form-precio').value;
+        const talle        = document.getElementById('form-talle').value;
+        const genero       = document.getElementById('form-genero').value;
+        const categoria    = document.getElementById('form-categoria').value;
+
+        if (!nombre || !precio || !talle || !genero || !categoria) {
+            showFormError('Completá todos los campos obligatorios (*).');
+            return;
+        }
+
+        const btn = document.getElementById('btn-submit-form');
+        btn.disabled = true;
+        btn.textContent = 'Guardando…';
+
+        const fd = new FormData();
+        fd.append('nombre',           nombre);
+        fd.append('precio',           precio);
+        fd.append('precio_original',  precio);
+        fd.append('talle',            talle);
+        fd.append('genero',           genero);
+        fd.append('categoria',        categoria);
+        fd.append('estado',           document.getElementById('form-estado').value);
+        fd.append('familia_origen',      document.getElementById('form-familia').value);
+        fd.append('descripcion',         document.getElementById('form-descripcion').value);
+        fd.append('historia',            document.getElementById('form-historia').value);
+        fd.append('nota_consignante',    document.getElementById('form-nota-consignante').value);
+        fd.append('monto_consignante',   document.getElementById('form-monto-consignante').value || '0');
+        fd.append('revisado',         document.getElementById('form-revisado').checked);
+        fd.append('lavado',           document.getElementById('form-lavado').checked);
+        fd.append('sin_manchas',      document.getElementById('form-sin-manchas').checked);
+        fd.append('es_destacado',     document.getElementById('form-destacado').checked);
+
+        for (let i = 0; i < selectedImageFiles.length; i++) {
+            fd.append('imagen', selectedImageFiles[i]);
+        }
+
+        try {
+            const token = window.ElRoperito.Auth.token;
+            if (editingId) {
+                await window.ElRoperito.API.adminUpdateProduct(token, editingId, fd);
+            } else {
+                await window.ElRoperito.API.adminCreateProduct(token, fd);
+            }
+            closeDrawer();
+            await loadProducts();
+        } catch (err) {
+            showFormError(err.message || 'Error al guardar el producto.');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = editingId ? 'Guardar cambios' : 'Crear producto';
+        }
+    }
+
+    // ─── Modal de confirmación ───────────────────────────────────────────────────
+    function setupConfirm() {
+        document.getElementById('btn-confirm-cancel').addEventListener('click', hideConfirm);
+        document.getElementById('confirm-overlay').addEventListener('click', hideConfirm);
+        document.getElementById('btn-confirm-ok').addEventListener('click', function () {
+            if (confirmCallback) confirmCallback();
+            hideConfirm();
+        });
+    }
+
+    function showConfirm(text, callback) {
+        document.getElementById('confirm-text').textContent = text;
+        confirmCallback = callback;
+        document.getElementById('confirm-overlay').style.display = '';
+        document.getElementById('confirm-modal').style.display = '';
+    }
+
+    function hideConfirm() {
+        document.getElementById('confirm-overlay').style.display = 'none';
+        document.getElementById('confirm-modal').style.display = 'none';
+        confirmCallback = null;
+    }
+
+    // ─── Helpers ─────────────────────────────────────────────────────────────────
+    function showFormError(msg) {
+        const el = document.getElementById('form-error');
+        el.textContent = msg;
+        el.style.display = '';
+    }
+    function hideFormError() {
+        document.getElementById('form-error').style.display = 'none';
+    }
+
+    function escHtml(str) {
+        return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function estadoLabel(estado) {
+        return { disponible: 'Disponible', pausado: 'Pausado', vendido: 'Vendido', reservado: 'Reservado',
+                 pending_payment: 'Pendiente de pago', paid: 'Pagado', shipped: 'Enviado',
+                 ready_for_pickup: 'Listo para retirar', completed: 'Completado', cancelled: 'Cancelado' }[estado] || estado;
+    }
+
+    function generoLabel(g) {
+        return { nena: 'Nena', nene: 'Nene', unisex: 'Unisex', M: 'Nene', F: 'Nena', U: 'Unisex' }[g] || g;
+    }
+
+    function categoriaLabel(c) {
+        const map = { remera:'Remera', pantalon:'Pantalón', vestido:'Vestido', campera:'Campera',
+                      mameluco:'Mameluco', conjunto:'Conjunto', calzado:'Calzado', accesorio:'Accesorio' };
+        return map[c] || c;
+    }
+    </script>
+</body>
+</html>

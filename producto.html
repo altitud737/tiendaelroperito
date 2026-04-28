@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto — El Roperito</title>
+    <link rel="stylesheet" href="styles.css?v=20260424b">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Nunito:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="page-body">
+
+    <!-- ── HEADER COMPRADOR ── -->
+    <header class="buyer-header">
+        <div class="buyer-header-inner">
+            <a href="tienda.html" class="buyer-logo">
+                <div class="brand-logo">
+                    <span class="logo-letter logo-el" data-letter="E">E</span>
+                    <span class="logo-letter logo-el" data-letter="l">l</span>
+                    <span class="logo-space"></span>
+                    <span class="logo-letter logo-rop" data-letter="R">R</span>
+                    <span class="logo-letter logo-rop" data-letter="o">o</span>
+                    <span class="logo-letter logo-rop" data-letter="p">p</span>
+                    <span class="logo-letter logo-er" data-letter="e">e</span>
+                    <span class="logo-letter logo-er" data-letter="r">r</span>
+                    <span class="logo-letter logo-ito" data-letter="i">i</span>
+                    <span class="logo-letter logo-ito" data-letter="t">t</span>
+                    <span class="logo-letter logo-ito" data-letter="o">o</span>
+                </div>
+            </a>
+
+            <div class="buyer-search-wrap">
+                <svg class="buyer-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="search-input" class="buyer-search-input" placeholder="Buscar prendas, talles, categorías..." autocomplete="off">
+                <button id="search-clear" class="buyer-search-clear" style="display:none;" aria-label="Limpiar búsqueda">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <div class="buyer-actions">
+                <a href="perfil.html?tab=favoritos" class="buyer-action-btn buyer-wishlist-btn" title="Mis favoritos">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                    <span class="buyer-action-label">Favoritos</span>
+                    <span class="buyer-wishlist-count" id="buyer-wishlist-count" style="display:none;">0</span>
+                </a>
+                <button class="buyer-action-btn" id="notif-btn" title="Notificaciones">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+                    <span class="buyer-action-label">Notificaciones</span>
+                    <span class="buyer-notif-dot" id="notif-dot" style="display:none;"></span>
+                </button>
+                <a href="checkout.html" class="buyer-action-btn buyer-cart-btn" title="Carrito">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    <span class="buyer-action-label">Carrito</span>
+                    <span class="cart-count buyer-cart-count" id="buyer-cart-count" style="display:none;">0</span>
+                </a>
+                <div class="buyer-profile-wrap" id="profile-wrap">
+                    <button class="buyer-profile-btn" id="profile-btn" aria-expanded="false" aria-label="Mi perfil">
+                        <div class="buyer-avatar" id="profile-avatar">?</div>
+                        <svg class="buyer-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="buyer-dropdown" id="profile-dropdown" style="display:none;">
+                        <div class="buyer-dropdown-user">
+                            <span class="buyer-dropdown-name" id="dropdown-name">Mi cuenta</span>
+                            <span class="buyer-dropdown-email" id="dropdown-email"></span>
+                        </div>
+                        <div class="buyer-dropdown-divider"></div>
+                        <a href="perfil.html" class="buyer-dropdown-item" id="item-mi-perfil">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            Mi perfil
+                        </a>
+                        <a href="perfil.html?tab=credito" class="buyer-dropdown-item" id="item-mi-credito">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                            Mi crédito
+                        </a>
+                        <a href="perfil.html?tab=datos" class="buyer-dropdown-item" id="item-config">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                            Configuración
+                        </a>
+                        <div class="buyer-dropdown-divider"></div>
+                        <a href="login.html" class="buyer-dropdown-item" id="item-login">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                            Iniciar sesión
+                        </a>
+                        <a href="registro.html" class="buyer-dropdown-item" id="item-register">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-3-3.87"/><path d="M4 21v-2a4 4 0 013-3.87"/><circle cx="12" cy="7" r="4"/><line x1="16" y1="3" x2="22" y2="3"/><line x1="19" y1="0" x2="19" y2="6"/></svg>
+                            Registrarse
+                        </a>
+                        <button class="buyer-dropdown-item buyer-dropdown-logout" id="logout-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                            Cerrar sesión
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container">
+            <div id="product-loading" class="loading-text">Cargando producto...</div>
+            <div id="product-content" style="display:none;">
+
+                <!-- Volver siempre encima de la imagen -->
+                <a href="tienda.html" class="back-link" style="display:inline-block;margin-bottom:24px;">← Volver a la tienda</a>
+
+                <!-- Nombre del producto visible solo en mobile, encima de la imagen -->
+                <h1 id="product-name-mobile" class="detail-title" style="display:none;margin-bottom:14px;font-size:clamp(20px,6vw,28px);"></h1>
+
+                <!-- Galería + Info -->
+                <div class="product-detail-grid">
+                    <!-- Galería -->
+                    <div class="product-gallery">
+                        <div class="gallery-main" style="position:relative;">
+                            <img id="gallery-main-img" src="" alt="">
+                            <button id="btn-wishlist" class="detail-wish-btn gallery-wish-overlay" title="Agregar a favoritos">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                            </button>
+                        </div>
+                        <div id="gallery-thumbs" class="gallery-thumbs"></div>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="product-info">
+
+                        <h1 id="product-name" class="detail-title"></h1>
+
+                        <!-- Historia (primer tercio, regla de negocio) -->
+                        <div id="product-story-block" class="detail-story" style="display:none;">
+                            <svg class="quote-icon-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                            <p id="product-story"></p>
+                        </div>
+
+                        <!-- Badges calidad -->
+                        <div id="quality-badges" class="quality-badges"></div>
+
+                        <!-- Atributos -->
+                        <div class="detail-attributes">
+                            <span id="detail-talle" class="detail-attr"></span>
+                            <span id="detail-genero" class="detail-attr"></span>
+                            <span id="detail-categoria" class="detail-attr"></span>
+                        </div>
+
+                        <!-- Precio -->
+                        <div class="detail-price-block">
+                            <span id="detail-price" class="detail-price"></span>
+                            <span id="detail-price-original" class="detail-price-original"></span>
+                        </div>
+
+                        <!-- Descripción -->
+                        <p id="product-desc" class="detail-desc"></p>
+
+                        <!-- Acciones -->
+                        <div class="detail-actions">
+                            <div class="detail-cta-wrap">
+                                <button id="btn-add-cart" class="cta-button detail-cta">Lo quiero</button>
+                                <a id="whatsapp-link" href="#" class="whatsapp-link" target="_blank" rel="noopener">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                                    Consultá por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/notifications.js"></script>
+    <script>
+        let currentProduct = null;
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Auth + header (wrapped so errors don't block product loading)
+            try {
+                await window.ElRoperito.Auth.init();
+                initBuyerHeader();
+                updateCartBadge();
+                updateWishlistBadge();
+            } catch(e) { /* continue without auth */ }
+
+            // Search redirects to tienda
+            var searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                searchInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' && this.value.trim()) {
+                        window.location.href = 'tienda.html?search=' + encodeURIComponent(this.value.trim());
+                    }
+                });
+            }
+
+            const params = new URLSearchParams(window.location.search);
+            const slug = params.get('slug');
+            if (!slug) { window.location.href = 'tienda.html'; return; }
+
+            try {
+                currentProduct = await window.ElRoperito.API.getProductBySlug(slug);
+                renderProduct(currentProduct);
+            } catch (e) {
+                document.getElementById('product-loading').textContent = 'Producto no encontrado.';
+            }
+        });
+
+        function updateCartBadge() {
+            var count = (window.ElRoperito.Cart.getItems() || []).length;
+            var el = document.getElementById('buyer-cart-count');
+            if (el) { el.textContent = count; el.style.display = count > 0 ? '' : 'none'; }
+        }
+
+        async function updateWishlistBadge() {
+            var el = document.getElementById('buyer-wishlist-count');
+            if (!el) return;
+            var token = window.ElRoperito.Auth.token;
+            if (!token) { el.style.display = 'none'; return; }
+            try {
+                var data = await window.ElRoperito.API.getWishlist(token);
+                var count = (data.productos || []).length;
+                el.textContent = count;
+                el.style.display = count > 0 ? '' : 'none';
+            } catch(e) { el.style.display = 'none'; }
+        }
+
+        function initBuyerHeader() {
+            var auth = window.ElRoperito.Auth;
+            var user = auth.user;
+            var isLogged = auth && typeof auth.isLoggedIn === 'function' ? auth.isLoggedIn() : !!user;
+
+            var avatarEl = document.getElementById('profile-avatar');
+            var nameEl = document.getElementById('dropdown-name');
+            var emailEl = document.getElementById('dropdown-email');
+
+            var itemPerfil   = document.getElementById('item-mi-perfil');
+            var itemCredito  = document.getElementById('item-mi-credito');
+            var itemConfig   = document.getElementById('item-config');
+            var itemLogin    = document.getElementById('item-login');
+            var itemRegister = document.getElementById('item-register');
+            var logoutBtn    = document.getElementById('logout-btn');
+
+            if (isLogged && user && user.nombre) {
+                avatarEl.textContent = user.nombre.charAt(0).toUpperCase();
+                nameEl.textContent = user.nombre + (user.apellido ? ' ' + user.apellido : '');
+                emailEl.textContent = user.email || '';
+                if (itemPerfil)   itemPerfil.style.display = '';
+                if (itemCredito)  itemCredito.style.display = '';
+                if (itemConfig)   itemConfig.style.display = '';
+                if (logoutBtn)    logoutBtn.style.display = '';
+                if (itemLogin)    itemLogin.style.display = 'none';
+                if (itemRegister) itemRegister.style.display = 'none';
+            } else {
+                avatarEl.textContent = '?';
+                nameEl.textContent = 'Invitado';
+                if (emailEl) emailEl.textContent = '';
+                if (itemPerfil)   itemPerfil.style.display = 'none';
+                if (itemCredito)  itemCredito.style.display = 'none';
+                if (itemConfig)   itemConfig.style.display = 'none';
+                if (logoutBtn)    logoutBtn.style.display = 'none';
+                if (itemLogin)    itemLogin.style.display = '';
+                if (itemRegister) itemRegister.style.display = '';
+            }
+
+            // Toggle dropdown
+            var profileBtn = document.getElementById('profile-btn');
+            var dropdown = document.getElementById('profile-dropdown');
+            profileBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var open = dropdown.style.display !== 'none';
+                dropdown.style.display = open ? 'none' : '';
+                profileBtn.setAttribute('aria-expanded', String(!open));
+                profileBtn.closest('.buyer-profile-wrap').classList.toggle('open', !open);
+            });
+            document.addEventListener('click', function() {
+                dropdown.style.display = 'none';
+                profileBtn.setAttribute('aria-expanded', 'false');
+                profileBtn.closest('.buyer-profile-wrap').classList.remove('open');
+            });
+
+            // Logout
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                window.ElRoperito.Auth.logout();
+                window.location.href = 'index.html';
+            });
+
+            // Notificaciones
+            document.getElementById('notif-btn').addEventListener('click', function() {
+                window.ElRoperito.Components.showNotification('Sin notificaciones nuevas', 'info');
+            });
+        }
+
+        function renderProduct(p) {
+            document.title = p.nombre + ' — El Roperito';
+            document.getElementById('product-loading').style.display = 'none';
+            document.getElementById('product-content').style.display = '';
+
+            // Galería
+            const images = p.images || [];
+            const mainImg = document.getElementById('gallery-main-img');
+            if (images.length > 0) {
+                mainImg.src = images[0].imagen;
+                mainImg.alt = p.nombre;
+                const thumbs = document.getElementById('gallery-thumbs');
+                if (images.length > 1) {
+                    thumbs.innerHTML = images.map(function(img, i) {
+                        return '<img src="' + img.imagen + '" alt="" class="gallery-thumb' + (i === 0 ? ' active' : '') + '" onclick="selectThumb(' + i + ')">';
+                    }).join('');
+                }
+            } else {
+                mainImg.src = 'images/placeholder.jpg';
+                mainImg.alt = p.nombre;
+            }
+
+            // Nombre (desktop: inside grid column; mobile: above gallery)
+            document.getElementById('product-name').textContent = p.nombre;
+            var mobileTitle = document.getElementById('product-name-mobile');
+            if (mobileTitle) {
+                mobileTitle.textContent = p.nombre;
+                var isMobile = window.innerWidth <= 640;
+                mobileTitle.style.display = isMobile ? 'block' : 'none';
+                document.getElementById('product-name').style.display = isMobile ? 'none' : '';
+            }
+
+            // Historia (primer tercio — regla de negocio)
+            if (p.historia) {
+                document.getElementById('product-story-block').style.display = '';
+                document.getElementById('product-story').textContent = p.historia;
+            }
+
+            // Badges calidad
+            var badges = [];
+            if (p.revisado) badges.push('✓ Revisado');
+            if (p.lavado) badges.push('✓ Lavado');
+            if (p.sin_manchas) badges.push('✓ Sin manchas');
+            if (badges.length > 0) {
+                document.getElementById('quality-badges').innerHTML = badges.map(function(b) {
+                    return '<span class="quality-badge">' + b + '</span>';
+                }).join('');
+            }
+
+            // Atributos
+            var generoLabel = p.genero === 'nena' || p.genero === 'F' ? 'Nena' : p.genero === 'nene' || p.genero === 'M' ? 'Nene' : 'Unisex';
+            document.getElementById('detail-talle').textContent = 'Talle ' + p.talle;
+            document.getElementById('detail-genero').textContent = generoLabel;
+            document.getElementById('detail-categoria').textContent = p.categoria || '';
+
+            // Precio
+            document.getElementById('detail-price').textContent = '$' + Number(p.precio).toLocaleString('es-AR');
+            if (p.precio_original && Number(p.precio_original) > Number(p.precio)) {
+                document.getElementById('detail-price-original').textContent = '$' + Number(p.precio_original).toLocaleString('es-AR');
+            }
+
+            // Descripción
+            document.getElementById('product-desc').textContent = p.descripcion || '';
+
+            // WhatsApp
+            var msg = encodeURIComponent('Hola! Vi "' + p.nombre + '" en El Roperito y me interesa. ¿Sigue disponible?');
+            document.getElementById('whatsapp-link').href = 'https://wa.me/5492346530892?text=' + msg;
+
+            // Botón carrito
+            document.getElementById('btn-add-cart').addEventListener('click', function() {
+                var img = (p.images && p.images.length > 0) ? p.images[0].imagen : null;
+                var added = window.ElRoperito.Cart.addItem({
+                    id: p.id,
+                    nombre: p.nombre,
+                    precio: Number(p.precio),
+                    precio_original: Number(p.precio_original) || Number(p.precio),
+                    talle: p.talle,
+                    slug: p.slug,
+                    imagen: img
+                });
+                if (added) {
+                    this.textContent = '¡Agregado!';
+                    this.disabled = true;
+                    window.ElRoperito.Components.showNotification('¡Agregado al carrito!');
+                } else {
+                    window.ElRoperito.Components.showNotification('Ya está en tu carrito');
+                }
+            });
+
+            // Si ya está en carrito
+            if (window.ElRoperito.Cart.hasItem(p.id)) {
+                var btn = document.getElementById('btn-add-cart');
+                btn.textContent = 'Ya en el carrito';
+                btn.disabled = true;
+            }
+
+            // Wishlist
+            document.getElementById('btn-wishlist').addEventListener('click', async function() {
+                if (!window.ElRoperito.Auth.isLoggedIn()) {
+                    window.location.href = 'login.html?next=producto.html?slug=' + p.slug;
+                    return;
+                }
+                try {
+                    await window.ElRoperito.API.addToWishlist(window.ElRoperito.Auth.token, p.id);
+                    this.classList.add('wishlisted');
+                    window.ElRoperito.Components.showNotification('Agregado a favoritos');
+                    updateWishlistBadge();
+                } catch (e) {
+                    window.ElRoperito.Components.showNotification('Ya está en favoritos');
+                }
+            });
+        }
+
+        var currentThumbIndex = 0;
+
+        function selectThumb(index) {
+            var images = currentProduct.images;
+            if (!images || !images[index]) return;
+            currentThumbIndex = index;
+            document.getElementById('gallery-main-img').src = images[index].imagen;
+            var thumbs = document.querySelectorAll('.gallery-thumb');
+            thumbs.forEach(function(t, i) {
+                t.classList.toggle('active', i === index);
+            });
+        }
+
+        // Touch swipe on main image
+        (function() {
+            var startX = 0;
+            var mainImg = document.getElementById('gallery-main-img');
+            if (!mainImg) return;
+            mainImg.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+            }, { passive: true });
+            mainImg.addEventListener('touchend', function(e) {
+                var diff = startX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) < 40) return; // ignore small swipes
+                var images = currentProduct && currentProduct.images;
+                if (!images || images.length < 2) return;
+                if (diff > 0) {
+                    // swipe left → next
+                    selectThumb((currentThumbIndex + 1) % images.length);
+                } else {
+                    // swipe right → prev
+                    selectThumb((currentThumbIndex - 1 + images.length) % images.length);
+                }
+            }, { passive: true });
+        })();
+    </script>
+</body>
+</html>
