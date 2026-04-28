@@ -181,6 +181,10 @@ html {
     scroll-snap-type: y proximity;
     height: 100%;
     overflow: hidden;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 /* Offset all anchor-target sections so fixed header never covers the title */
@@ -288,8 +292,6 @@ main {
     height: auto;
     min-height: 88px;
     pointer-events: auto;
-    transform: translateZ(5px);
-    transform-style: preserve-3d;
     gap: 64px;
 }
 
