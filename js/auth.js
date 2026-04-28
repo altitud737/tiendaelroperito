@@ -51,7 +51,7 @@ window.ElRoperito = window.ElRoperito || {};
         logout() {
             this.clearSession();
             this.updateUI();
-            window.location.href = 'index.html';
+            window.location.href = '/';
         },
 
         clearSession() {
@@ -110,8 +110,8 @@ window.ElRoperito = window.ElRoperito || {};
         // Redirigir a login si no está autenticado
         requireAuth(redirectBack) {
             if (!this.isLoggedIn()) {
-                const next = redirectBack || window.location.pathname.split('/').pop();
-                window.location.href = 'login.html?next=' + encodeURIComponent(next);
+                const next = redirectBack || window.location.pathname;
+                window.location.href = '/login/?next=' + encodeURIComponent(next);
                 return false;
             }
             return true;
@@ -119,7 +119,7 @@ window.ElRoperito = window.ElRoperito || {};
 
         requireAdmin() {
             if (!this.isAdmin()) {
-                window.location.href = 'index.html';
+                window.location.href = '/';
                 return false;
             }
             return true;

@@ -64,7 +64,7 @@
                 </form>
 
                 <p class="auth-alt">
-                    ¿Ya tenés cuenta? <a href="login.html" id="login-link">Iniciá sesión</a>
+                    ¿Ya tenés cuenta? <a href="/login/" id="login-link">Iniciá sesión</a>
                 </p>
             </div>
             </div>
@@ -83,7 +83,7 @@
             if (headerLogo) {
                 var goHome = function(e) {
                     e.preventDefault();
-                    window.location.href = 'index.html';
+                    window.location.href = '/';
                 };
                 headerLogo.addEventListener('click', goHome);
                 headerLogo.addEventListener('touchend', goHome, { passive: false });
@@ -93,14 +93,14 @@
             await window.ElRoperito.Auth.init();
 
             var params = new URLSearchParams(window.location.search);
-            var next = params.get('next') || 'tienda.html';
+            var next = params.get('next') || '/tienda/';
 
             if (window.ElRoperito.Auth.isLoggedIn()) {
                 window.location.href = next;
                 return;
             }
 
-            document.getElementById('login-link').href = 'login.html' + (next !== 'index.html' ? '?next=' + encodeURIComponent(next) : '');
+            document.getElementById('login-link').href = '/login/' + (next !== '/' ? '?next=' + encodeURIComponent(next) : '');
 
             document.getElementById('register-form').addEventListener('submit', async function(e) {
                 e.preventDefault();
@@ -185,7 +185,7 @@
         // Pasar next al link de volver (calculado inline, no depende del scope de DOMContentLoaded)
         (function() {
             var _next = new URLSearchParams(window.location.search).get('next');
-            if (_next) document.getElementById('back-login').href = 'login.html?next=' + encodeURIComponent(_next);
+            if (_next) document.getElementById('back-login').href = '/login/?next=' + encodeURIComponent(_next);
         })();
     </script>
 </body>

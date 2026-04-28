@@ -704,13 +704,12 @@ main {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 100px 50% 80px;
+    padding: 100px 5% 80px;
     position: relative;
-    background-image: url('images/bodyprincipal.PNG');
+    background-image: url('https://res.cloudinary.com/elroperito/image/upload/v1777399620/web/bodysecundario.png');
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     scroll-snap-align: start;
     scroll-snap-stop: always;
 }
