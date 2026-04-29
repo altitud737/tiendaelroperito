@@ -59,6 +59,7 @@ def password_reset_request(request):
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     domain_override=domain,
                     token_generator=default_token_generator,
+                    fail_silently=True,
                 )
             except Exception as exc:
                 logger.error('password_reset send_mail failed: %s', exc, exc_info=True)
