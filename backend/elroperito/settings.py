@@ -201,15 +201,16 @@ MP_BACK_URL_PENDING = config('MP_BACK_URL_PENDING', default=f'{BASE_URL}/pago-pe
 # Envío — costo fijo configurable (en pesos)
 SHIPPING_COST = config('SHIPPING_COST', default=2500, cast=float)
 
-# Email — Gmail SMTP
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_TIMEOUT = 8
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='elroperitoch@gmail.com')
+# Email — SMTP configurable via env vars
+EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=False, cast=bool)
+EMAIL_TIMEOUT = config('EMAIL_TIMEOUT', default=10, cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-DEFAULT_FROM_EMAIL = 'El Roperito <elroperitoch@gmail.com>'
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='El Roperito <elroperitoch@gmail.com>')
 
 # Password reset — links usan la URL pública del sitio
 FRONTEND_URL = config('FRONTEND_URL', default=BASE_URL)
