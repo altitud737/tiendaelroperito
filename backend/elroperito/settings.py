@@ -215,6 +215,9 @@ EMAIL_TIMEOUT = config('EMAIL_TIMEOUT', default=10, cast=int)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='resend')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 
+# Auth
+LOGIN_URL = '/login/'
+
 # Password reset — links usan la URL pública del sitio
 FRONTEND_URL = config('FRONTEND_URL', default=BASE_URL)
 PASSWORD_RESET_TIMEOUT = 3600  # 1 hora
@@ -253,7 +256,17 @@ LOGGING = {
         },
         'django': {
             'handlers': ['console'],
-            'level': 'WARNING',
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'core': {
+            'handlers': ['console'],
+            'level': 'INFO',
             'propagate': False,
         },
     },
