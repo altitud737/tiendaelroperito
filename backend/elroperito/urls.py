@@ -59,6 +59,6 @@ if not getattr(settings, 'USE_CLOUDINARY', False):
 # Servir CSS, JS, imágenes y otros assets del frontend (WhiteNoise cubre /static/).
 # En desarrollo y en Railway sin Nginx se sirven desde Django.
 urlpatterns += [
-    re_path(r'(?i)^(?P<path>.+\.(?:css|js|ico|png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot))$',
+    re_path(r'^(?P<path>.+\.(?:css|js|ico|png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot|CSS|JS|ICO|PNG|JPG|JPEG|GIF|SVG|WEBP|WOFF|WOFF2|TTF|EOT))$',
             serve, {'document_root': FRONTEND_ROOT}),
 ]
