@@ -37,6 +37,11 @@ def password_reset_request(request):
     Siempre responde 200 para no revelar si el email existe.
     """
     email = request.data.get('email', '').strip().lower()
+    logger.info('[PWD-RESET] email=%s, HOST=%s, PORT=%s, TLS=%s, SSL=%s, USER=%s, FROM=%s, TIMEOUT=%s',
+                email, settings.EMAIL_HOST, settings.EMAIL_PORT,
+                settings.EMAIL_USE_TLS, settings.EMAIL_USE_SSL,
+                settings.EMAIL_HOST_USER, settings.DEFAULT_FROM_EMAIL,
+                getattr(settings, 'EMAIL_TIMEOUT', 'not set'))
 
     if email:
         form = PasswordResetForm(data={'email': email})
@@ -51,6 +56,8 @@ def password_reset_request(request):
                 protocol = 'https'
                 domain = frontend_url.rstrip('/')
 
+            logger.info('[PWD-RESET] domain_override=%s, protocol=%s', domain, protocol)
+
             try:
                 form.save(
                     subject_template_name='registration/password_reset_subject.txt',
@@ -59,10 +66,14 @@ def password_reset_request(request):
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     domain_override=domain,
                     token_generator=default_token_generator,
-                    fail_silently=True,
                 )
+                logger.info('[PWD-RESET] form.save() completed OK — email should be sent')
             except Exception as exc:
-                logger.error('password_reset send_mail failed: %s', exc, exc_info=True)
+                logger.error('[PWD-RESET] form.save() FAILED: %s', exc, exc_info=True)
+        else:
+            logger.warning('[PWD-RESET] form is NOT valid: %s', form.errors)
+    else:
+        logger.warning('[PWD-RESET] no email provided')
 
     return Response(
         {'detail': 'Si el email está registrado, recibirás un enlace para restablecer tu contraseña.'},
