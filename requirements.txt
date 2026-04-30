@@ -12,3 +12,4 @@ whitenoise==6.7.0
 dj-database-url==2.2.0
 cloudinary==1.40.0
 django-cloudinary-storage==0.3.0
+resend==2.7.0
