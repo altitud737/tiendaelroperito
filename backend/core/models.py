@@ -150,6 +150,41 @@ class CreditCode(models.Model):
 
 
 # =============================================================================
+# TALLE / CATEGORÍA  (dinámicos, el admin los gestiona desde el panel)
+# =============================================================================
+
+class Talle(models.Model):
+    nombre = models.CharField('nombre', max_length=10, unique=True)
+    orden = models.PositiveIntegerField('orden', default=0)
+
+    class Meta:
+        verbose_name = 'Talle'
+        verbose_name_plural = 'Talles'
+        ordering = ['orden', 'nombre']
+
+    def __str__(self):
+        return self.nombre
+
+
+class Categoria(models.Model):
+    nombre = models.CharField('nombre', max_length=50, unique=True)
+    slug = models.SlugField('slug', max_length=60, unique=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Categoría'
+        verbose_name_plural = 'Categorías'
+        ordering = ['nombre']
+
+    def __str__(self):
+        return self.nombre
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.nombre)
+        super().save(*args, **kwargs)
+
+
+# =============================================================================
 # PRODUCTO
 # =============================================================================
 
@@ -160,40 +195,11 @@ class Producto(models.Model):
     Cada prenda es única y tiene una historia emocional asociada.
     El slug se genera automáticamente a partir del nombre.
     """
-    TALLE_CHOICES = [
-        ('0000', '0000'),
-        ('000', '000'),
-        ('00', '00'),
-        ('0', '0'),
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
-        ('4', '4'),
-        ('5', '5'),
-        ('6', '6'),
-        ('7', '7'),
-        ('8', '8'),
-        ('9', '9'),
-        ('10', '10'),
-        ('12', '12'),
-        ('14', '14'),
-    ]
 
     GENERO_CHOICES = [
         ('nena', 'Nena'),
         ('nene', 'Nene'),
         ('unisex', 'Unisex'),
-    ]
-
-    CATEGORIA_CHOICES = [
-        ('remera', 'Remera'),
-        ('pantalon', 'Pantalón'),
-        ('vestido', 'Vestido'),
-        ('campera', 'Campera'),
-        ('mameluco', 'Mameluco'),
-        ('conjunto', 'Conjunto'),
-        ('calzado', 'Calzado'),
-        ('accesorio', 'Accesorio'),
     ]
 
     ESTADO_CHOICES = [
@@ -213,9 +219,9 @@ class Producto(models.Model):
         decimal_places=2,
         help_text='Precio de referencia para mostrar tachado'
     )
-    talle = models.CharField('talle', max_length=4, choices=TALLE_CHOICES)
+    talle = models.CharField('talle', max_length=20)
     genero = models.CharField('género', max_length=7, choices=GENERO_CHOICES)
-    categoria = models.CharField('categoría', max_length=10, choices=CATEGORIA_CHOICES)
+    categoria = models.CharField('categoría', max_length=50)
     estado = models.CharField(
         'estado',
         max_length=10,

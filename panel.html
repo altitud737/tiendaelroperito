@@ -44,6 +44,12 @@
                     Créditos
                 </button>
             </li>
+            <li>
+                <button class="admin-nav-btn" data-section="configuracion">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                    Configuración
+                </button>
+            </li>
         </ul>
 
         <div class="admin-sidebar-footer">
@@ -275,6 +281,69 @@
             </div>
         </section>
 
+        <!-- ──── SECCIÓN CONFIGURACIÓN ──── -->
+        <section class="admin-section" id="section-configuracion">
+
+            <div class="admin-config-grid">
+
+                <!-- Talles -->
+                <div class="admin-table-card">
+                    <h3 style="font-family:'Jost',sans-serif;font-size:16px;font-weight:600;margin:0 0 16px;">Talles</h3>
+                    <div style="display:flex;gap:8px;margin-bottom:12px;align-items:flex-end;">
+                        <div style="flex:2;">
+                            <input type="text" id="cfg-talle-nombre" class="admin-form-input" placeholder="Nombre del talle (ej: XL, 16)">
+                        </div>
+                        <div style="flex:1;">
+                            <input type="number" id="cfg-talle-orden" class="admin-form-input" placeholder="Orden" min="0" value="0">
+                        </div>
+                        <button class="admin-btn-primary" id="btn-add-talle" style="white-space:nowrap;">Agregar</button>
+                    </div>
+                    <div id="cfg-talle-msg" class="form-error" style="display:none;margin-bottom:8px;"></div>
+                    <div class="admin-table-scroll">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Orden</th>
+                                    <th style="width:80px;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cfg-talles-tbody">
+                                <tr><td colspan="3" class="admin-table-loading">Cargando...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Categorías -->
+                <div class="admin-table-card">
+                    <h3 style="font-family:'Jost',sans-serif;font-size:16px;font-weight:600;margin:0 0 16px;">Categorías</h3>
+                    <div style="display:flex;gap:8px;margin-bottom:12px;align-items:flex-end;">
+                        <div style="flex:1;">
+                            <input type="text" id="cfg-cat-nombre" class="admin-form-input" placeholder="Nombre de la categoría (ej: Bermuda)">
+                        </div>
+                        <button class="admin-btn-primary" id="btn-add-categoria" style="white-space:nowrap;">Agregar</button>
+                    </div>
+                    <div id="cfg-cat-msg" class="form-error" style="display:none;margin-bottom:8px;"></div>
+                    <div class="admin-table-scroll">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Slug</th>
+                                    <th style="width:80px;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cfg-categorias-tbody">
+                                <tr><td colspan="3" class="admin-table-loading">Cargando...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </div><!-- /.admin-main -->
 
 
@@ -310,22 +379,6 @@
                     <label class="admin-form-label">Talle <span class="required">*</span></label>
                     <select id="form-talle" class="admin-form-input" required>
                         <option value="">Seleccioná</option>
-                        <option value="0000">0000</option>
-                        <option value="000">000</option>
-                        <option value="00">00</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="12">12</option>
-                        <option value="14">14</option>
                     </select>
                 </div>
                 <div class="admin-form-group">
@@ -341,14 +394,6 @@
                     <label class="admin-form-label">Categoría <span class="required">*</span></label>
                     <select id="form-categoria" class="admin-form-input" required>
                         <option value="">Seleccioná</option>
-                        <option value="remera">Remera</option>
-                        <option value="pantalon">Pantalón</option>
-                        <option value="vestido">Vestido</option>
-                        <option value="campera">Campera</option>
-                        <option value="mameluco">Mameluco</option>
-                        <option value="conjunto">Conjunto</option>
-                        <option value="calzado">Calzado</option>
-                        <option value="accesorio">Accesorio</option>
                     </select>
                 </div>
             </div>
@@ -469,6 +514,8 @@
         setupMobileSidebar();
 
         document.getElementById('btn-new-product').style.display = 'none';
+        await loadTallesYCategorias();
+        populateFormSelects();
         await loadDashboard();
     });
 
@@ -503,7 +550,7 @@
 
     // ─── Navegación ─────────────────────────────────────────────────────────────
     function setupNav() {
-        var sectionTitles = { dashboard: 'Dashboard', productos: 'Productos', usuarios: 'Usuarios', creditos: 'Créditos' };
+        var sectionTitles = { dashboard: 'Dashboard', productos: 'Productos', usuarios: 'Usuarios', creditos: 'Créditos', configuracion: 'Configuración' };
         document.querySelectorAll('.admin-nav-btn').forEach(btn => {
             btn.addEventListener('click', function () {
                 const section = this.dataset.section;
@@ -518,6 +565,7 @@
                 if (section === 'productos') loadProducts();
                 if (section === 'usuarios') loadUsers();
                 if (section === 'creditos') loadCreditos();
+                if (section === 'configuracion') loadConfiguracion();
             });
         });
 
@@ -1273,9 +1321,147 @@
     }
 
     function categoriaLabel(c) {
-        const map = { remera:'Remera', pantalon:'Pantalón', vestido:'Vestido', campera:'Campera',
-                      mameluco:'Mameluco', conjunto:'Conjunto', calzado:'Calzado', accesorio:'Accesorio' };
-        return map[c] || c;
+        return c;
+    }
+
+    // ─── Configuración (Talles / Categorías) ─────────────────────────────────
+    var cachedTalles = [];
+    var cachedCategorias = [];
+
+    async function loadTallesYCategorias() {
+        try {
+            const [t, c] = await Promise.all([
+                window.ElRoperito.API.getTalles(),
+                window.ElRoperito.API.getCategorias()
+            ]);
+            cachedTalles = t || [];
+            cachedCategorias = c || [];
+        } catch (e) { console.error('Error cargando talles/categorías:', e); }
+    }
+
+    function populateFormSelects() {
+        const talleSelect = document.getElementById('form-talle');
+        const catSelect   = document.getElementById('form-categoria');
+        const currentTalle = talleSelect.value;
+        const currentCat   = catSelect.value;
+
+        talleSelect.innerHTML = '<option value="">Seleccioná</option>';
+        cachedTalles.forEach(t => {
+            talleSelect.innerHTML += '<option value="' + escHtml(t.nombre) + '">' + escHtml(t.nombre) + '</option>';
+        });
+
+        catSelect.innerHTML = '<option value="">Seleccioná</option>';
+        cachedCategorias.forEach(c => {
+            catSelect.innerHTML += '<option value="' + escHtml(c.nombre) + '">' + escHtml(c.nombre) + '</option>';
+        });
+
+        if (currentTalle) talleSelect.value = currentTalle;
+        if (currentCat) catSelect.value = currentCat;
+    }
+
+    async function loadConfiguracion() {
+        const token = window.ElRoperito.Auth.token;
+        try {
+            const [talles, categorias] = await Promise.all([
+                window.ElRoperito.API.adminGetTalles(token),
+                window.ElRoperito.API.adminGetCategorias(token)
+            ]);
+            cachedTalles = talles || [];
+            cachedCategorias = categorias || [];
+            renderTallesTable(cachedTalles);
+            renderCategoriasTable(cachedCategorias);
+            populateFormSelects();
+        } catch (e) {
+            console.error('Error cargando configuración:', e);
+        }
+    }
+
+    function renderTallesTable(talles) {
+        const tbody = document.getElementById('cfg-talles-tbody');
+        if (!talles.length) {
+            tbody.innerHTML = '<tr><td colspan="3" class="admin-table-empty">No hay talles.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = talles.map(t =>
+            `<tr>
+                <td><strong>${escHtml(t.nombre)}</strong></td>
+                <td>${t.orden}</td>
+                <td class="admin-actions-cell">
+                    <button class="admin-action-btn admin-action-delete" onclick="handleDeleteTalle(${t.id}, '${escHtml(t.nombre)}')">Eliminar</button>
+                </td>
+            </tr>`
+        ).join('');
+    }
+
+    function renderCategoriasTable(categorias) {
+        const tbody = document.getElementById('cfg-categorias-tbody');
+        if (!categorias.length) {
+            tbody.innerHTML = '<tr><td colspan="3" class="admin-table-empty">No hay categorías.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = categorias.map(c =>
+            `<tr>
+                <td><strong>${escHtml(c.nombre)}</strong></td>
+                <td>${escHtml(c.slug)}</td>
+                <td class="admin-actions-cell">
+                    <button class="admin-action-btn admin-action-delete" onclick="handleDeleteCategoria(${c.id}, '${escHtml(c.nombre)}')">Eliminar</button>
+                </td>
+            </tr>`
+        ).join('');
+    }
+
+    document.getElementById('btn-add-talle').addEventListener('click', async function() {
+        const nombre = document.getElementById('cfg-talle-nombre').value.trim();
+        const orden  = parseInt(document.getElementById('cfg-talle-orden').value) || 0;
+        const msgEl  = document.getElementById('cfg-talle-msg');
+        msgEl.style.display = 'none';
+        if (!nombre) { msgEl.textContent = 'Ingresá un nombre.'; msgEl.style.display = ''; return; }
+        try {
+            const token = window.ElRoperito.Auth.token;
+            await window.ElRoperito.API.adminCreateTalle(token, { nombre, orden });
+            document.getElementById('cfg-talle-nombre').value = '';
+            document.getElementById('cfg-talle-orden').value = '0';
+            await loadConfiguracion();
+        } catch (e) {
+            msgEl.textContent = e.message;
+            msgEl.style.display = '';
+        }
+    });
+
+    document.getElementById('btn-add-categoria').addEventListener('click', async function() {
+        const nombre = document.getElementById('cfg-cat-nombre').value.trim();
+        const msgEl  = document.getElementById('cfg-cat-msg');
+        msgEl.style.display = 'none';
+        if (!nombre) { msgEl.textContent = 'Ingresá un nombre.'; msgEl.style.display = ''; return; }
+        try {
+            const token = window.ElRoperito.Auth.token;
+            await window.ElRoperito.API.adminCreateCategoria(token, { nombre });
+            document.getElementById('cfg-cat-nombre').value = '';
+            await loadConfiguracion();
+        } catch (e) {
+            msgEl.textContent = e.message;
+            msgEl.style.display = '';
+        }
+    });
+
+    function handleDeleteTalle(id, nombre) {
+        showConfirm('¿Eliminar el talle "' + nombre + '"?', async function() {
+            try {
+                const token = window.ElRoperito.Auth.token;
+                await window.ElRoperito.API.adminDeleteTalle(token, id);
+                await loadConfiguracion();
+            } catch (e) { alert('Error: ' + e.message); }
+        });
+    }
+
+    function handleDeleteCategoria(id, nombre) {
+        showConfirm('¿Eliminar la categoría "' + nombre + '"?', async function() {
+            try {
+                const token = window.ElRoperito.Auth.token;
+                await window.ElRoperito.API.adminDeleteCategoria(token, id);
+                await loadConfiguracion();
+            } catch (e) { alert('Error: ' + e.message); }
+        });
     }
     </script>
 </body>

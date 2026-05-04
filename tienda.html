@@ -132,21 +132,8 @@
                         <div class="filter-dropdown" data-target="filter-talle" data-default-label="Todos los talles">
                             <input type="hidden" id="filter-talle" value="">
                             <button type="button" class="filter-dropdown-toggle" aria-expanded="false">Todos los talles</button>
-                            <div class="filter-dropdown-menu" role="listbox">
+                            <div class="filter-dropdown-menu" id="filter-talle-menu" role="listbox">
                                 <button type="button" class="filter-option is-selected" data-value="">Todos los talles</button>
-                                <button type="button" class="filter-option" data-value="0000">0000</button>
-                                <button type="button" class="filter-option" data-value="000">000</button>
-                                <button type="button" class="filter-option" data-value="00">00</button>
-                                <button type="button" class="filter-option" data-value="0">0</button>
-                                <button type="button" class="filter-option" data-value="1">1</button>
-                                <button type="button" class="filter-option" data-value="2">2</button>
-                                <button type="button" class="filter-option" data-value="3">3</button>
-                                <button type="button" class="filter-option" data-value="4">4</button>
-                                <button type="button" class="filter-option" data-value="6">6</button>
-                                <button type="button" class="filter-option" data-value="8">8</button>
-                                <button type="button" class="filter-option" data-value="10">10</button>
-                                <button type="button" class="filter-option" data-value="12">12</button>
-                                <button type="button" class="filter-option" data-value="14">14</button>
                             </div>
                         </div>
                     </div>
@@ -170,15 +157,8 @@
                         <div class="filter-dropdown" data-target="filter-categoria" data-default-label="Todas">
                             <input type="hidden" id="filter-categoria" value="">
                             <button type="button" class="filter-dropdown-toggle" aria-expanded="false">Todas</button>
-                            <div class="filter-dropdown-menu" role="listbox">
+                            <div class="filter-dropdown-menu" id="filter-categoria-menu" role="listbox">
                                 <button type="button" class="filter-option is-selected" data-value="">Todas</button>
-                                <button type="button" class="filter-option" data-value="remera">Remera</button>
-                                <button type="button" class="filter-option" data-value="pantalon">Pantalón</button>
-                                <button type="button" class="filter-option" data-value="vestido">Vestido</button>
-                                <button type="button" class="filter-option" data-value="campera">Campera</button>
-                                <button type="button" class="filter-option" data-value="conjunto">Conjunto</button>
-                                <button type="button" class="filter-option" data-value="body">Body</button>
-                                <button type="button" class="filter-option" data-value="otro">Otro</button>
                             </div>
                         </div>
                     </div>
@@ -361,6 +341,38 @@
                     searchInput.focus();
                 });
             }
+
+            // Load dynamic filter options (talles + categorías)
+            try {
+                var [talles, categorias] = await Promise.all([
+                    window.ElRoperito.API.getTalles(),
+                    window.ElRoperito.API.getCategorias()
+                ]);
+                var talleMenu = document.getElementById('filter-talle-menu');
+                if (talleMenu && talles) {
+                    talles.forEach(function(t) {
+                        var btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'filter-option';
+                        btn.setAttribute('data-value', t.nombre);
+                        btn.textContent = t.nombre;
+                        talleMenu.appendChild(btn);
+                    });
+                }
+                var catMenu = document.getElementById('filter-categoria-menu');
+                if (catMenu && categorias) {
+                    categorias.forEach(function(c) {
+                        var btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'filter-option';
+                        btn.setAttribute('data-value', c.nombre);
+                        btn.textContent = c.nombre;
+                        catMenu.appendChild(btn);
+                    });
+                }
+                // Re-init dropdowns so new buttons get click handlers
+                setupFilterDropdowns();
+            } catch(e) { console.error('Error cargando filtros dinámicos:', e); }
 
             // Load products on init
             loadProducts();

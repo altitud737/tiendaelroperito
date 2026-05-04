@@ -3,7 +3,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.html import format_html
 from .models import (
     Usuario, CreditTransaction, Producto, ProductImage,
-    Orden, OrdenItem, Wishlist, Payment
+    Orden, OrdenItem, Wishlist, Payment,
+    Talle, Categoria,
 )
 
 
@@ -208,6 +209,18 @@ class WishlistAdmin(admin.ModelAdmin):
 
 
 # DECISIÓN: Se personaliza el título del sitio de admin para la dueña
+@admin.register(Talle)
+class TalleAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'orden')
+    ordering = ('orden', 'nombre')
+
+
+@admin.register(Categoria)
+class CategoriaAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'slug')
+    prepopulated_fields = {'slug': ('nombre',)}
+
+
 admin.site.site_header = 'El Roperito — Administración'
 admin.site.site_title = 'El Roperito Admin'
 admin.site.index_title = 'Panel de gestión'

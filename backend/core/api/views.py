@@ -16,7 +16,8 @@ import django_filters
 from django.contrib.auth import get_user_model
 from core.models import (
     Producto, ProductImage, CreditTransaction, CreditCode,
-    Wishlist, Orden, OrdenItem, Payment, Notificacion
+    Wishlist, Orden, OrdenItem, Payment, Notificacion,
+    Talle, Categoria,
 )
 from .image_utils import validate_product_image
 from .email_utils import send_credit_code_email
@@ -30,6 +31,7 @@ from .serializers import (
     CheckoutSerializer, ProcessPaymentSerializer,
     AdminProductoSerializer, AdminUsuarioSerializer,
     NotificacionSerializer,
+    TalleSerializer, CategoriaSerializer,
 )
 from . import payment_service
 from .throttles import LoginThrottle, PasswordResetThrottle, WebhookThrottle
@@ -1262,4 +1264,86 @@ class AdminCreditCodeDetailView(APIView):
         if not code:
             return Response({'detail': 'Código no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
         code.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# =============================================================================
+# TALLE / CATEGORÍA — endpoints públicos (lectura) y admin (escritura)
+# =============================================================================
+
+class TalleListView(generics.ListAPIView):
+    """GET /api/talles/ — Lista pública de talles disponibles."""
+    queryset = Talle.objects.all()
+    serializer_class = TalleSerializer
+    permission_classes = [permissions.AllowAny]
+    pagination_class = None
+
+
+class CategoriaListView(generics.ListAPIView):
+    """GET /api/categorias/ — Lista pública de categorías disponibles."""
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
+    permission_classes = [permissions.AllowAny]
+    pagination_class = None
+
+
+class AdminTalleListCreateView(APIView):
+    """
+    GET  /api/admin/talles/ — Listar talles
+    POST /api/admin/talles/ — Crear talle  { nombre, orden? }
+    """
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        talles = Talle.objects.all()
+        return Response(TalleSerializer(talles, many=True).data)
+
+    def post(self, request):
+        serializer = TalleSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class AdminTalleDeleteView(APIView):
+    """DELETE /api/admin/talles/:id/ — Eliminar talle."""
+    permission_classes = [IsAdminUser]
+
+    def delete(self, request, pk):
+        try:
+            talle = Talle.objects.get(pk=pk)
+        except Talle.DoesNotExist:
+            return Response({'detail': 'Talle no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+        talle.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class AdminCategoriaListCreateView(APIView):
+    """
+    GET  /api/admin/categorias/ — Listar categorías
+    POST /api/admin/categorias/ — Crear categoría  { nombre }
+    """
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        categorias = Categoria.objects.all()
+        return Response(CategoriaSerializer(categorias, many=True).data)
+
+    def post(self, request):
+        serializer = CategoriaSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class AdminCategoriaDeleteView(APIView):
+    """DELETE /api/admin/categorias/:id/ — Eliminar categoría."""
+    permission_classes = [IsAdminUser]
+
+    def delete(self, request, pk):
+        try:
+            cat = Categoria.objects.get(pk=pk)
+        except Categoria.DoesNotExist:
+            return Response({'detail': 'Categoría no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+        cat.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

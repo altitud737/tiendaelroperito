@@ -106,5 +106,17 @@ window.ElRoperito = window.ElRoperito || {};
         adminCreateCreditCode: (token, data) => fetchAPI('/api/admin/credits/codes/', { method: 'POST', token, body: JSON.stringify(data) }),
         adminUpdateCreditCode: (token, id, data) => fetchAPI('/api/admin/credits/codes/' + id + '/', { method: 'PATCH', token, body: JSON.stringify(data) }),
         adminDeleteCreditCode: (token, id) => fetchAPI('/api/admin/credits/codes/' + id + '/', { method: 'DELETE', token }),
+
+        // TALLES / CATEGORÍAS (público)
+        getTalles: () => fetchAPI('/api/talles/'),
+        getCategorias: () => fetchAPI('/api/categorias/'),
+
+        // ADMIN — TALLES / CATEGORÍAS
+        adminGetTalles: (token) => fetchAPI('/api/admin/talles/', { token }),
+        adminCreateTalle: (token, data) => fetchAPI('/api/admin/talles/', { method: 'POST', token, body: JSON.stringify(data) }),
+        adminDeleteTalle: (token, id) => fetchAPI('/api/admin/talles/' + id + '/', { method: 'DELETE', token }),
+        adminGetCategorias: (token) => fetchAPI('/api/admin/categorias/', { token }),
+        adminCreateCategoria: (token, data) => fetchAPI('/api/admin/categorias/', { method: 'POST', token, body: JSON.stringify(data) }),
+        adminDeleteCategoria: (token, id) => fetchAPI('/api/admin/categorias/' + id + '/', { method: 'DELETE', token }),
     };
 })();

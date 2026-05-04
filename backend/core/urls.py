@@ -1,4 +1,5 @@
 from django.urls import path, include
+from .api.views import TalleListView, CategoriaListView
 
 # DECISIÓN: Se separan las URLs en sub-módulos para mantener claridad a medida que crece la API
 urlpatterns = [
@@ -10,4 +11,6 @@ urlpatterns = [
     path('checkout/', include('core.api.checkout_urls')),
     path('orders/', include('core.api.order_urls')),
     path('admin/', include('core.api.admin_urls')),
+    path('talles/', TalleListView.as_view(), name='talle-list'),
+    path('categorias/', CategoriaListView.as_view(), name='categoria-list'),
 ]

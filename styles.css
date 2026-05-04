@@ -6650,3 +6650,13 @@ img {
 @media (max-width: 380px) {
     .admin-stats-row { grid-template-columns: 1fr 1fr; }
 }
+
+/* ─── Config section (Talles / Categorías) ─── */
+.admin-config-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+@media (max-width: 768px) {
+    .admin-config-grid { grid-template-columns: 1fr; }
+}

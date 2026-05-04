@@ -4,10 +4,28 @@ from core.models import (
     CreditTransaction, CreditCode,
     Producto, ProductImage,
     Orden, OrdenItem, Wishlist, Payment,
-    Notificacion
+    Notificacion,
+    Talle, Categoria,
 )
 
 Usuario = get_user_model()
+
+
+# =============================================================================
+# TALLE / CATEGORÍA
+# =============================================================================
+
+class TalleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Talle
+        fields = ('id', 'nombre', 'orden')
+
+
+class CategoriaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Categoria
+        fields = ('id', 'nombre', 'slug')
+        read_only_fields = ('slug',)
 
 
 # =============================================================================

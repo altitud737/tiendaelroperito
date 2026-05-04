@@ -10,6 +10,10 @@ from .views import (
     AdminAssignCreditView,
     AdminCreditCodeListCreateView,
     AdminCreditCodeDetailView,
+    AdminTalleListCreateView,
+    AdminTalleDeleteView,
+    AdminCategoriaListCreateView,
+    AdminCategoriaDeleteView,
 )
 
 urlpatterns = [
@@ -23,4 +27,8 @@ urlpatterns = [
     path('credits/assign/',     AdminAssignCreditView.as_view(),       name='admin-credit-assign'),
     path('credits/codes/',      AdminCreditCodeListCreateView.as_view(), name='admin-credit-codes'),
     path('credits/codes/<int:pk>/', AdminCreditCodeDetailView.as_view(), name='admin-credit-code-detail'),
+    path('talles/',                  AdminTalleListCreateView.as_view(),     name='admin-talles'),
+    path('talles/<int:pk>/',         AdminTalleDeleteView.as_view(),         name='admin-talle-delete'),
+    path('categorias/',              AdminCategoriaListCreateView.as_view(), name='admin-categorias'),
+    path('categorias/<int:pk>/',     AdminCategoriaDeleteView.as_view(),     name='admin-categoria-delete'),
 ]
