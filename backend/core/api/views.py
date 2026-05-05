@@ -153,7 +153,7 @@ class ProductoFeaturedView(generics.ListAPIView):
     def get_queryset(self):
         return (
             Producto.objects
-            .filter(es_destacado=True, estado='disponible')
+            .filter(es_destacado=True, estado='disponible', eliminado=False)
             .prefetch_related('imagenes')[:8]
         )
 
