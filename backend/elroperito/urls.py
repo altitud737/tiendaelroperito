@@ -3,11 +3,13 @@ URL configuration for elroperito project.
 """
 import os
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
 from django.http import HttpResponse, Http404
+from core.sitemaps import StaticSitemap, ProductoSitemap
 from core.api.password_reset_views import (
     CustomPasswordResetConfirmView,
     CustomPasswordResetCompleteView,
@@ -27,7 +29,13 @@ def frontend_view(request, page='index.html'):
         raise Http404(f'Página {page} no encontrada')
 
 
+sitemaps = {
+    'static': StaticSitemap,
+    'productos': ProductoSitemap,
+}
+
 urlpatterns = [
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('admin/', admin.site.urls),
     path('api/', include('core.urls')),
     # Webhook raíz para MercadoPago (redirige al mismo handler)
