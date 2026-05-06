@@ -8,7 +8,7 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
-from django.http import HttpResponse, Http404
+from django.http import FileResponse, HttpResponse, Http404
 from core.sitemaps import StaticSitemap, ProductoSitemap
 from core.api.password_reset_views import (
     CustomPasswordResetConfirmView,
@@ -34,7 +34,14 @@ sitemaps = {
     'productos': ProductoSitemap,
 }
 
+
+def favicon_view(request):
+    """Sirve favicon.png en /favicon.ico para crawlers y navegadores."""
+    favicon_path = os.path.join(FRONTEND_ROOT, 'images', 'favicon.png')
+    return FileResponse(open(favicon_path, 'rb'), content_type='image/png')
+
 urlpatterns = [
+    path('favicon.ico', favicon_view, name='favicon'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('admin/', admin.site.urls),
     path('api/', include('core.urls')),
