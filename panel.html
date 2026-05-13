@@ -32,6 +32,10 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                     Productos
                 </button>
+                <button class="admin-nav-sub-btn" id="btn-new-product">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    Nuevo producto
+                </button>
             </li>
             <li>
                 <button class="admin-nav-btn" data-section="usuarios">
@@ -81,10 +85,6 @@
             </div>
             <div class="admin-topbar-right">
                 <span class="admin-user-badge" id="admin-user-name"></span>
-                <button class="admin-btn-primary" id="btn-new-product">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                    <span>Nuevo producto</span>
-                </button>
             </div>
         </header>
 
@@ -514,7 +514,6 @@
         setupConfirm();
         setupMobileSidebar();
 
-        document.getElementById('btn-new-product').style.display = 'none';
         await loadTallesYCategorias();
         populateFormSelects();
         await loadDashboard();
@@ -560,8 +559,6 @@
                 document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
                 document.getElementById('section-' + section).classList.add('active');
                 document.getElementById('section-title').textContent = sectionTitles[section] || section;
-                document.getElementById('btn-new-product').style.display =
-                    section === 'productos' ? '' : 'none';
                 if (section === 'dashboard') loadDashboard();
                 if (section === 'productos') loadProducts();
                 if (section === 'usuarios') loadUsers();
@@ -574,7 +571,15 @@
             window.ElRoperito.Auth.logout();
         });
 
-        document.getElementById('btn-new-product').addEventListener('click', openCreateDrawer);
+        document.getElementById('btn-new-product').addEventListener('click', function () {
+            // Navigate to productos section first
+            var prodBtn = document.querySelector('[data-section="productos"]');
+            if (prodBtn && !prodBtn.classList.contains('active')) prodBtn.click();
+            // Close mobile sidebar
+            document.querySelector('.admin-sidebar').classList.remove('open');
+            document.getElementById('admin-sidebar-overlay').classList.remove('active');
+            openCreateDrawer();
+        });
     }
 
     // ─── Dashboard ──────────────────────────────────────────────────────────────
