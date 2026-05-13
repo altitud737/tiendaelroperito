@@ -6616,7 +6616,8 @@ img {
 
     /* Topbar adjustments */
     .admin-topbar { padding: 14px 16px; }
-    .admin-section-title { font-size: 20px; }
+    .admin-section-title { font-size: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+    .admin-topbar-right { flex-shrink: 0; }
 
     /* Sections */
     .admin-section { padding: 16px; }
